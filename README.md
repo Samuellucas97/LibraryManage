@@ -4,9 +4,9 @@
 
 Neste repositório encontra-se a implementação de um sistema de controle de estoque que gerencia o inventário de bibliotecas e provê informações sobre a quantidade e disponsabilidade, além de incluir um sitema de rankings referente ao trabalho a ser feito na disciplina ***Projeto Detalhado de Software*** do bacharelado de _Tecnologia da Informação_ ( **UFRN** ).
   
-## Cronograma de Implementação (Sprints)  
+## :bookmark_tabs: Cronograma de Implementação (Sprints)  
   
-### 1ª Sprint (28/Fevereiro a 14/Março)  
+### 1ª Sprint (28/Fevereiro a 14/Março) :dart: 
   
 - [ ] Elaboração e implementação da Interface gráfica   
 - [ ] Criação de requisitos funcionais  
