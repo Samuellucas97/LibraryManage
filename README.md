@@ -1,4 +1,4 @@
-# Sistema de biblioteca ranqueado  
+# Sistema de Controle de Estoque Ranqueado - SCER 
 
 ## Introdução  
 
@@ -32,11 +32,22 @@ Implementação das seguintes funcionalidades:
 - [ ] Consultar livros 
 - [ ] Consultar ranking  
 - [ ] Avaliar livros  
+
+## Referência 
+
+
+<img src="https://cdn-images-1.medium.com/max/982/1*AiTBjfsoj3emarTpaeNgKQ.png" data-canonical-src="https://junit.org/junit5" width="14%" />  
+  
+  
+    
+
+:link: [Eclipse - última versão](https://www.eclipse.org/downloads/download.php?file=/oomph/epp/2018-12/R/eclipse-inst-linux64.tar.gz)  
+:link: [WindowsBuilder](https://www.eclipse.org/windowbuilder/download.php)  
+:link: [Vídeo explicando a instalação do Eclipse e do WindowsBuilder](https://www.youtube.com/watch?v=1hdJ9b363O0)  
   
 
 ## Autores :smile: 
   
 
-Samuel Lucas de Moura Ferino ( _samuellucas97@ufrn.edu.br_ )  
-Welliton  
-Thiago
+Programas desenvolvidos por Samuel Lucas de Moura Ferino ( _samuellucas97@ufrn.edu.br_ ), José Welliton Nunes Junior ( _wellintongb@ufrn.edu.br_ ) e Thiago     
+:copyright: IMD/UFRN 2019.
