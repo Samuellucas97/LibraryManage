@@ -49,5 +49,5 @@ Implementação das seguintes funcionalidades:
 ## Autores :smile: 
   
 
-Programas desenvolvidos por Samuel Lucas de Moura Ferino ( _samuellucas97@ufrn.edu.br_ ), José Welliton Nunes Junior ( _wellintongb@ufrn.edu.br_ ) e Thiago     
+Samuel Lucas de Moura Ferino ( _samuellucas97@ufrn.edu.br_ ), José Welliton Nunes Junior ( _wellintongb@ufrn.edu.br_ ) e Thiago     
 :copyright: IMD/UFRN 2019.
