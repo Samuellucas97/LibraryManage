@@ -46,28 +46,28 @@ public class TelaLogin extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel_AdicionarUsuario.setIcon(new javax.swing.ImageIcon("/home/samuellucas97/Música/PDS/img/add_usuario.png")); // NOI18N
+        jLabel_AdicionarUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaceGrafica/img/add_usuario.png"))); // NOI18N
         jLabel_AdicionarUsuario.setText("Adicionar usuário");
 
-        jLabel_AvaliarLivro.setIcon(new javax.swing.ImageIcon("/home/samuellucas97/Música/PDS/img/avaliando_livro.png")); // NOI18N
+        jLabel_AvaliarLivro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaceGrafica/img/avaliando_livro.png"))); // NOI18N
         jLabel_AvaliarLivro.setText("Avaliar livro");
 
-        jLabel_AdicionarLivro.setIcon(new javax.swing.ImageIcon("/home/samuellucas97/Música/PDS/img/add_livro.png")); // NOI18N
+        jLabel_AdicionarLivro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaceGrafica/img/add_livro.png"))); // NOI18N
         jLabel_AdicionarLivro.setText("Adicionar livro");
 
-        jLabel4.setIcon(new javax.swing.ImageIcon("/home/samuellucas97/Música/PDS/img/remove_usuario.png")); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaceGrafica/img/remove_usuario.png"))); // NOI18N
         jLabel4.setText("Remover usuário");
 
-        jLabel5.setIcon(new javax.swing.ImageIcon("/home/samuellucas97/Música/PDS/img/remove_livro.png")); // NOI18N
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaceGrafica/img/remove_livro.png"))); // NOI18N
         jLabel5.setText("Remover livro");
 
-        jLabel6.setIcon(new javax.swing.ImageIcon("/home/samuellucas97/Música/PDS/img/editar_usuario.png")); // NOI18N
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaceGrafica/img/editar_usuario.png"))); // NOI18N
         jLabel6.setText("Editar usuário");
 
-        jLabel7.setIcon(new javax.swing.ImageIcon("/home/samuellucas97/Música/PDS/img/busca_livro.png")); // NOI18N
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaceGrafica/img/busca_livro.png"))); // NOI18N
         jLabel7.setText("Buscar livro");
 
-        jLabel8.setIcon(new javax.swing.ImageIcon("/home/samuellucas97/Música/PDS/img/bloquear_livro.png")); // NOI18N
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaceGrafica/img/bloquear_livro.png"))); // NOI18N
         jLabel8.setText("Bloquear livro");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -123,7 +123,7 @@ public class TelaLogin extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jPanel2);
 
         jLabel_IconePrograma.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel_IconePrograma.setIcon(new javax.swing.ImageIcon("/home/samuellucas97/Música/PDS/img/Webp.net-resizeimage.png")); // NOI18N
+        jLabel_IconePrograma.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaceGrafica/img/Webp.net-resizeimage.png"))); // NOI18N
 
         jLabel1.setText("NOME DO USUÁRIO");
 
@@ -164,12 +164,12 @@ public class TelaLogin extends javax.swing.JFrame {
                         .addComponent(jLabel_IconePrograma))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(20, 20, 20)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel3)
                                 .addComponent(jLabel2)
-                                .addComponent(jButton_Loggout)))))
+                                .addComponent(jButton_Loggout))
+                            .addComponent(jLabel1))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 

@@ -123,7 +123,7 @@
             <Component class="javax.swing.JLabel" name="jLabel_AdicionarUsuario">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="/home/samuellucas97/M&#xfa;sica/PDS/img/add_usuario.png"/>
+                  <Image iconType="3" name="/interfaceGrafica/img/add_usuario.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Adicionar usu&#xe1;rio"/>
               </Properties>
@@ -131,7 +131,7 @@
             <Component class="javax.swing.JLabel" name="jLabel_AvaliarLivro">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="/home/samuellucas97/M&#xfa;sica/PDS/img/avaliando_livro.png"/>
+                  <Image iconType="3" name="/interfaceGrafica/img/avaliando_livro.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Avaliar livro"/>
               </Properties>
@@ -139,7 +139,7 @@
             <Component class="javax.swing.JLabel" name="jLabel_AdicionarLivro">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="/home/samuellucas97/M&#xfa;sica/PDS/img/add_livro.png"/>
+                  <Image iconType="3" name="/interfaceGrafica/img/add_livro.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Adicionar livro"/>
               </Properties>
@@ -147,7 +147,7 @@
             <Component class="javax.swing.JLabel" name="jLabel4">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="/home/samuellucas97/M&#xfa;sica/PDS/img/remove_usuario.png"/>
+                  <Image iconType="3" name="/interfaceGrafica/img/remove_usuario.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Remover usu&#xe1;rio"/>
               </Properties>
@@ -155,7 +155,7 @@
             <Component class="javax.swing.JLabel" name="jLabel5">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="/home/samuellucas97/M&#xfa;sica/PDS/img/remove_livro.png"/>
+                  <Image iconType="3" name="/interfaceGrafica/img/remove_livro.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Remover livro"/>
               </Properties>
@@ -163,7 +163,7 @@
             <Component class="javax.swing.JLabel" name="jLabel6">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="/home/samuellucas97/M&#xfa;sica/PDS/img/editar_usuario.png"/>
+                  <Image iconType="3" name="/interfaceGrafica/img/editar_usuario.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Editar usu&#xe1;rio"/>
               </Properties>
@@ -171,7 +171,7 @@
             <Component class="javax.swing.JLabel" name="jLabel7">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="/home/samuellucas97/M&#xfa;sica/PDS/img/busca_livro.png"/>
+                  <Image iconType="3" name="/interfaceGrafica/img/busca_livro.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Buscar livro"/>
               </Properties>
@@ -179,7 +179,7 @@
             <Component class="javax.swing.JLabel" name="jLabel8">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="/home/samuellucas97/M&#xfa;sica/PDS/img/bloquear_livro.png"/>
+                  <Image iconType="3" name="/interfaceGrafica/img/bloquear_livro.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Bloquear livro"/>
               </Properties>
@@ -218,13 +218,13 @@
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Group type="103" alignment="3" groupAlignment="3" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                                   <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jButton_Loggout" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
+                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -238,7 +238,7 @@
           <Properties>
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="/home/samuellucas97/M&#xfa;sica/PDS/img/Webp.net-resizeimage.png"/>
+              <Image iconType="3" name="/interfaceGrafica/img/Webp.net-resizeimage.png"/>
             </Property>
           </Properties>
         </Component>

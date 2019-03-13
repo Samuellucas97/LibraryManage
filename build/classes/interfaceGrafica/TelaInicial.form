@@ -174,7 +174,7 @@
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jScrollPane_ResultadosBusca" min="-2" pref="370" max="-2" attributes="0"/>
-                  <EmptySpace pref="36" max="32767" attributes="0"/>
+                  <EmptySpace pref="38" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -202,10 +202,18 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                      <Component id="jLabel_IconePrograma" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabel_NomePrograma" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                              <Component id="jLabel_IconePrograma" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                              <Component id="jLabel_IconePrograma1" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jLabel_NomePrograma" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="jLabel_Login" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
@@ -230,11 +238,15 @@
                           <Component id="jTextField_Login" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel_Login" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jPasswordField_Senha" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel_NomePrograma" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
-                  <Component id="jLabel_NomePrograma" alignment="1" max="32767" attributes="0"/>
-                  <Component id="jLabel_IconePrograma" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="jLabel_IconePrograma" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jLabel_IconePrograma1" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -285,12 +297,17 @@
             <Component class="javax.swing.JLabel" name="jLabel_IconePrograma">
               <Properties>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="/home/samuellucas97/M&#xfa;sica/PDS/img/Webp.net-resizeimage.png"/>
-                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JPasswordField" name="jPasswordField_Senha">
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel_IconePrograma1">
+              <Properties>
+                <Property name="horizontalAlignment" type="int" value="0"/>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/interfaceGrafica/img/Webp.net-resizeimage.png"/>
+                </Property>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>
@@ -421,9 +438,6 @@
         </Component>
         <Component class="javax.swing.JButton" name="jButton_Buscar">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="/home/samuellucas97/M&#xfa;sica/PDS/img/busca.png"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="BUSCAR"/>
           </Properties>
         </Component>

@@ -44,6 +44,7 @@ public class TelaInicial extends javax.swing.JFrame {
         jLabel_NomePrograma = new javax.swing.JLabel();
         jLabel_IconePrograma = new javax.swing.JLabel();
         jPasswordField_Senha = new javax.swing.JPasswordField();
+        jLabel_IconePrograma1 = new javax.swing.JLabel();
         jTextField_Nome = new javax.swing.JTextField();
         jCheckBox_Nome = new javax.swing.JCheckBox();
         jCheckBox_Autor = new javax.swing.JCheckBox();
@@ -100,17 +101,24 @@ public class TelaInicial extends javax.swing.JFrame {
         jLabel_NomePrograma.setText("NOME DO PROGRAMA");
 
         jLabel_IconePrograma.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel_IconePrograma.setIcon(new javax.swing.ImageIcon("/home/samuellucas97/Música/PDS/img/Webp.net-resizeimage.png")); // NOI18N
+
+        jLabel_IconePrograma1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel_IconePrograma1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaceGrafica/img/Webp.net-resizeimage.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel_MarromLayout = new javax.swing.GroupLayout(jPanel_Marrom);
         jPanel_Marrom.setLayout(jPanel_MarromLayout);
         jPanel_MarromLayout.setHorizontalGroup(
             jPanel_MarromLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_MarromLayout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(jLabel_IconePrograma)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel_NomePrograma)
+                .addGroup(jPanel_MarromLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel_MarromLayout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(jLabel_IconePrograma))
+                    .addGroup(jPanel_MarromLayout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(jLabel_IconePrograma1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel_NomePrograma)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel_Login)
                 .addGap(2, 2, 2)
@@ -132,10 +140,13 @@ public class TelaInicial extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(jTextField_Login, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel_Login)
-                    .addComponent(jPasswordField_Senha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPasswordField_Senha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel_NomePrograma))
                 .addContainerGap())
-            .addComponent(jLabel_NomePrograma, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jLabel_IconePrograma, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_MarromLayout.createSequentialGroup()
+                .addComponent(jLabel_IconePrograma)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel_IconePrograma1))
         );
 
         jCheckBox_Nome.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 14)); // NOI18N
@@ -201,7 +212,6 @@ public class TelaInicial extends javax.swing.JFrame {
             }
         });
 
-        jButton_Buscar.setIcon(new javax.swing.ImageIcon("/home/samuellucas97/Música/PDS/img/busca.png")); // NOI18N
         jButton_Buscar.setText("BUSCAR");
 
         javax.swing.GroupLayout jPanel_AzulLayout = new javax.swing.GroupLayout(jPanel_Azul);
@@ -288,7 +298,7 @@ public class TelaInicial extends javax.swing.JFrame {
                         .addComponent(jButton_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane_ResultadosBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -369,6 +379,7 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel_BuscarLivro;
     private javax.swing.JLabel jLabel_IconePrograma;
+    private javax.swing.JLabel jLabel_IconePrograma1;
     private javax.swing.JLabel jLabel_Login;
     private javax.swing.JLabel jLabel_NomePrograma;
     private javax.swing.JPanel jPanel_Azul;
