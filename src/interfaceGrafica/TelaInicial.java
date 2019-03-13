@@ -35,30 +35,18 @@ public class TelaInicial extends javax.swing.JFrame {
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
         jPanel_Azul = new javax.swing.JPanel();
-        jLabel_BuscarLivro = new javax.swing.JLabel();
         jPanel_Marrom = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jTextField_Login = new javax.swing.JTextField();
         jLabel_Login = new javax.swing.JLabel();
         jButton_Confirmar = new javax.swing.JButton();
-        jLabel_NomePrograma = new javax.swing.JLabel();
         jLabel_IconePrograma = new javax.swing.JLabel();
         jPasswordField_Senha = new javax.swing.JPasswordField();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         jLabel_IconePrograma1 = new javax.swing.JLabel();
-        jTextField_Nome = new javax.swing.JTextField();
-        jCheckBox_Nome = new javax.swing.JCheckBox();
-        jCheckBox_Autor = new javax.swing.JCheckBox();
-        jTextField_Autor = new javax.swing.JTextField();
-        jCheckBox_Linguagem = new javax.swing.JCheckBox();
-        jCheckBox_Categoria = new javax.swing.JCheckBox();
-        jCheckBox_Editora = new javax.swing.JCheckBox();
-        jTextField_Editora = new javax.swing.JTextField();
-        jCheckBox_DataDeSubimissao = new javax.swing.JCheckBox();
-        jTextField_DataDeSubmissao = new javax.swing.JTextField();
-        jComboBox_Linguagem = new javax.swing.JComboBox<>();
-        jComboBox_Categoria = new javax.swing.JComboBox<>();
-        jButton_Buscar = new javax.swing.JButton();
-        jScrollPane_ResultadosBusca = new javax.swing.JScrollPane();
+        jLabel_NomePrograma = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
 
         jRadioButton1.setText("jRadioButton1");
 
@@ -68,14 +56,9 @@ public class TelaInicial extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel_Azul.setBackground(new java.awt.Color(0, 155, 255));
         jPanel_Azul.setForeground(java.awt.Color.blue);
 
-        jLabel_BuscarLivro.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 36)); // NOI18N
-        jLabel_BuscarLivro.setForeground(new java.awt.Color(254, 254, 254));
-        jLabel_BuscarLivro.setText("Buscar Livro");
-
-        jPanel_Marrom.setBackground(new java.awt.Color(224, 196, 168));
+        jPanel_Marrom.setBackground(new java.awt.Color(153, 204, 255));
 
         jLabel2.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 12)); // NOI18N
         jLabel2.setText("Senha:");
@@ -97,13 +80,17 @@ public class TelaInicial extends javax.swing.JFrame {
             }
         });
 
-        jLabel_NomePrograma.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel_NomePrograma.setText("NOME DO PROGRAMA");
-
         jLabel_IconePrograma.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        jLabel6.setText("00:00");
+
+        jLabel3.setText("00/00/0000");
 
         jLabel_IconePrograma1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel_IconePrograma1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaceGrafica/img/Webp.net-resizeimage.png"))); // NOI18N
+
+        jLabel_NomePrograma.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel_NomePrograma.setText("NOME DO PROGRAMA");
 
         javax.swing.GroupLayout jPanel_MarromLayout = new javax.swing.GroupLayout(jPanel_Marrom);
         jPanel_Marrom.setLayout(jPanel_MarromLayout);
@@ -112,108 +99,59 @@ public class TelaInicial extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_MarromLayout.createSequentialGroup()
                 .addGroup(jPanel_MarromLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel_MarromLayout.createSequentialGroup()
-                        .addGap(27, 27, 27)
+                        .addGap(201, 201, 201)
                         .addComponent(jLabel_IconePrograma))
                     .addGroup(jPanel_MarromLayout.createSequentialGroup()
-                        .addGap(26, 26, 26)
+                        .addContainerGap()
                         .addComponent(jLabel_IconePrograma1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel_NomePrograma)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel_Login)
-                .addGap(2, 2, 2)
-                .addComponent(jTextField_Login, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
-                .addGap(5, 5, 5)
-                .addComponent(jPasswordField_Senha, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton_Confirmar)
-                .addContainerGap())
+                        .addComponent(jLabel_NomePrograma)
+                        .addGap(63, 63, 63)
+                        .addComponent(jLabel_Login)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField_Login, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPasswordField_Senha, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton_Confirmar)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel6)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel3)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel_MarromLayout.setVerticalGroup(
             jPanel_MarromLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_MarromLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel_MarromLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addGroup(jPanel_MarromLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel_MarromLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton_Confirmar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jTextField_Login, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel_Login)
+                            .addComponent(jLabel2)
+                            .addComponent(jPasswordField_Senha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel_MarromLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel6)))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_MarromLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jLabel_IconePrograma)
+                    .addGap(43, 43, 43)))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_MarromLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel_MarromLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton_Confirmar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel2)
-                    .addComponent(jTextField_Login, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel_Login)
-                    .addComponent(jPasswordField_Senha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel_NomePrograma))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_MarromLayout.createSequentialGroup()
-                .addComponent(jLabel_IconePrograma)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel_IconePrograma1))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(jPanel_MarromLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel_IconePrograma1)
+                    .addGroup(jPanel_MarromLayout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(jLabel_NomePrograma))))
         );
 
-        jCheckBox_Nome.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 14)); // NOI18N
-        jCheckBox_Nome.setForeground(new java.awt.Color(255, 255, 255));
-        jCheckBox_Nome.setText("Nome");
-        jCheckBox_Nome.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox_NomeActionPerformed(evt);
-            }
-        });
-
-        jCheckBox_Autor.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 14)); // NOI18N
-        jCheckBox_Autor.setForeground(new java.awt.Color(255, 255, 255));
-        jCheckBox_Autor.setText("Autor");
-
-        jCheckBox_Linguagem.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 14)); // NOI18N
-        jCheckBox_Linguagem.setForeground(new java.awt.Color(255, 255, 255));
-        jCheckBox_Linguagem.setText("Linguagem");
-        jCheckBox_Linguagem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox_LinguagemActionPerformed(evt);
-            }
-        });
-
-        jCheckBox_Categoria.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 14)); // NOI18N
-        jCheckBox_Categoria.setForeground(new java.awt.Color(255, 255, 255));
-        jCheckBox_Categoria.setText("Categoria");
-        jCheckBox_Categoria.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox_CategoriaActionPerformed(evt);
-            }
-        });
-
-        jCheckBox_Editora.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 14)); // NOI18N
-        jCheckBox_Editora.setForeground(new java.awt.Color(255, 255, 255));
-        jCheckBox_Editora.setText("Editora");
-        jCheckBox_Editora.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox_EditoraActionPerformed(evt);
-            }
-        });
-
-        jCheckBox_DataDeSubimissao.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 14)); // NOI18N
-        jCheckBox_DataDeSubimissao.setForeground(new java.awt.Color(255, 255, 255));
-        jCheckBox_DataDeSubimissao.setText("Data de Submissão");
-        jCheckBox_DataDeSubimissao.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox_DataDeSubimissaoActionPerformed(evt);
-            }
-        });
-
-        jComboBox_Linguagem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Inglês", "Português", "Francês", "Nenhuma" }));
-        jComboBox_Linguagem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox_LinguagemActionPerformed(evt);
-            }
-        });
-
-        jComboBox_Categoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Matemática", "Direito", "Informática" }));
-        jComboBox_Categoria.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox_CategoriaActionPerformed(evt);
-            }
-        });
-
-        jButton_Buscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaceGrafica/img/busca.png"))); // NOI18N
-        jButton_Buscar.setText("BUSCAR");
+        jLabel7.setText("Buscar livro");
 
         javax.swing.GroupLayout jPanel_AzulLayout = new javax.swing.GroupLayout(jPanel_Azul);
         jPanel_Azul.setLayout(jPanel_AzulLayout);
@@ -221,92 +159,24 @@ public class TelaInicial extends javax.swing.JFrame {
             jPanel_AzulLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel_Marrom, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel_AzulLayout.createSequentialGroup()
-                .addGroup(jPanel_AzulLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel_AzulLayout.createSequentialGroup()
-                        .addGap(223, 223, 223)
-                        .addComponent(jLabel_BuscarLivro, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel_AzulLayout.createSequentialGroup()
-                        .addGap(70, 70, 70)
-                        .addGroup(jPanel_AzulLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane_ResultadosBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 547, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel_AzulLayout.createSequentialGroup()
-                                .addGroup(jPanel_AzulLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(jPanel_AzulLayout.createSequentialGroup()
-                                        .addComponent(jCheckBox_Autor)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextField_Autor))
-                                    .addGroup(jPanel_AzulLayout.createSequentialGroup()
-                                        .addComponent(jCheckBox_DataDeSubimissao)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextField_DataDeSubmissao, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel_AzulLayout.createSequentialGroup()
-                                        .addComponent(jCheckBox_Editora)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextField_Editora))
-                                    .addGroup(jPanel_AzulLayout.createSequentialGroup()
-                                        .addComponent(jCheckBox_Nome)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextField_Nome, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(81, 81, 81)
-                                .addGroup(jPanel_AzulLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel_AzulLayout.createSequentialGroup()
-                                        .addComponent(jCheckBox_Categoria)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jComboBox_Categoria, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel_AzulLayout.createSequentialGroup()
-                                        .addComponent(jCheckBox_Linguagem)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jComboBox_Linguagem, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jButton_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(120, Short.MAX_VALUE))
+                .addGap(338, 338, 338)
+                .addComponent(jLabel7)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel_AzulLayout.setVerticalGroup(
             jPanel_AzulLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_AzulLayout.createSequentialGroup()
                 .addComponent(jPanel_Marrom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel_BuscarLivro)
-                .addGap(25, 25, 25)
-                .addGroup(jPanel_AzulLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel_AzulLayout.createSequentialGroup()
-                        .addGroup(jPanel_AzulLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jCheckBox_Nome)
-                            .addComponent(jTextField_Nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel_AzulLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jCheckBox_Autor)
-                            .addComponent(jTextField_Autor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel_AzulLayout.createSequentialGroup()
-                        .addGroup(jPanel_AzulLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jCheckBox_Linguagem)
-                            .addComponent(jComboBox_Linguagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(25, 25, 25)
-                        .addGroup(jPanel_AzulLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jCheckBox_Categoria)
-                            .addComponent(jComboBox_Categoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGroup(jPanel_AzulLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel_AzulLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel_AzulLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jCheckBox_Editora)
-                            .addComponent(jTextField_Editora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel_AzulLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jCheckBox_DataDeSubimissao)
-                            .addComponent(jTextField_DataDeSubmissao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel_AzulLayout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addComponent(jButton_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane_ResultadosBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addGap(104, 104, 104)
+                .addComponent(jLabel7)
+                .addGap(0, 138, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel_Azul, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel_Azul, javax.swing.GroupLayout.PREFERRED_SIZE, 782, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -316,69 +186,34 @@ public class TelaInicial extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField_LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_LoginActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField_LoginActionPerformed
-
-    private void jCheckBox_LinguagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox_LinguagemActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox_LinguagemActionPerformed
-
-    private void jCheckBox_CategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox_CategoriaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox_CategoriaActionPerformed
-
-    private void jCheckBox_EditoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox_EditoraActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox_EditoraActionPerformed
-
-    private void jCheckBox_DataDeSubimissaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox_DataDeSubimissaoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox_DataDeSubimissaoActionPerformed
-
-    private void jCheckBox_NomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox_NomeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox_NomeActionPerformed
-
-    private void jComboBox_LinguagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_LinguagemActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox_LinguagemActionPerformed
-
-    private void jComboBox_CategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_CategoriaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox_CategoriaActionPerformed
-
     private void jButton_ConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ConfirmarActionPerformed
 
         try{
-            
+
             TelaLogin telaLogin = new TelaLogin();
             telaLogin.setVisible(true);
-            
+
             dispose();
-            
+
         }catch(Exception e){
             e.printStackTrace();
-        }  
-        
+        }
+
     }//GEN-LAST:event_jButton_ConfirmarActionPerformed
+
+    private void jTextField_LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_LoginActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField_LoginActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton_Buscar;
     private javax.swing.JButton jButton_Confirmar;
-    private javax.swing.JCheckBox jCheckBox_Autor;
-    private javax.swing.JCheckBox jCheckBox_Categoria;
-    private javax.swing.JCheckBox jCheckBox_DataDeSubimissao;
-    private javax.swing.JCheckBox jCheckBox_Editora;
-    private javax.swing.JCheckBox jCheckBox_Linguagem;
-    private javax.swing.JCheckBox jCheckBox_Nome;
-    private javax.swing.JComboBox<String> jComboBox_Categoria;
-    private javax.swing.JComboBox<String> jComboBox_Linguagem;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel_BuscarLivro;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel_IconePrograma;
     private javax.swing.JLabel jLabel_IconePrograma1;
     private javax.swing.JLabel jLabel_Login;
@@ -387,12 +222,7 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel_Marrom;
     private javax.swing.JPasswordField jPasswordField_Senha;
     private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JScrollPane jScrollPane_ResultadosBusca;
-    private javax.swing.JTextField jTextField_Autor;
-    private javax.swing.JTextField jTextField_DataDeSubmissao;
-    private javax.swing.JTextField jTextField_Editora;
     private javax.swing.JTextField jTextField_Login;
-    private javax.swing.JTextField jTextField_Nome;
     private javax.swing.JToggleButton jToggleButton1;
     // End of variables declaration//GEN-END:variables
 
