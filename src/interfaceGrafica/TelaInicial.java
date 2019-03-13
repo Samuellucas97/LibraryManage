@@ -212,6 +212,7 @@ public class TelaInicial extends javax.swing.JFrame {
             }
         });
 
+        jButton_Buscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaceGrafica/img/busca.png"))); // NOI18N
         jButton_Buscar.setText("BUSCAR");
 
         javax.swing.GroupLayout jPanel_AzulLayout = new javax.swing.GroupLayout(jPanel_Azul);
