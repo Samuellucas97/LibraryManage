@@ -5,8 +5,6 @@
  */
 package interfaceGrafica;
 
-import java.awt.Toolkit;
-
 /**
  *
  * @author samuellucas97
@@ -14,7 +12,7 @@ import java.awt.Toolkit;
 public class TelaInicial extends javax.swing.JFrame {
 
     /**
-     * Creates new form TelaTest
+     * Creates new form TelaInicial
      */
     public TelaInicial() {
         initComponents();
@@ -29,36 +27,23 @@ public class TelaInicial extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jToggleButton1 = new javax.swing.JToggleButton();
-        jButton2 = new javax.swing.JButton();
-        buttonGroup1 = new javax.swing.ButtonGroup();
-        buttonGroup2 = new javax.swing.ButtonGroup();
-        jPanel_Azul = new javax.swing.JPanel();
-        jPanel_Marrom = new javax.swing.JPanel();
+        jPanel_AzulClaro = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jTextField_Login = new javax.swing.JTextField();
         jLabel_Login = new javax.swing.JLabel();
         jButton_Confirmar = new javax.swing.JButton();
         jLabel_IconePrograma = new javax.swing.JLabel();
         jPasswordField_Senha = new javax.swing.JPasswordField();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jLabel_IconePrograma1 = new javax.swing.JLabel();
         jLabel_NomePrograma = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-
-        jRadioButton1.setText("jRadioButton1");
-
-        jToggleButton1.setText("jToggleButton1");
-
-        jButton2.setText("jButton2");
+        jLabel6 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel_Azul.setForeground(java.awt.Color.blue);
-
-        jPanel_Marrom.setBackground(new java.awt.Color(153, 204, 255));
+        jPanel_AzulClaro.setBackground(new java.awt.Color(153, 204, 255));
 
         jLabel2.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 12)); // NOI18N
         jLabel2.setText("Senha:");
@@ -82,34 +67,33 @@ public class TelaInicial extends javax.swing.JFrame {
 
         jLabel_IconePrograma.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
-        jLabel6.setText("00:00");
-
-        jLabel3.setText("00/00/0000");
-
         jLabel_IconePrograma1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel_IconePrograma1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaceGrafica/img/Webp.net-resizeimage.png"))); // NOI18N
 
         jLabel_NomePrograma.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel_NomePrograma.setText("NOME DO PROGRAMA");
 
-        javax.swing.GroupLayout jPanel_MarromLayout = new javax.swing.GroupLayout(jPanel_Marrom);
-        jPanel_Marrom.setLayout(jPanel_MarromLayout);
-        jPanel_MarromLayout.setHorizontalGroup(
-            jPanel_MarromLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_MarromLayout.createSequentialGroup()
-                .addGroup(jPanel_MarromLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel_MarromLayout.createSequentialGroup()
+        jLabel6.setText("00:00");
+
+        jLabel3.setText("00/00/0000");
+
+        javax.swing.GroupLayout jPanel_AzulClaroLayout = new javax.swing.GroupLayout(jPanel_AzulClaro);
+        jPanel_AzulClaro.setLayout(jPanel_AzulClaroLayout);
+        jPanel_AzulClaroLayout.setHorizontalGroup(
+            jPanel_AzulClaroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_AzulClaroLayout.createSequentialGroup()
+                .addGroup(jPanel_AzulClaroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel_AzulClaroLayout.createSequentialGroup()
                         .addGap(201, 201, 201)
                         .addComponent(jLabel_IconePrograma))
-                    .addGroup(jPanel_MarromLayout.createSequentialGroup()
+                    .addGroup(jPanel_AzulClaroLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel_IconePrograma1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel_NomePrograma)
-                        .addGap(63, 63, 63)
-                        .addComponent(jLabel_Login)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-<<<<<<< OURS
                         .addComponent(jLabel3))
                     .addGroup(jPanel_AzulClaroLayout.createSequentialGroup()
                         .addGap(87, 87, 87)
@@ -124,105 +108,75 @@ public class TelaInicial extends javax.swing.JFrame {
                                 .addComponent(jTextField_Login, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jButton_Confirmar))))
                 .addContainerGap(30, Short.MAX_VALUE))
-=======
-                        .addComponent(jTextField_Login, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPasswordField_Senha, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton_Confirmar)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel6)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel3)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
->>>>>>> THEIRS
         );
-        jPanel_MarromLayout.setVerticalGroup(
-            jPanel_MarromLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel_MarromLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel_MarromLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addGroup(jPanel_MarromLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel_MarromLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton_Confirmar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextField_Login, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel_Login)
-                            .addComponent(jLabel2)
-                            .addComponent(jPasswordField_Senha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel_MarromLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel6)))
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_MarromLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jLabel_IconePrograma)
-                    .addGap(43, 43, 43)))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_MarromLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(jPanel_MarromLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jPanel_AzulClaroLayout.setVerticalGroup(
+            jPanel_AzulClaroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_AzulClaroLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel_AzulClaroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel_IconePrograma1)
-                    .addGroup(jPanel_MarromLayout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(jLabel_NomePrograma))))
-        );
-
-<<<<<<< OURS
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaceGrafica/img/search _2.png"))); // NOI18N
-        jLabel4.setText("Consultar livro");
-=======
-        jLabel7.setText("Buscar livro");
-
-        javax.swing.GroupLayout jPanel_AzulLayout = new javax.swing.GroupLayout(jPanel_Azul);
-        jPanel_Azul.setLayout(jPanel_AzulLayout);
-        jPanel_AzulLayout.setHorizontalGroup(
-            jPanel_AzulLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel_Marrom, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel_AzulLayout.createSequentialGroup()
-                .addGap(338, 338, 338)
-                .addComponent(jLabel7)
+                    .addGroup(jPanel_AzulClaroLayout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addGroup(jPanel_AzulClaroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel_NomePrograma)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel3))))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel_AzulClaroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField_Login, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel_Login))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel_AzulClaroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jPasswordField_Senha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(25, 25, 25)
+                .addComponent(jButton_Confirmar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(57, 57, 57)
+                .addComponent(jLabel_IconePrograma)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel_AzulLayout.setVerticalGroup(
-            jPanel_AzulLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel_AzulLayout.createSequentialGroup()
-                .addComponent(jPanel_Marrom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(104, 104, 104)
-                .addComponent(jLabel7)
-                .addGap(0, 138, Short.MAX_VALUE))
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaceGrafica/img/search _2.png"))); // NOI18N
+        jLabel1.setText("Consultar livro");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(27, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(22, 22, 22))
         );
->>>>>>> THEIRS
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(68, 68, 68)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-<<<<<<< OURS
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel_AzulClaro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
-                .addComponent(jLabel4)
-                .addGap(24, 24, 24))
-=======
-            .addComponent(jPanel_Azul, javax.swing.GroupLayout.PREFERRED_SIZE, 782, javax.swing.GroupLayout.PREFERRED_SIZE)
->>>>>>> THEIRS
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-<<<<<<< OURS
-            .addComponent(jPanel_AzulClaro, javax.swing.GroupLayout.PREFERRED_SIZE, 216, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel4)
-                .addGap(50, 50, 50))
-=======
-            .addComponent(jPanel_Azul, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
->>>>>>> THEIRS
+            .addComponent(jPanel_AzulClaro, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jTextField_LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_LoginActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField_LoginActionPerformed
 
     private void jButton_ConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ConfirmarActionPerformed
 
@@ -231,37 +185,59 @@ public class TelaInicial extends javax.swing.JFrame {
             TelaLogin telaLogin = new TelaLogin();
             telaLogin.setVisible(true);
 
-            dispose();
-
         }catch(Exception e){
             e.printStackTrace();
         }
-
     }//GEN-LAST:event_jButton_ConfirmarActionPerformed
 
-    private void jTextField_LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_LoginActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField_LoginActionPerformed
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(TelaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(TelaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(TelaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(TelaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new TelaInicial().setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.ButtonGroup buttonGroup2;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton_Confirmar;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel_IconePrograma;
     private javax.swing.JLabel jLabel_IconePrograma1;
     private javax.swing.JLabel jLabel_Login;
     private javax.swing.JLabel jLabel_NomePrograma;
-    private javax.swing.JPanel jPanel_Azul;
-    private javax.swing.JPanel jPanel_Marrom;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel_AzulClaro;
     private javax.swing.JPasswordField jPasswordField_Senha;
-    private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JTextField jTextField_Login;
-    private javax.swing.JToggleButton jToggleButton1;
     // End of variables declaration//GEN-END:variables
-
 }

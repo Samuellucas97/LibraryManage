@@ -9,12 +9,12 @@ package interfaceGrafica;
  *
  * @author samuellucas97
  */
-public class NewJPanel extends javax.swing.JPanel {
+public class TelaInicialPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form NewJPanel
      */
-    public NewJPanel() {
+    public TelaInicialPanel() {
         initComponents();
     }
 

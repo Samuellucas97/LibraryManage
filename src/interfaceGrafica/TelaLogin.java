@@ -203,7 +203,7 @@ public class TelaLogin extends javax.swing.JFrame {
         
         try{
             
-            TelaInicial telaInicial = new TelaInicial();
+            TelaInicialPanel telaInicial = new TelaInicialPanel();
             telaInicial.setVisible(true);
             
             dispose();
