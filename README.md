@@ -1,4 +1,4 @@
-# Sistema de Controle de Estoque Ranqueado - SCER 
+# LibrayManage 
 
 ## Introdução  
 
@@ -27,7 +27,7 @@ Clique nos links acima
 ## Autores :smile: 
   
  
-[Samuel Lucas de Moura Ferino](www.google.com) ( _samuellucas97@ufrn.edu.br_ )    
+Samuel Lucas de Moura Ferino ( _samuellucas97@ufrn.edu.br_ )    
 José Welliton Nunes Junior ( _wellintongb@ufrn.edu.br_ )  
 Thiago     
 :copyright: IMD/UFRN 2019.
