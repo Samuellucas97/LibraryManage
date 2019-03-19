@@ -5,6 +5,9 @@
  */
 package interfaceGrafica;
 
+import javafx.util.Pair; 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author samuellucas97
@@ -180,14 +183,42 @@ public class TelaInicial extends javax.swing.JFrame {
 
     private void jButton_ConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ConfirmarActionPerformed
 
-        try{
+        /// Pegando o conteúdo dos campos login e senha
+        String loginTemporaria = jTextField_Login.getText();
+        String senhaTemporaria = new String( jPasswordField_Senha.getPassword() );
+        
+        
+        if( /*Usuario.autenticacao( loginTemporaria, senhaTemporaria ).getValue() == true
+                2 posição é o resultado da autenticação*/ false ) {
+                
+            try{
 
-            TelaLogin telaLogin = new TelaLogin();
-            telaLogin.setVisible(true);
+                TelaLogin telaLogin = new TelaLogin();
+                telaLogin.setVisible(true);
 
-        }catch(Exception e){
-            e.printStackTrace();
+                this.dispose();
+
+            }catch(Exception e){
+                e.printStackTrace();
+            }
         }
+        else{
+            
+            if( /** Usuario.autenticacao( loginTemporaria, senhaTemporaria ).getKey() == 1 
+                    A 1ª posiçã da tupla é um valor 1 ou 2 para indica se o erro está no login ou na senha*/ 
+                    false){
+                JOptionPane.showMessageDialog(null, "Login errado. Tente novamente...");
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Senha errada. Tente novamente...");            
+            }
+            
+            /// Limpando os campos
+            jTextField_Login.setText(""); 
+            jPasswordField_Senha.setText("");
+            
+        } 
+        
     }//GEN-LAST:event_jButton_ConfirmarActionPerformed
 
     /**
