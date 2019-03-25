@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package interfaceGrafica;
+package interacaoComUsuario.telas;
 
 /**
  *
@@ -61,7 +61,7 @@ public class TelaAdicionarUsuario extends javax.swing.JFrame {
         jLabel3.setText("00/00/0000");
 
         jLabel_IconePrograma1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel_IconePrograma1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaceGrafica/img/Webp.net-resizeimage.png"))); // NOI18N
+        jLabel_IconePrograma1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interacaoComUsuario/img/Webp.net-resizeimage.png"))); // NOI18N
 
         jLabel_NomePrograma.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel_NomePrograma.setText("NOME DO PROGRAMA");
@@ -194,11 +194,12 @@ public class TelaAdicionarUsuario extends javax.swing.JFrame {
             jPanel_CinzaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_CinzaLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel_CinzaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField_Login)
-                    .addComponent(jLabel_Login)
-                    .addComponent(jLabel5)
-                    .addComponent(jPasswordField_Senha2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel_CinzaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel_CinzaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jTextField_Login)
+                        .addComponent(jLabel_Login)
+                        .addComponent(jPasswordField_Senha2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel_CinzaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jPasswordField_Senha)

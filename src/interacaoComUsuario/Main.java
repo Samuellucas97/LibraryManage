@@ -1,5 +1,7 @@
-package interfaceGrafica;
+package interacaoComUsuario;
 
+import interacaoComUsuario.telas.TelaInicial;
+import interacaoComUsuario.telas.TelaInicialPanel;
 import java.awt.EventQueue;
 
 /**

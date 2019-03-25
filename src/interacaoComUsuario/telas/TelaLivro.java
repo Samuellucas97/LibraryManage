@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package interfaceGrafica;
+package interacaoComUsuario.telas;
 
 /**
  *
@@ -55,7 +55,7 @@ public class TelaLivro extends javax.swing.JFrame {
         jLabel_NomePrograma.setText("NOME DO PROGRAMA");
 
         jLabel_IconePrograma1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel_IconePrograma1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaceGrafica/img/Webp.net-resizeimage.png"))); // NOI18N
+        jLabel_IconePrograma1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interacaoComUsuario/img/Webp.net-resizeimage.png"))); // NOI18N
 
         jLabel_Data.setText("00/00/0000");
 

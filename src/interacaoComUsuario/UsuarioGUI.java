@@ -6,26 +6,15 @@
 package interacaoComUsuario;
 
 /**
- *
+ * Interface da apresentação do usuário
  * @author SamDan
  */
-public abstract class UsuarioGUI {
+public interface UsuarioGUI {
 
-//    
-//    public void setTipoDeUsuario(String tipoDeUsuario) {
-//            this.tipoDeUsuario = tipoDeUsuario;
-//    }
-    public abstract void realizarLogin(String login, String senha);
-
-    /**
-     *
-     * @param login
-     * @param senha
-     */
+//    public abstract void realizarLogin(String login, String senha);
     public abstract void autenticacao( String login, String senha);
     public abstract void realizarLogout();
-
-
+    
 }
 
 

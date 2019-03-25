@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package interfaceGrafica;
+package interacaoComUsuario.telas;
 
 /**
  *
@@ -115,7 +115,7 @@ public class TelaBusca extends javax.swing.JFrame {
             }
         });
 
-        jButton_Buscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaceGrafica/img/busca.png"))); // NOI18N
+        jButton_Buscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interacaoComUsuario/img/busca.png"))); // NOI18N
         jButton_Buscar.setText("BUSCAR");
         jButton_Buscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -131,7 +131,7 @@ public class TelaBusca extends javax.swing.JFrame {
         jLabel_IconePrograma.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         jLabel_IconePrograma1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel_IconePrograma1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaceGrafica/img/Webp.net-resizeimage.png"))); // NOI18N
+        jLabel_IconePrograma1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interacaoComUsuario/img/Webp.net-resizeimage.png"))); // NOI18N
 
         jLabel2.setText("00/00/0000");
 
@@ -347,9 +347,6 @@ public class TelaBusca extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton_Buscar;
-    private javax.swing.JButton jButton_Confirmar1;
-    private javax.swing.JButton jButton_Confirmar2;
-    private javax.swing.JButton jButton_Confirmar3;
     private javax.swing.JCheckBox jCheckBox_Autor;
     private javax.swing.JCheckBox jCheckBox_Categoria;
     private javax.swing.JCheckBox jCheckBox_DataDeSubimissao;
@@ -359,47 +356,17 @@ public class TelaBusca extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox_Categoria;
     private javax.swing.JComboBox<String> jComboBox_Linguagem;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel_BuscarLivro;
-    private javax.swing.JLabel jLabel_BuscarLivro1;
-    private javax.swing.JLabel jLabel_BuscarLivro2;
-    private javax.swing.JLabel jLabel_BuscarLivro3;
     private javax.swing.JLabel jLabel_IconePrograma;
     private javax.swing.JLabel jLabel_IconePrograma1;
-    private javax.swing.JLabel jLabel_IconePrograma2;
-    private javax.swing.JLabel jLabel_IconePrograma3;
-    private javax.swing.JLabel jLabel_IconePrograma4;
-    private javax.swing.JLabel jLabel_IconePrograma5;
-    private javax.swing.JLabel jLabel_IconePrograma6;
-    private javax.swing.JLabel jLabel_IconePrograma7;
-    private javax.swing.JLabel jLabel_Login1;
-    private javax.swing.JLabel jLabel_Login2;
-    private javax.swing.JLabel jLabel_Login3;
     private javax.swing.JLabel jLabel_NomePrograma;
-    private javax.swing.JLabel jLabel_NomePrograma1;
-    private javax.swing.JLabel jLabel_NomePrograma2;
-    private javax.swing.JLabel jLabel_NomePrograma3;
     private javax.swing.JPanel jPanel_Azul;
-    private javax.swing.JPanel jPanel_Azul1;
-    private javax.swing.JPanel jPanel_Azul2;
-    private javax.swing.JPanel jPanel_Azul3;
     private javax.swing.JPanel jPanel_Marrom;
-    private javax.swing.JPanel jPanel_Marrom1;
-    private javax.swing.JPanel jPanel_Marrom2;
-    private javax.swing.JPanel jPanel_Marrom3;
-    private javax.swing.JPasswordField jPasswordField_Senha1;
-    private javax.swing.JPasswordField jPasswordField_Senha2;
-    private javax.swing.JPasswordField jPasswordField_Senha3;
     private javax.swing.JScrollPane jScrollPane_ResultadosBusca;
     private javax.swing.JTextField jTextField_Autor;
     private javax.swing.JTextField jTextField_DataDeSubmissao;
     private javax.swing.JTextField jTextField_Editora;
-    private javax.swing.JTextField jTextField_Login1;
-    private javax.swing.JTextField jTextField_Login2;
-    private javax.swing.JTextField jTextField_Login3;
     private javax.swing.JTextField jTextField_Nome;
     // End of variables declaration//GEN-END:variables
 }

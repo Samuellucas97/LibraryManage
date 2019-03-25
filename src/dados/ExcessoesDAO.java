@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package logicaDeNegocios;
+package dados;
 
 /**
  *
- * @author samuk
+ * @author SamDan
  */
-public class AdministradorUsuario {
+public class ExcessoesDAO {
     
 }

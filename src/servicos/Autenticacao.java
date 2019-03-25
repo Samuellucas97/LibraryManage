@@ -3,23 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package logicaDeNegocios;
+package servicos;
 
 /**
  *
  * @author samuk
  */
-public class Usuario {
-    
-   public Usuario(){
-       login = new String();
-       senha = new String();
-   }
-    
-    
-    
-    
-    private String login;
-    private String senha;
+public class Autenticacao {
     
 }

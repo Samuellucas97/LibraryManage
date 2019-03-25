@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package interfaceGrafica;
+package interacaoComUsuario.telas;
 
 import javafx.util.Pair; 
 import javax.swing.JOptionPane;
@@ -71,7 +71,7 @@ public class TelaInicial extends javax.swing.JFrame {
         jLabel_IconePrograma.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         jLabel_IconePrograma1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel_IconePrograma1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaceGrafica/img/Webp.net-resizeimage.png"))); // NOI18N
+        jLabel_IconePrograma1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interacaoComUsuario/img/Webp.net-resizeimage.png"))); // NOI18N
 
         jLabel_NomePrograma.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel_NomePrograma.setText("NOME DO PROGRAMA");
@@ -139,7 +139,7 @@ public class TelaInicial extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaceGrafica/img/search _2.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interacaoComUsuario/img/search _2.png"))); // NOI18N
         jLabel1.setText("Consultar livro");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

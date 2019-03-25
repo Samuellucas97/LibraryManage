@@ -1,4 +1,4 @@
-# LibrayManage 
+# LibraryManage 
 
 ## Introdução  
 
