@@ -61,8 +61,13 @@ public class UsuarioDAOArquivo implements UsuarioDAO{
        
         usuariosCadastrados = this.conteudoArquivo.split("\n");
         for(String linhaDoArquivo: usuariosCadastrados ){
+            
             loginTemporario = linhaDoArquivo.split(";")[0].split(":")[1];
             senhaTemporaria = linhaDoArquivo.split(";")[1].split(":")[1];
+            
+            if( loginTemporario.equals(login) && senhaTemporaria.equals(senha) )
+                return true;
+            
         }
         
         return false;
