@@ -53,11 +53,17 @@ public class UsuarioDAOArquivo implements UsuarioDAO{
     
     private boolean buscaUsuarioNoArquivo( String login, String senha){
         
+        String[] usuariosCadastrados;
+        String loginTemporario = new String();
+        String senhaTemporaria = new String();
+
         lerArquivo("usuariosCadastrados.dat");
-      
-        /// SEMPRE HAVERÁ PELO MENOS O SUPER ADMIN CADASTRADO
-        
-        
+       
+        usuariosCadastrados = this.conteudoArquivo.split("\n");
+        for(String linhaDoArquivo: usuariosCadastrados ){
+            loginTemporario = linhaDoArquivo.split(";")[0].split(":")[1];
+            senhaTemporaria = linhaDoArquivo.split(";")[1].split(":")[1];
+        }
         
         return false;
     }
