@@ -17,7 +17,10 @@ public class UsuarioServico {
     private UsuarioDAO usuarioDAO = new UsuarioDAOArquivo();
     
     public boolean autenticacao( String login, String senha){
+        
         return usuarioDAO.autenticacao( login, senha );
+        
+        
     }
     
 //    public boolean realizarLogout(){
