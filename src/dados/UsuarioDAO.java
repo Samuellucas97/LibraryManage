@@ -12,6 +12,6 @@ package dados;
  */
 public interface UsuarioDAO {
 
-    public boolean autenticacao(String login, String senha);
+    public boolean autenticacao(String login, String senha) throws ServicoException;
     
 }

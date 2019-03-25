@@ -8,7 +8,12 @@ package dados;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import servicos.Autenticacao;
+import dados.ServicoException;
+import java.util.HashMap;
+import servicos.Usuario;
 
 /**
  *
@@ -16,26 +21,25 @@ import java.io.IOException;
  */
 public class UsuarioDAOArquivo implements UsuarioDAO{
     
-    private String conteudoArquivo;
-
-    public UsuarioDAOArquivo(){
-        conteudoArquivo = "";      
-    }
+    private HashMap<String, Usuario> hMap = new HashMap<String, Usuario>();
     
-    public boolean autenticacao(String login, String senha)  {
-        return buscaUsuarioNoArquivo(login, senha);       
+    public boolean autenticacao(String login, String senha) throws ServicoException{
+        
+        if( this.buscaUsuarioNoArquivo(login, senha).equals("OK")){
+            throw new ServicoException( this.buscaUsuarioNoArquivo(login, senha) );
+        }
+        return true;       
     }   
     	
-    private void lerArquivo(String nomeDoArquivo){
+    private String lerArquivo(String nomeDoArquivo){
         
         String linha = new String();
-        
+                
         try{
             BufferedReader buffReader = new BufferedReader(new FileReader( nomeDoArquivo ));
             
             while( buffReader.ready() ){              // -> LENDO CADA LINHA  
-                linha = buffReader.readLine();
-                this.conteudoArquivo += linha + "\n";
+                linha += buffReader.readLine() + "\n";
             }
             
             buffReader.close();
@@ -49,21 +53,34 @@ public class UsuarioDAOArquivo implements UsuarioDAO{
         catch(IOException e){  // -> OCORREU OUTRO ERRO, SENDO ESSE DESCONHECIDO
             System.err.println( e.getMessage() );
         }
+        
+        return linha;
+        
     }
     
-    private boolean buscaUsuarioNoArquivo( String login, String senha){
+    private void transformaStringEmHashMap(String conteudoArquivo){
+    
+        hMap.clear();
         
-        String[] usuariosCadastrados;
         String loginTemporario = new String();
         String senhaTemporaria = new String();
-
-        lerArquivo("usuariosCadastrados.dat");
-       
-        usuariosCadastrados = this.conteudoArquivo.split("\n");
-        for(String linhaDoArquivo: usuariosCadastrados ){
-            
+        Usuario usuario = new Usuario();
+        
+        for(String linhaDoArquivo: conteudoArquivo.split("\n") ){
             loginTemporario = linhaDoArquivo.split(";")[0].split(":")[1];
             senhaTemporaria = linhaDoArquivo.split(";")[1].split(":")[1];
+        }
+        
+        
+    }
+    
+    
+    private String buscaUsuarioNoArquivo( String login, String senha){
+        
+        String[] usuariosCadastrados;
+        
+        this.lerArquivo("./arquivos/usuariosCadastrados.dat");
+       
             
             if( loginTemporario.equals(login) && senhaTemporaria.equals(senha) )
                 return true;
@@ -72,4 +89,38 @@ public class UsuarioDAOArquivo implements UsuarioDAO{
         
         return false;
     }
+    private boolean salvarArquivo(String nomeArquivo, String conteudoArquivo){
+		
+        if(conteudoArquivo.equals("")) {
+                return false;
+        }
+	
+	try{
+
+          nomeArquivo += ".dat";
+		  FileWriter writer = new FileWriter(nomeArquivo);     
+		  writer.write(conteudoArquivo);
+		  writer.close(); 		
+		  return true;
+
+        }
+        catch(FileNotFoundException e){   // -> ARQUIVO NãO EXISTE
+	        System.err.println( e.getMessage() );
+	        return false;        
+        }
+        catch(IOException e){  // -> OCORREU OUTRO ERRO, SENDO ESSE DESCONHECIDO
+            System.err.println( e.getMessage() );
+            return false;
+        }
+    
+    }
+
+    public static void main(String[] args){
+        
+        UsuarioDAO e = new UsuarioDAOArquivo();
+        
+        System.out.println(e.autenticacao("Samuel", "admin") );
+    
+    }
+    
 }
