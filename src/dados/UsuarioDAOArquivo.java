@@ -10,23 +10,26 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import servicos.Autenticacao;
-import dados.ServicoException;
 import java.util.HashMap;
+import servicos.Administrador;
+import servicos.Cliente;
 import servicos.Usuario;
 
 /**
- *
- * @author SamDan
+ * Representa um 
+ * @author  Samuel Lucas de Moura Ferino
+ *          José Wellinton
  */
 public class UsuarioDAOArquivo implements UsuarioDAO{
     
-    private HashMap<String, Usuario> hMap = new HashMap<String, Usuario>();
+    private HashMap<String, Usuario> hMapUsuarios = new HashMap<String, Usuario>();
+    
+    public UsuarioDAOArquivo(){}
     
     public boolean autenticacao(String login, String senha) throws ServicoException{
         
-        if( this.buscaUsuarioNoArquivo(login, senha).equals("OK")){
-            throw new ServicoException( this.buscaUsuarioNoArquivo(login, senha) );
+        if( this.buscaUsuario(login, senha).equals("OK")){
+            throw new ServicoException( this.buscaUsuario(login, senha) );
         }
         return true;       
     }   
@@ -60,38 +63,81 @@ public class UsuarioDAOArquivo implements UsuarioDAO{
     
     private void transformaStringEmHashMap(String conteudoArquivo){
     
-        hMap.clear();
+        hMapUsuarios.clear();
         
-        String loginTemporario = new String();
-        String senhaTemporaria = new String();
-        Usuario usuario = new Usuario();
+        Usuario usuario;
         
         for(String linhaDoArquivo: conteudoArquivo.split("\n") ){
-            loginTemporario = linhaDoArquivo.split(";")[0].split(":")[1];
-            senhaTemporaria = linhaDoArquivo.split(";")[1].split(":")[1];
+            
+            if ( linhaDoArquivo.split(";")[1].split(":")[1].equals("cliente")  ) {
+                
+                usuario = new Cliente();
+                
+                usuario.setLogin( linhaDoArquivo.split(";")[1].split(":")[1] );
+                usuario.setSenha( linhaDoArquivo.split(";")[2].split(":")[1] );
+                usuario.setNome( linhaDoArquivo.split(";")[3].split(":")[1] );
+                usuario.setTelefone( linhaDoArquivo.split(";")[4].split(":")[1] );
+                usuario.setIdade( Integer.parseInt(linhaDoArquivo.split(";")[5].split(":")[1] ));
+                usuario.setGenero( linhaDoArquivo.split(";")[6].split(":")[1] );
+            
+                hMapUsuarios.put( usuario.getLogin(), usuario);
+                
+                continue;
+                
+            }
+            
+            if( linhaDoArquivo.split(";")[1].split(":")[1].equals("administrador") ){
+                
+                usuario = new Administrador();
+                
+                usuario.setLogin( linhaDoArquivo.split(";")[1].split(":")[1] );
+                usuario.setSenha( linhaDoArquivo.split(";")[2].split(":")[1] );
+                usuario.setNome( linhaDoArquivo.split(";")[3].split(":")[1] );
+                usuario.setTelefone( linhaDoArquivo.split(";")[4].split(":")[1] );
+                usuario.setIdade( Integer.parseInt(linhaDoArquivo.split(";")[5].split(":")[1] ));
+                usuario.setGenero( linhaDoArquivo.split(";")[6].split(":")[1] );
+                
+                hMapUsuarios.put( usuario.getLogin(), usuario);
+                
+                continue;
+                
+            }
+            
+//      FAZER A CLASSE OPERADOR                
+//            else if( linhaDoArquivo.split(";")[1].split(":")[1].equals("operador") ){
+//                usuario = new Operador();
+//                usuario.setLogin( linhaDoArquivo.split(";")[1].split(":")[1] );
+//                usuario.setSenha( linhaDoArquivo.split(";")[2].split(":")[1] );
+//                usuario.setNome( linhaDoArquivo.split(";")[3].split(":")[1] );
+//                usuario.setTelefone( linhaDoArquivo.split(";")[4].split(":")[1] );
+//                usuario.setIdade( Integer.parseInt(linhaDoArquivo.split(";")[5].split(":")[1] ));
+//                usuario.setGenero( linhaDoArquivo.split(";")[6].split(":")[1] );
+//                hMapUsuarios.put( usuario.getLogin(), usuario);
+//                
+//                  continue;
+//                  
+//            }
         }
         
         
     }
     
-    
-    private String buscaUsuarioNoArquivo( String login, String senha){
+    private String buscaUsuario( String login, String senha){
         
-        String[] usuariosCadastrados;
+        Usuario usuarioTemporario = hMapUsuarios.get(login);
         
-        this.lerArquivo("./arquivos/usuariosCadastrados.dat");
-       
-            
-            if( loginTemporario.equals(login) && senhaTemporaria.equals(senha) )
-                return true;
-            
-        }
-        
-        return false;
+        if(  usuarioTemporario == null )
+            return "Login de usuario nao cadastrado";
+                
+        if( !senha.equals( usuarioTemporario.getSenha() ) )
+            return "Senha de usuario incorreta";
+                    
+        return "OK";
     }
+    
     private boolean salvarArquivo(String nomeArquivo, String conteudoArquivo){
 		
-        if(conteudoArquivo.equals("")) {
+        if( conteudoArquivo.equals("") ) {
                 return false;
         }
 	
@@ -112,14 +158,6 @@ public class UsuarioDAOArquivo implements UsuarioDAO{
             System.err.println( e.getMessage() );
             return false;
         }
-    
-    }
-
-    public static void main(String[] args){
-        
-        UsuarioDAO e = new UsuarioDAOArquivo();
-        
-        System.out.println(e.autenticacao("Samuel", "admin") );
     
     }
     

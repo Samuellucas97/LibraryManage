@@ -5,16 +5,17 @@
  */
 package servicos;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 /**
  *
  * @author SamDan
  */
-public class ClienteServico {
- 
+public class Administrador extends Usuario{
+
+    private HashMap<String, ArrayList<Boolean> > hMapRankingUsuario =  new HashMap<String, ArrayList<Boolean> >();
     
-    private boolean inserirRankingLivro(){
-        return true;
-    }
     
     
 }

@@ -5,6 +5,7 @@
  */
 package servicos;
 
+import dados.ServicoException;
 import dados.UsuarioDAO;
 import dados.UsuarioDAOArquivo;
 
@@ -15,12 +16,21 @@ import dados.UsuarioDAOArquivo;
 public class UsuarioServico {
 
     private UsuarioDAO usuarioDAO = new UsuarioDAOArquivo();
+
+    public UsuarioServico() {
+    }
     
     public boolean autenticacao( String login, String senha){
         
-        return usuarioDAO.autenticacao( login, senha );
+        boolean resultado = false;
         
+        try{
+            resultado = usuarioDAO.autenticacao( login, senha );
+        }catch( ServicoException e){
+            System.err.println( e.getMessage() );
+        }
         
+        return resultado;
     }
     
 //    public boolean realizarLogout(){

@@ -6,6 +6,8 @@
 package servicos;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import javafx.util.Pair;
 
 
 /**
@@ -14,10 +16,13 @@ import java.util.ArrayList;
  */
 public class Cliente extends Usuario{
     
-    private ArrayList<Boolean> ranking;
+    
     private int numeroEmprestimos;
     private int numeroDevolucoes;
-
+    private ArrayList<Pair<String,String> > listaId_e_DataDeEmprestimoLivros;
+    private ArrayList<Boolean> ranking;
+    private HashMap<String, ArrayList<Boolean> > hMapRankingLivros = new HashMap<String, ArrayList<Boolean> >(); 
+    
     public Cliente( String login, String senha){
         
         super(login, senha);
@@ -30,6 +35,19 @@ public class Cliente extends Usuario{
         ranking.add(false);
         ranking.add(false);
     
+    }
+
+    public Cliente() {
+        
+        super();
+        
+        this.ranking = new ArrayList<Boolean>();
+        
+        ranking.add(false); 
+        ranking.add(false);
+        ranking.add(false);
+        ranking.add(false);
+        ranking.add(false);
     }
     
     public ArrayList<Boolean> getRanking(){
