@@ -26,6 +26,12 @@ public abstract class UsuarioDAOArquivo implements UsuarioDAO{
     
     public UsuarioDAOArquivo(){}
     
+    protected abstract void transformaStringEmHashMap(String conteudoArquivo );    
+     
+    protected abstract String autenticar( String login, String senha);
+    
+    public abstract Usuario buscar( String login ) throws NullPointerException;
+    
     public boolean autenticacao(String login, String senha) throws ServicoException{
         
         if( !this.autenticar(login, senha).equals("OK")){
@@ -61,13 +67,6 @@ public abstract class UsuarioDAOArquivo implements UsuarioDAO{
         return linha;
         
     }
-    
-    
-    protected abstract void transformaStringEmHashMap(String conteudoArquivo );    
-    
-    protected abstract String autenticar( String login, String senha);
-    
-    public abstract Usuario buscar( String login ) throws NullPointerException;
     
     private boolean salvarArquivo(String nomeArquivo, String conteudoArquivo){
 		

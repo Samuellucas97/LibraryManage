@@ -15,19 +15,12 @@ import dados.ServicoException;
  */
 public class FuncionarioServico {
     
-    private ClienteDAO clienteDAO;
-
-    public FuncionarioServico( String tipoDAO) {
-        
-        if( tipoDAO.equals("Arquivo"))
-            clienteDAO = new ClienteDAOArquivo();
+    private ClienteServico clienteServico = new ClienteServico();
     
-    }
-    
-    
+    public FuncionarioServico(){}
     
     public Cliente consultarCliente( String loginCliente ) throws ServicoException{
-       return clienteDAO.buscarCliente(loginCliente);
+       return clienteServico.consultarCliente(loginCliente);
     }
     
     public void registrarCliente(   String login, 
@@ -36,21 +29,18 @@ public class FuncionarioServico {
                                     String telefone,
                                     int idade,
                                     String genero ) throws ServicoException{
-    
-    
-        Cliente cliente = new Cliente();
+   
         
-        cliente.setLogin(login);
-        cliente.setSenha(senha);
-        cliente.setNome(nome);
-        cliente.setTelefone(telefone);
-        cliente.setIdade(idade);
-        cliente.setGenero(genero);
-        
-        this.clienteDAO.salvar( cliente );
+        this.clienteServico.salvar( login, 
+                                    senha,
+                                    nome,
+                                    telefone,
+                                    idade,
+                                    genero );
         
     
     }
+//    public void registrarFuncionario();
     public void bloqueioPermanenteDeCliente(){}
     public void registrarLivro(){}
     public void alterarLivro(){}

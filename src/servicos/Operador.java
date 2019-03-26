@@ -3,14 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dados;
-
-import servicos.Cliente;
+package servicos;
 
 /**
  *
  * @author SamDan
  */
-public interface AdministradorDAO {
+public class Operador extends Funcionario{
     
+    public Operador(){
+        super();
+    }
+  
 }

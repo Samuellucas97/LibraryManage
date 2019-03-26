@@ -10,5 +10,5 @@ package servicos;
  * @author SamDan
  */
 public class OperadorServico {
-    
+  
 }
