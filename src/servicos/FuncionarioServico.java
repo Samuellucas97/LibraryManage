@@ -5,8 +5,6 @@
  */
 package servicos;
 
-import dados.ClienteDAO;
-import dados.ClienteDAOArquivo;
 import dados.ServicoException;
 
 /**
@@ -40,10 +38,12 @@ public class FuncionarioServico {
         
     
     }
-//    public void registrarFuncionario();
+    
+    public void bloqueioPermanenteDeLivro(){}
+    public void bloqueioTemporarioDeLivro(){}
     public void bloqueioPermanenteDeCliente(){}
+    public void bloqueioTemporarioDeCliente(){}
     public void registrarLivro(){}
     public void alterarLivro(){}
-    public void bloqueioTemporarioDeCliente(){}
-
+    
 }

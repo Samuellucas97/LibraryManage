@@ -5,10 +5,13 @@
  */
 package servicos;
 
+import dados.ServicoException;
 /**
  *
  * @author SamDan
  */
-public class OperadorServico {
+public class OperadorServico extends FuncionarioServico{
   
+    public void efetuarDevolucaoDeLivro() throws ServicoException{}
+    public void emprestimoDeLivros() throws ServicoException{}
 }

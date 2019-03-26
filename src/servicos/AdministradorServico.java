@@ -5,10 +5,23 @@
  */
 package servicos;
 
+import dados.ServicoException;
+
 /**
  *
  * @author SamDan
  */
-public class AdministradorServico {
+public class AdministradorServico extends FuncionarioServico{
+    
+    public AdministradorServico(){
+        super();
+    }
+    public void excluirLivro() throws ServicoException{}
+    public void consultarFuncionario() throws ServicoException{}
+    public void alterarFuncionario() throws ServicoException{}
+    public void registrarFuncionario() throws ServicoException{}
+    public void excluirUsuario() throws ServicoException{}
+    public void bloqueioPermanenteDeFuncionario() throws ServicoException{}
+    public void bloqueioTemporarioDeFuncionario() throws ServicoException{}
     
 }
