@@ -46,6 +46,8 @@ public class Main {
                 new TelaInicial().setVisible(true);
             }
         });
+
+    
     }
 
 	

@@ -12,10 +12,16 @@ import java.util.HashMap;
  *
  * @author SamDan
  */
-public class Administrador extends Usuario{
+public class Administrador extends Funcionario{
 
     private HashMap<String, ArrayList<Boolean> > hMapRankingUsuario =  new HashMap<String, ArrayList<Boolean> >();
     
+    public Administrador(){
+        super();
+    }
     
+    public Administrador(String login, String senha){
+        super(login, senha);
+    }
     
 }

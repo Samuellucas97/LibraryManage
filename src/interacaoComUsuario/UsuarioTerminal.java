@@ -9,11 +9,11 @@ package interacaoComUsuario;
  * Interface da apresentação do usuário
  * @author SamDan
  */
-public interface UsuarioGUI {
+public class UsuarioTerminal {
 
 //    public abstract void realizarLogin(String login, String senha);
-    public abstract void autenticacao( String login, String senha);
-    public abstract void realizarLogout();
+    public void autenticacao( String login, String senha){}
+    public void realizarLogout(){}
     
 }
 

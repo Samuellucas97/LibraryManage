@@ -28,8 +28,8 @@ public class UsuarioDAOArquivo implements UsuarioDAO{
     
     public boolean autenticacao(String login, String senha) throws ServicoException{
         
-        if( this.buscaUsuario(login, senha).equals("OK")){
-            throw new ServicoException( this.buscaUsuario(login, senha) );
+        if( this.autenticarUsuario(login, senha).equals("OK")){
+            throw new ServicoException( this.autenticarUsuario(login, senha) );
         }
         return true;       
     }   
@@ -122,7 +122,7 @@ public class UsuarioDAOArquivo implements UsuarioDAO{
         
     }
     
-    private String buscaUsuario( String login, String senha){
+    private String autenticarUsuario( String login, String senha){
         
         Usuario usuarioTemporario = hMapUsuarios.get(login);
         
@@ -133,6 +133,10 @@ public class UsuarioDAOArquivo implements UsuarioDAO{
             return "Senha de usuario incorreta";
                     
         return "OK";
+    }
+    
+    private Usuario buscarUsuario( String login ) throws NullPointerException{
+        return hMapUsuarios.get(login);
     }
     
     private boolean salvarArquivo(String nomeArquivo, String conteudoArquivo){
