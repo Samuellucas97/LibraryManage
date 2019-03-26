@@ -12,10 +12,9 @@ Neste repositório encontra-se a implementação de um sistema de controle de es
 <a href="https://junit.org/junit5/"><img src="https://cdn-images-1.medium.com/max/982/1*AiTBjfsoj3emarTpaeNgKQ.png" width="14%"  />
 </p>
 
-## Autores :smile: 
-  
+## Autores 
+
  
-Samuel Lucas de Moura Ferino ( _samuellucas97@ufrn.edu.br_ ),    
-José Welliton Nunes Junior ( _wellintongb@ufrn.edu.br_ ) e  
-Thiago da Costa Monteiro       
-:copyright: IMD/UFRN 2019.
+Samuel Lucas de Moura Ferino ( _samuellucas97@ufrn.edu.br_ ), José Welliton Nunes Junior ( _wellintongb@ufrn.edu.br_ ) e  
+Thiago da Costa Monteiro :copyright: IMD/UFRN 2019.         
+
