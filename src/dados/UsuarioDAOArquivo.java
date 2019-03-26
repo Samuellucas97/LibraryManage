@@ -20,21 +20,22 @@ import servicos.Usuario;
  * @author  Samuel Lucas de Moura Ferino
  *          José Wellinton
  */
-public class UsuarioDAOArquivo implements UsuarioDAO{
+public abstract class UsuarioDAOArquivo implements UsuarioDAO{
     
-    private HashMap<String, Usuario> hMapUsuarios = new HashMap<String, Usuario>();
+//    private HashMap<String, Usuario> hMapUsuarios = new HashMap<String, Usuario>();
     
     public UsuarioDAOArquivo(){}
     
     public boolean autenticacao(String login, String senha) throws ServicoException{
         
-        if( this.autenticarUsuario(login, senha).equals("OK")){
-            throw new ServicoException( this.autenticarUsuario(login, senha) );
+        if( !this.autenticar(login, senha).equals("OK")){
+            throw new ServicoException( this.autenticar(login, senha) );
         }
+        
         return true;       
     }   
     	
-    private String lerArquivo(String nomeDoArquivo){
+    protected String lerArquivo(String nomeDoArquivo){
         
         String linha = new String();
                 
@@ -61,83 +62,12 @@ public class UsuarioDAOArquivo implements UsuarioDAO{
         
     }
     
-    private void transformaStringEmHashMap(String conteudoArquivo){
     
-        hMapUsuarios.clear();
-        
-        Usuario usuario;
-        
-        for(String linhaDoArquivo: conteudoArquivo.split("\n") ){
-            
-            if ( linhaDoArquivo.split(";")[1].split(":")[1].equals("cliente")  ) {
-                
-                usuario = new Cliente();
-                
-                usuario.setLogin( linhaDoArquivo.split(";")[1].split(":")[1] );
-                usuario.setSenha( linhaDoArquivo.split(";")[2].split(":")[1] );
-                usuario.setNome( linhaDoArquivo.split(";")[3].split(":")[1] );
-                usuario.setTelefone( linhaDoArquivo.split(";")[4].split(":")[1] );
-                usuario.setIdade( Integer.parseInt(linhaDoArquivo.split(";")[5].split(":")[1] ));
-                usuario.setGenero( linhaDoArquivo.split(";")[6].split(":")[1] );
-            
-                hMapUsuarios.put( usuario.getLogin(), usuario);
-                
-                continue;
-                
-            }
-            
-            if( linhaDoArquivo.split(";")[1].split(":")[1].equals("administrador") ){
-                
-                usuario = new Administrador();
-                
-                usuario.setLogin( linhaDoArquivo.split(";")[1].split(":")[1] );
-                usuario.setSenha( linhaDoArquivo.split(";")[2].split(":")[1] );
-                usuario.setNome( linhaDoArquivo.split(";")[3].split(":")[1] );
-                usuario.setTelefone( linhaDoArquivo.split(";")[4].split(":")[1] );
-                usuario.setIdade( Integer.parseInt(linhaDoArquivo.split(";")[5].split(":")[1] ));
-                usuario.setGenero( linhaDoArquivo.split(";")[6].split(":")[1] );
-                
-                hMapUsuarios.put( usuario.getLogin(), usuario);
-                
-                continue;
-                
-            }
-            
-//      FAZER A CLASSE OPERADOR                
-//            else if( linhaDoArquivo.split(";")[1].split(":")[1].equals("operador") ){
-//                usuario = new Operador();
-//                usuario.setLogin( linhaDoArquivo.split(";")[1].split(":")[1] );
-//                usuario.setSenha( linhaDoArquivo.split(";")[2].split(":")[1] );
-//                usuario.setNome( linhaDoArquivo.split(";")[3].split(":")[1] );
-//                usuario.setTelefone( linhaDoArquivo.split(";")[4].split(":")[1] );
-//                usuario.setIdade( Integer.parseInt(linhaDoArquivo.split(";")[5].split(":")[1] ));
-//                usuario.setGenero( linhaDoArquivo.split(";")[6].split(":")[1] );
-//                hMapUsuarios.put( usuario.getLogin(), usuario);
-//                
-//                  continue;
-//                  
-//            }
-        }
-        
-        
-    }
+    protected abstract void transformaStringEmHashMap(String conteudoArquivo );    
     
-    private String autenticarUsuario( String login, String senha){
-        
-        Usuario usuarioTemporario = hMapUsuarios.get(login);
-        
-        if(  usuarioTemporario == null )
-            return "Login de usuario nao cadastrado";
-                
-        if( !senha.equals( usuarioTemporario.getSenha() ) )
-            return "Senha de usuario incorreta";
-                    
-        return "OK";
-    }
+    protected abstract String autenticar( String login, String senha);
     
-    private Usuario buscarUsuario( String login ) throws NullPointerException{
-        return hMapUsuarios.get(login);
-    }
+    public abstract Usuario buscar( String login ) throws NullPointerException;
     
     private boolean salvarArquivo(String nomeArquivo, String conteudoArquivo){
 		

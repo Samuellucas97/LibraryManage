@@ -17,9 +17,9 @@ import javafx.util.Pair;
 public class Cliente extends Usuario{
     
     
-    private int numeroEmprestimos;
-    private int numeroDevolucoes;
-    private ArrayList<Pair<String,String> > listaId_e_DataDeEmprestimoLivros;
+    private int numeroEmprestimos = 0;
+    private int numeroDevolucoes = 0;
+    private ArrayList<Pair<String,String> > listaId_e_DataDeEmprestimoLivros = new ArrayList< Pair<String, String> >();
     private ArrayList<Boolean> ranking;
     private HashMap<String, ArrayList<Boolean> > hMapRankingLivros = new HashMap<String, ArrayList<Boolean> >(); 
     

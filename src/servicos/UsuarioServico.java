@@ -15,26 +15,14 @@ import dados.UsuarioDAOArquivo;
  */
 public class UsuarioServico {
 
-    private UsuarioDAO usuarioDAO = new UsuarioDAOArquivo();
+    private UsuarioDAO usuarioDAO;
 
     public UsuarioServico() {
     }
     
-    public boolean autenticacao( String login, String senha){
-        
-        boolean resultado = false;
-        
-        try{
-            resultado = usuarioDAO.autenticacao( login, senha );
-        }catch( ServicoException e){
-            System.err.println( e.getMessage() );
-        }
-        
-        return resultado;
+    public boolean autenticacao( String login, String senha) throws ServicoException{    
+        return usuarioDAO.autenticacao( login, senha );
     }
     
-//    public boolean realizarLogout(){
-//    
-//    }
-//    
+    
 }
