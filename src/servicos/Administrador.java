@@ -5,17 +5,12 @@
  */
 package servicos;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
 /**
  *
  * @author SamDan
  */
 public class Administrador extends Funcionario{
 
-    private HashMap<String, ArrayList<Boolean> > hMapRankingUsuario =  new HashMap<String, ArrayList<Boolean> >();
-    
     public Administrador(){
         super();
     }

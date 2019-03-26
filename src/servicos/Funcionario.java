@@ -5,11 +5,16 @@
  */
 package servicos;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 /**
  *
  * @author SamDante
  */
 public class Funcionario extends Usuario{
+    
+    private HashMap<String, ArrayList<Boolean> > hMapRankingUsuario =  new HashMap<String, ArrayList<Boolean> >();
     
     private String id;
     private float salario;

@@ -12,6 +12,5 @@ import servicos.Funcionario;
  * @author SamDan
  */
 public interface FuncionarioDAO {
-    public  Funcionario buscarFuncionario(String loginFuncionario)  throws ServicoException;
     public void salvar(Funcionario funcionario) throws ServicoException;   
 }

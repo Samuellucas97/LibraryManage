@@ -5,7 +5,6 @@
  */
 package dados;
 
-import dados.ServicoException;
 import java.util.HashMap;
 import servicos.Cliente;
 import servicos.Usuario;

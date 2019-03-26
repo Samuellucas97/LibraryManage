@@ -5,6 +5,8 @@
  */
 package interacaoComUsuario;
 
+import java.util.Scanner;
+
 /**
  * Interface da apresentação do usuário
  * @author SamDan
@@ -14,6 +16,8 @@ public class UsuarioTerminal {
 //    public abstract void realizarLogin(String login, String senha);
     public void autenticacao( ){
     
+        Scanner entradaUsuario = new Scanner(System.in);
+        
         System.out.println("\n");
         System.out.println("REALIZANDO LOGIN -");
         System.out.print("Digite seu login:");

@@ -30,8 +30,6 @@ public abstract class UsuarioDAOArquivo implements UsuarioDAO{
      
     protected abstract String autenticar( String login, String senha);
     
-    public abstract Usuario buscar( String login ) throws NullPointerException;
-    
     public boolean autenticacao(String login, String senha) throws ServicoException{
         
         if( !this.autenticar(login, senha).equals("OK")){

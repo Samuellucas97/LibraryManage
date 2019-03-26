@@ -5,6 +5,8 @@
  */
 package dados;
 
+import servicos.Usuario;
+
 /**
  * Interface de manipulação de dados
  * @author Samuel Lucas de Moura Ferino
@@ -13,5 +15,6 @@ package dados;
 public interface UsuarioDAO {
 
     public boolean autenticacao(String login, String senha) throws ServicoException;
+    public Usuario buscar( String login ) throws NullPointerException;
     
 }

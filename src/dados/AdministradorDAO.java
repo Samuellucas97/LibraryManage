@@ -5,12 +5,13 @@
  */
 package dados;
 
-import servicos.Cliente;
+import servicos.Administrador;
 
 /**
  *
  * @author SamDan
  */
 public interface AdministradorDAO {
-    
+    public void salvar(Administrador administrador) throws ServicoException;
+
 }
