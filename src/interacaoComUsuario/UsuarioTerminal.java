@@ -12,7 +12,18 @@ package interacaoComUsuario;
 public class UsuarioTerminal {
 
 //    public abstract void realizarLogin(String login, String senha);
-    public void autenticacao( String login, String senha){}
+    public void autenticacao( ){
+    
+        System.out.println("\n");
+        System.out.println("REALIZANDO LOGIN -");
+        System.out.print("Digite seu login:");
+        String loginTemporario = entradaUsuario.next();
+
+        System.out.print("Digite sua senha:");
+        String senhaTemporaria = entradaUsuario.next();
+
+    
+    }
     public void realizarLogout(){}
     
 }
