@@ -63,5 +63,10 @@ public class AdministradorDAOArquivo extends FuncionarioDAOArquivo implements Ad
     public void salvar(Administrador administrador) throws ServicoException {
         /// TODO
     }
+
+    @Override
+    public void salvar(Funcionario funcionario) throws ServicoException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

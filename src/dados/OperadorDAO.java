@@ -9,6 +9,6 @@ package dados;
  *
  * @author SamDan
  */
-public class OperadorDAO {
+public interface OperadorDAO {
     
 }

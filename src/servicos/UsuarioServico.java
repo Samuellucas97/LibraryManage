@@ -5,6 +5,8 @@
  */
 package servicos;
 
+import dados.AdministradorDAOArquivo;
+import dados.ClienteDAOArquivo;
 import dados.ServicoException;
 import dados.UsuarioDAO;
 import dados.UsuarioDAOArquivo;
@@ -13,7 +15,7 @@ import dados.UsuarioDAOArquivo;
  *
  * @author SamDan
  */
-public class UsuarioServico {
+public class UsuarioServico{
 
     private UsuarioDAO usuarioDAO;
 
@@ -21,6 +23,7 @@ public class UsuarioServico {
     }
     
     public boolean autenticacao( String login, String senha) throws ServicoException{    
+        this.usuarioDAO = new AdministradorDAOArquivo();
         return usuarioDAO.autenticacao( login, senha );
     }
     

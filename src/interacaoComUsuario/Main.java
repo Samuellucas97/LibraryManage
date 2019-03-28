@@ -9,14 +9,15 @@ import java.util.Scanner;
  * @version	0.0.1
  */
 public class Main {
-
+    
+   
 	
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        
-        int opcaoEscolhida;
+        UsuarioTerminal usuario = new UsuarioTerminal();
+        /*int opcaoEscolhida;
         Scanner entradaUsuario = new Scanner(System.in);
         
         System.out.println("\n");
@@ -43,7 +44,9 @@ public class Main {
                 
                 break;
             default:    
-        }
+        }*/
+        
+        usuario.apresentacao();
         
         
     }

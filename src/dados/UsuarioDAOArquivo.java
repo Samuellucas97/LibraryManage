@@ -30,13 +30,18 @@ public abstract class UsuarioDAOArquivo implements UsuarioDAO{
      
     protected abstract String autenticar( String login, String senha);
     
+    @Override
     public boolean autenticacao(String login, String senha) throws ServicoException{
         
-        if( !this.autenticar(login, senha).equals("OK")){
-            throw new ServicoException( this.autenticar(login, senha) );
-        }
+        ClienteDAOArquivo cliente = new ClienteDAOArquivo();
+        AdministradorDAOArquivo administrador = new AdministradorDAOArquivo();
+        OperadorDAOArquivo operador = new OperadorDAOArquivo();
         
-        return true;       
+        if(cliente.autenticar(login, senha).equals("OK")) return true;
+        if(administrador.autenticar(login, senha).equals("OK")) return true;
+        if(operador.autenticar(login, senha).equals("OK")) return true;
+        
+        throw new ServicoException( this.autenticar(login, senha) );      
     }   
     	
     protected String lerArquivo(String nomeDoArquivo){
