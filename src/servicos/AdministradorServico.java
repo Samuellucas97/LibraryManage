@@ -5,6 +5,8 @@
  */
 package servicos;
 
+import dados.AdministradorDAO;
+import dados.AdministradorDAOArquivo;
 import dados.ServicoException;
 
 /**
@@ -13,15 +15,33 @@ import dados.ServicoException;
  */
 public class AdministradorServico extends FuncionarioServico{
     
+    private AdministradorDAO administradorDAO = new AdministradorDAOArquivo();
+    
     public AdministradorServico(){
         super();
     }
-    public void excluirLivro() throws ServicoException{}
+    
+    public void excluirLivro(Livro livro) throws ServicoException{
+//        administradorDAO.excluirLivro(livro);
+    }
+    
     public void consultarFuncionario() throws ServicoException{}
     public void alterarFuncionario() throws ServicoException{}
-    public void registrarFuncionario() throws ServicoException{}
-    public void excluirUsuario() throws ServicoException{}
-    public void bloqueioPermanenteDeFuncionario() throws ServicoException{}
-    public void bloqueioTemporarioDeFuncionario() throws ServicoException{}
+    
+    public void registrarFuncionario(Funcionario funcionario) throws ServicoException{
+//        administradorDAO.registrarFuncionario();
+    }
+    
+    public void excluirUsuario(Usuario usuario) throws ServicoException{
+//        administradorDAO.excluirUsuario(usuario);
+    }
+    
+    public void bloqueioPermanenteDeFuncionario(Funcionario funcionario) throws ServicoException{
+//        administradorDAO.bloqueioPermanenteDeFuncionario(funcionario);
+    }
+    
+    public void bloqueioTemporarioDeFuncionario(Funcionario funcionario) throws ServicoException{
+//        administradorDAO.bloqueioTemporarioDeFuncionario(funcionario);
+    }
     
 }

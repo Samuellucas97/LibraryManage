@@ -60,7 +60,7 @@ public class Cliente extends Usuario{
     }
 
     public int getNumeroEmprestimos() {
-        return numeroEmprestimos;
+        return this.numeroEmprestimos;
     }
 
     public void setNumeroEmprestimos(int numeroEmprestimos) {
@@ -68,7 +68,7 @@ public class Cliente extends Usuario{
     }
 
     public int getNumeroDevolucoes() {
-        return numeroDevolucoes;
+        return this.numeroDevolucoes;
     }
 
     public void setNumeroDevolucoes(int numeroDevolucoes) {

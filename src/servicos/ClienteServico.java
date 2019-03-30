@@ -21,7 +21,7 @@ public class ClienteServico {
        clienteDAO = new ClienteDAOArquivo();
     }
     
-    private boolean inserirRankingLivro(){
+    private boolean inserirRankingLivro( Livro livro){
         return true;
     }
     
@@ -47,5 +47,13 @@ public class ClienteServico {
     
     public Cliente consultarCliente( String loginCliente ) throws ServicoException{
        return clienteDAO.buscarCliente(loginCliente);
+    }
+
+    void bloqueioPermanenteDeCliente(Cliente cliente) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    void bloqueioTemporarioDeCliente(Cliente cliente) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

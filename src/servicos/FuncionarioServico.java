@@ -14,6 +14,7 @@ import dados.ServicoException;
 public class FuncionarioServico {
     
     private ClienteServico clienteServico = new ClienteServico();
+    private LivroServico livroServico = new LivroServico();
     
     public FuncionarioServico(){}
     
@@ -39,11 +40,26 @@ public class FuncionarioServico {
     
     }
     
-    public void bloqueioPermanenteDeLivro(){}
-    public void bloqueioTemporarioDeLivro(){}
-    public void bloqueioPermanenteDeCliente(){}
-    public void bloqueioTemporarioDeCliente(){}
-    public void registrarLivro(){}
+    public void bloqueioPermanenteDeLivro(Livro livro) throws ServicoException{
+        livroServico.bloqueioPermanenteDeLivro(livro);
+    }
+    
+    public void bloqueioTemporarioDeLivro(Livro livro) throws ServicoException{
+        livroServico.bloqueioTemporarioDeLivro(livro);
+    }
+    
+    public void bloqueioPermanenteDeCliente(Cliente cliente) throws ServicoException{
+        clienteServico.bloqueioPermanenteDeCliente(cliente);
+    }
+    
+    public void bloqueioTemporarioDeCliente(Cliente cliente) throws ServicoException{
+        clienteServico.bloqueioTemporarioDeCliente(cliente);
+    }
+    
+    public void registrarLivro(Livro livro) throws ServicoException{
+        livroServico.registrarLivro(livro);
+    }
+    
     public void alterarLivro(){}
     
 }

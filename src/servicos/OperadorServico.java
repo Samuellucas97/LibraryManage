@@ -5,6 +5,8 @@
  */
 package servicos;
 
+import dados.OperadorDAO;
+import dados.OperadorDAOArquivo;
 import dados.ServicoException;
 /**
  *
@@ -12,6 +14,8 @@ import dados.ServicoException;
  */
 public class OperadorServico extends FuncionarioServico{
   
+    private OperadorDAO operadorDAO = new OperadorDAOArquivo();
+    
     public void efetuarDevolucaoDeLivro() throws ServicoException{}
     public void emprestimoDeLivros() throws ServicoException{}
 }

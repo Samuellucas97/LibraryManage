@@ -14,5 +14,11 @@ public class Operador extends Funcionario{
     public Operador(){
         super();
     }
-  
+    
+    public Operador( String login, String senha){
+   
+        super(login, senha);
+       
+    }
+    
 }
