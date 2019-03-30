@@ -21,7 +21,7 @@ public class ClienteServico {
        clienteDAO = new ClienteDAOArquivo();
     }
     
-    private boolean inserirRankingLivro( Livro livro){
+    private boolean inserirRankingLivro( Livro livro ){
         return true;
     }
     
