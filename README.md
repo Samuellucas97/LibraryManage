@@ -2,10 +2,17 @@
 
 ## Introdução  
 
-Neste repositório encontra-se a implementação de um sistema de controle de estoque que gerencia o inventário de bibliotecas e provê informações sobre a quantidade e disponsabilidade, além de incluir um sitema de rankings referente ao trabalho a ser feito na disciplina ***Projeto Detalhado de Software*** do bacharelado de _Tecnologia da Informação_ ( **UFRN** ).
+Neste repositório encontra-se o projeto LibraryManage feito na disciplina ***Projeto Detalhado de Software*** do bacharelado de _Tecnologia da Informação_ ( **UFRN** ).
+
+- [Sobre o LibraryManage](#sobre-o-librarymanage) - Informações sobre a aplicação denominada Library Manage. 
+- [Links de referência](#links-de-referência) - Links relacionados ao projeto.
+- [Autores](#autores) - Autores que trabalharam no projeto.
+
+
+## Sobre o LibraryManage  
+
+Trata-se de um sistema de controle de estoque que gerencia o inventário de bibliotecas e provê informações sobre a quantidade e disponsabilidade, além de incluir um sitema de rankings.
   
-
-
 ## Links de referência 
 
 <p align="left">
