@@ -5,43 +5,19 @@
  */
 package servicos;
 
-import dados.AdministradorDAO;
-import dados.AdministradorDAOArquivo;
 import dados.ServicoException;
 
 /**
- *
- * @author SamDan
+ * Interface das regras de negócio de Administrador
+ * @author Samuel Lucas de Moura Ferino
  */
-public class AdministradorServico extends FuncionarioServico{
-    
-    private AdministradorDAO administradorDAO = new AdministradorDAOArquivo();
-    
-    public AdministradorServico(){
-        super();
-    }
-    
-    public void excluirLivro(Livro livro) throws ServicoException{
-//        administradorDAO.excluirLivro(livro);
-    }
-    
-    public void consultarFuncionario() throws ServicoException{}
-    public void alterarFuncionario() throws ServicoException{}
-    
-    public void registrarFuncionario(Funcionario funcionario) throws ServicoException{
-//        administradorDAO.registrarFuncionario();
-    }
-    
-    public void excluirUsuario(Usuario usuario) throws ServicoException{
-//        administradorDAO.excluirUsuario(usuario);
-    }
-    
-    public void bloqueioPermanenteDeFuncionario(Funcionario funcionario) throws ServicoException{
-//        administradorDAO.bloqueioPermanenteDeFuncionario(funcionario);
-    }
-    
-    public void bloqueioTemporarioDeFuncionario(Funcionario funcionario) throws ServicoException{
-//        administradorDAO.bloqueioTemporarioDeFuncionario(funcionario);
-    }
-    
+public interface AdministradorServico {
+ 
+    /**
+     * Exclui o livro
+     * @param livro Livro a ser excluído
+     * @throws ServicoException 
+     */
+    public void excluirLivro(Livro livro) throws ServicoException;
+       
 }

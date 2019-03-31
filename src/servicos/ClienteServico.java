@@ -5,55 +5,48 @@
  */
 package servicos;
 
-import dados.ClienteDAO;
-import dados.ClienteDAOArquivo;
 import dados.ServicoException;
 
 /**
- *
- * @author SamDan
+ * Interface com as regras de negócios de Cliente
+ * @author Samuel Lucas de Moura Ferino
  */
-public class ClienteServico {
- 
-    private ClienteDAO clienteDAO;
- 
-    public ClienteServico(){        
-       clienteDAO = new ClienteDAOArquivo();
-    }
+public interface ClienteServico {
     
-    private boolean inserirRankingLivro( Livro livro ){
-        return true;
-    }
-    
+    /**
+     * Salva o cliente no sistema
+     * @param login Login do cliente
+     * @param senha Senha do cliente
+     * @param nome  Nome do cliente
+     * @param telefone  Telefone do cliente
+     * @param idade Idade do cliente
+     * @param genero    Gênero do cliente    
+     * @throws ServicoException 
+     */
     public void salvar( String login, 
                         String senha, 
                         String nome,
                         String telefone,
                         int idade,
-                        String genero ) throws ServicoException{
+                        String genero ) throws ServicoException;
     
-        Cliente cliente = new Cliente();
-        
-        cliente.setLogin(login);
-        cliente.setSenha(senha);
-        cliente.setNome(nome);
-        cliente.setTelefone(telefone);
-        cliente.setIdade(idade);
-        cliente.setGenero(genero);
-        
-        this.clienteDAO.salvar( cliente );
-            
-    }
+    /**
+     * Consulta cliente  
+     * @param loginCliente  Cliente a ser consultado
+     * @return Cliente buscado
+     * @throws ServicoException 
+     */
+    public Cliente consultarCliente( String loginCliente ) throws ServicoException;
     
-    public Cliente consultarCliente( String loginCliente ) throws ServicoException{
-       return clienteDAO.buscarCliente(loginCliente);
-    }
+    /**
+     * Bloqueia cliente permanentemente
+     * @param cliente Cliente a ser bloqueado permanentemente
+     */
+    public void bloqueioPermanenteDeCliente(Cliente cliente);
 
-    void bloqueioPermanenteDeCliente(Cliente cliente) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    void bloqueioTemporarioDeCliente(Cliente cliente) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    /**
+     * Bloqueia cliente temporariamente
+     * @param cliente Cliente a ser bloqueado temporariamente
+     */
+    public void bloqueioTemporarioDeCliente(Cliente cliente);
 }

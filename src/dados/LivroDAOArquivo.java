@@ -13,6 +13,9 @@ import servicos.Livro;
  */
 public class LivroDAOArquivo implements LivroDAO{
 
+    public LivroDAOArquivo(){
+    }
+    
     @Override
     public void registrarLivro(Livro livro) throws ServicoException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -35,6 +38,21 @@ public class LivroDAOArquivo implements LivroDAO{
 
     @Override
     public void alterarLivro() throws ServicoException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void emprestimoDeLivro(Livro livro) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void efetuarDevolucaoDeLivro(Livro livro) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Livro consultaLivro(String idLivro) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

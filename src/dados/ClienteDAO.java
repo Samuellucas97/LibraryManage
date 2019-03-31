@@ -14,4 +14,8 @@ import servicos.Cliente;
 public interface ClienteDAO {
     public Cliente buscarCliente(String loginCliente)  throws ServicoException;
     public void salvar(Cliente cliente) throws ServicoException;
+
+    public void bloqueioPermanenteDeCliente(Cliente cliente);
+
+    public void bloqueioTemporarioDeCliente(Cliente cliente);
 }

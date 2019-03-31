@@ -10,10 +10,16 @@ import dados.LivroDAOArquivo;
 import dados.ServicoException;
 
 /**
- * Interface das regras de negócio de Livro
+ * Implementa a lógica de negócios relativa a Livro
  * @author Samuel Lucas de Moura Ferino
+ * @author José Wellinton 
  */
-public interface LivroServico {
+public class LivroServicoConcreto implements LivroServico{
+    
+    private LivroDAO livroDAO = new LivroDAOArquivo();
+    
+    public LivroServicoConcreto(){
+    }
     
     /**
      * Livro a ser consultado
@@ -21,47 +27,64 @@ public interface LivroServico {
      * @return  Livro com o id dado
      * @throws ServicoException 
      */
-    public Livro consultaLivro(String idLivro) throws ServicoException;    
+    public Livro consultaLivro(String idLivro) throws ServicoException{
+        return livroDAO.consultaLivro(idLivro);
+    }
     
     /**
      * Registra o livro
      * @param livro Livro a ser registrado
      * @throws ServicoException 
      */
-    public void registrarLivro(Livro livro) throws ServicoException;
+    public void registrarLivro(Livro livro) throws ServicoException{
+        this.livroDAO.registrarLivro(livro);
+    }
     
+    public void alterarLivro() throws ServicoException{
     
-    public void alterarLivro() throws ServicoException;
+    }
     
     /**
      * Muda-se o status do livro para bloqueado temporariamente
      * @param livro Livro a ser bloqueado temporariamente
      * @throws ServicoException 
      */
-    public void bloqueioTemporarioDeLivro(Livro livro) throws ServicoException;
+    public void bloqueioTemporarioDeLivro(Livro livro) throws ServicoException{
+        this.livroDAO.bloqueioTemporarioDeLivro(livro);
+    }
     
     /**
      * Bloqueia-se permanentemente o livro
      * @param livro Livro a ser bloqueado permanentemente
      * @throws ServicoException 
      */
-    public void bloqueioPermanenteDeLivro(Livro livro) throws ServicoException;
+    public void bloqueioPermanenteDeLivro(Livro livro) throws ServicoException{
+        this.livroDAO.bloqueioPermanenteDeLivro(livro);
+    }
     
     /**
      * Exclui o livro
      * @param livro Livro a ser excluído
      * @throws ServicoException 
      */
-    public void excluirLivro(Livro livro) throws ServicoException;
+    public void excluirLivro(Livro livro) throws ServicoException{
+        this.livroDAO.excluirLivro(livro);
+    }
+
     /**
      * Efetua o devolução do livro
      * @param livro Livro a ser devolvido
      */
-    void efetuarDevolucaoDeLivro(Livro livro);
-    
+    public void efetuarDevolucaoDeLivro(Livro livro) {
+        this.livroDAO.efetuarDevolucaoDeLivro(livro);
+    }
+
     /**
      * Empresta o livro
      * @param livro Livro a ser emprestado
      */
-    void emprestimoDeLivro(Livro livro);   
+    public void emprestimoDeLivro(Livro livro) {
+        this.livroDAO.emprestimoDeLivro(livro);
+    }
+    
 }

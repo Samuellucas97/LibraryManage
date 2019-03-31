@@ -7,7 +7,8 @@ package servicos;
 
 /**
  * Representa um usuário
- * @author samuk
+ * @author  Samuel Lucas de Moura Ferino
+ * @author  José Wellinton
  */
 public class Usuario {
 
@@ -18,6 +19,9 @@ public class Usuario {
     protected int idade;
     protected String genero;
     
+    /**
+     * Construtor padrão da classe Usuario
+     */
     public Usuario(){
         this.login = new String();
         this.senha = new String();
@@ -27,11 +31,16 @@ public class Usuario {
         this.genero = new String();
     }
 
+    /**
+     * Construtor parametrizado
+     * @param login Login do usuário
+     * @param senha Senha do usuário 
+     */
     public Usuario( String login, String senha){
         
         this.login = login;
         this.senha = senha;
-        
+    
         this.nome  = new String();
         this.telefone = new String();
         this.idade = 0;

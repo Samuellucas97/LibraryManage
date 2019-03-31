@@ -5,27 +5,20 @@
  */
 package servicos;
 
-import dados.AdministradorDAOArquivo;
-import dados.ClienteDAOArquivo;
 import dados.ServicoException;
-import dados.UsuarioDAO;
-import dados.UsuarioDAOArquivo;
 
 /**
- *
- * @author SamDan
+ * Interface das regras de negócio de usuário
+ * @author Samuel Lucas de Moura Ferino
  */
-public class UsuarioServico{
-
-    private UsuarioDAO usuarioDAO;
-
-    public UsuarioServico() {
-    }
+public interface UsuarioServico {
     
-    public boolean autenticacao( String login, String senha) throws ServicoException{    
-        this.usuarioDAO = new AdministradorDAOArquivo();
-        return usuarioDAO.autenticacao( login, senha );
-    }
-    
+    /**
+     * Autentica o usuário em detrimento do login e da senha
+     * @param login Login do usuário
+     * @param senha Senha do usuário
+     * @throws ServicoException 
+     */
+    public void autenticacao( String login, String senha) throws ServicoException;
     
 }

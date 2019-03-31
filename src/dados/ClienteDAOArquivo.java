@@ -77,4 +77,14 @@ public class ClienteDAOArquivo extends UsuarioDAOArquivo implements ClienteDAO {
         return hMapCliente.get(login);
     }
 
+    @Override
+    public void bloqueioPermanenteDeCliente(Cliente cliente) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void bloqueioTemporarioDeCliente(Cliente cliente) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

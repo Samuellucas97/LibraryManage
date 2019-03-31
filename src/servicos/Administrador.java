@@ -6,15 +6,24 @@
 package servicos;
 
 /**
- *
- * @author SamDan
+ * Representa um administrador
+ * @author Samuel Lucas de Moura Ferino
+ * @author José Wellinton
  */
 public class Administrador extends Funcionario{
-
+    
+    /**
+     * Construtor padrão
+     */
     public Administrador(){
         super();
     }
     
+    /**
+     * Construtor parametrizado
+     * @param login Login do administrador
+     * @param senha Senha do administrador
+     */
     public Administrador(String login, String senha){
         super(login, senha);
     }

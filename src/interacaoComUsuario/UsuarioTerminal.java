@@ -9,7 +9,7 @@ import dados.ServicoException;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import servicos.UsuarioServico;
+import servicos.UsuarioServicoConcreto;
 
 /**
  * Interface da apresentação do usuário
@@ -17,11 +17,11 @@ import servicos.UsuarioServico;
  */
 public class UsuarioTerminal {
     
-    private UsuarioServico usuarioServico;
+    private UsuarioServicoConcreto usuarioServico;
     private int LoginErrado = 0; 
 
     public UsuarioTerminal() {
-        this.usuarioServico = new UsuarioServico();
+        this.usuarioServico = new UsuarioServicoConcreto();
     }
     
     

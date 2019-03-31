@@ -5,17 +5,26 @@
  */
 package servicos;
 
-import dados.OperadorDAO;
-import dados.OperadorDAOArquivo;
 import dados.ServicoException;
+
 /**
- *
- * @author SamDan
+ * Interface com as regra de negócio de Operador
+ * @author Samuel Lucas de Moura Ferino
  */
-public class OperadorServico extends FuncionarioServico{
-  
-    private OperadorDAO operadorDAO = new OperadorDAOArquivo();
+public interface OperadorServico {
     
-    public void efetuarDevolucaoDeLivro() throws ServicoException{}
-    public void emprestimoDeLivros() throws ServicoException{}
+    /**
+     * Efetua a devolução de um livro
+     * @param livro Livro a ser devolvido
+     * @throws ServicoException 
+     */
+    public void efetuarDevolucaoDeLivro(Livro livro) throws ServicoException;
+    
+    /**
+     * Efetua o empréstimo de um livro
+     * @param livro Livro a ser emprestado
+     * @throws ServicoException 
+     */
+    public void emprestimoDeLivro(Livro livro) throws ServicoException;   
+   
 }
