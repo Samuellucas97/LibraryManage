@@ -10,19 +10,26 @@ import dados.AdministradorDAOArquivo;
 import dados.ServicoException;
 
 /**
- *
- * @author SamDan
+ * Implementa as regras de negócio de Administrador
+ * @author Samuel Lucas de Moura Ferino
  */
 public class AdministradorServicoConcreto extends FuncionarioServicoConcreto implements AdministradorServico{
     
     private AdministradorDAO administradorDAO = new AdministradorDAOArquivo();
     private LivroServicoConcreto livroServico = new LivroServicoConcreto();
     
+    /**
+     * Construtor padrão
+     */
     public AdministradorServicoConcreto(){
         super();
     }
     
-    @Override
+    /**
+     * Exclui livro
+     * @param livro Livro a ser excluído
+     * @throws ServicoException 
+     */
     public void excluirLivro(Livro livro) throws ServicoException{
         livroServico.excluirLivro(livro);
     }
