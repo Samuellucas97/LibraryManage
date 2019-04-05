@@ -1,6 +1,7 @@
 package interacaoComUsuario;
 
 import java.util.Scanner;
+import servicos.Usuario;
 
 /**
  * Implementação da Main
@@ -16,37 +17,20 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        UsuarioTerminal usuario = new UsuarioTerminal();
-        /*int opcaoEscolhida;
-        Scanner entradaUsuario = new Scanner(System.in);
+        Contexto estados = new Contexto();
+        Usuario usr = new Usuario();
         
-        System.out.println("\n");
-        System.out.println("LibraryManage - version 1.0");
-        System.out.println("\n");
-        System.out.println("MENU:");
-        System.out.println("1 - Fazer login;");
-        System.out.println("\n");
-        System.out.print("Digite o respectivo numero da opcao escolhida:");
+        while(true){
+            Object obj = estados.getEstado().tratamentoEscolha(estados.getEstado().apresentacao());
         
-        opcaoEscolhida = entradaUsuario.nextInt();
         
-        switch(opcaoEscolhida){
-            case 1: 
-                
-                System.out.println("\n");
-                System.out.println("REALIZANDO LOGIN -");
-                System.out.print("Digite seu login:");
-                String loginTemporario = entradaUsuario.next();
-                
-                System.out.print("Digite sua senha:");
-                String senhaTemporaria = entradaUsuario.next();
-                    
-                
-                break;
-            default:    
-        }*/
         
-        usuario.apresentacao();
+        
+        
+        
+        
+        
+        }
         
         
     }

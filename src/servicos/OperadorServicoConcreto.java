@@ -23,7 +23,7 @@ public class OperadorServicoConcreto extends FuncionarioServicoConcreto implemen
      * Construtor da classe OperadorServico
      */
     public OperadorServicoConcreto() {
-        
+        /// VAZIO
     }
     
     /**

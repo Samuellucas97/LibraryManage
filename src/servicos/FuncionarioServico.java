@@ -73,5 +73,5 @@ public interface FuncionarioServico {
      */
     public void registrarLivro(Livro livro) throws ServicoException;
     
-    public void alterarLivro();      
+    public void alterarLivro(Livro livro) throws ServicoException;    
 }
