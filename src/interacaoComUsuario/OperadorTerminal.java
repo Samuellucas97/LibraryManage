@@ -5,10 +5,35 @@
  */
 package interacaoComUsuario;
 
+import dados.ServicoException;
+import servicos.FuncionarioServico;
+import servicos.FuncionarioServicoConcreto;
+import servicos.Usuario;
+
 /**
  *
- * @author SamDan
+ * @author Thiago da Costa Monteiro
  */
-public class OperadorTerminal extends FuncionarioTerminal{
+public class OperadorTerminal extends Terminal{
+    
+   
+    
+    
+    @Override
+    protected Usuario autenticacao(String login, String senha) throws ServicoException {
+        try{
+            
+        }
+        catch (ServicoException ex) {
+            System.err.println(ex.getMessage());
+        }
+    }
+
+    @Override
+    public void apresentacao() {
+        throw new UnsupportedOperationException("Not supported yet."); 
+    }
+
+   
     
 }
