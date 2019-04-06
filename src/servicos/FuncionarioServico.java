@@ -11,7 +11,7 @@ import dados.ServicoException;
  * Interface das regras de negócio de Funcionário
  * @author Samuel Lucas de Moura Ferino
  */
-public interface FuncionarioServico {
+public interface FuncionarioServico extends UsuarioServico{
  
     /**
      * Consulta cliente
