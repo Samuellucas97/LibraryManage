@@ -19,6 +19,6 @@ public interface UsuarioServico {
      * @param senha Senha do usuário
      * @throws ServicoException 
      */
-    public void autenticacao( String login, String senha) throws ServicoException;
+    public Usuario autenticacao( String login, String senha) throws ServicoException;
     
 }

@@ -50,6 +50,7 @@ public class ClienteDAOArquivo extends UsuarioDAOArquivo implements ClienteDAO {
             cliente.setTelefone( linhaDoArquivo.split(";")[4].split(":")[1] );
             cliente.setIdade( Integer.parseInt(linhaDoArquivo.split(";")[5].split(":")[1] ));
             cliente.setGenero( linhaDoArquivo.split(";")[6].split(":")[1] );
+            cliente.
 
             hMapCliente.put( cliente.getLogin(), cliente);
 

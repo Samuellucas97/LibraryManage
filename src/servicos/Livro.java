@@ -14,7 +14,15 @@ import java.util.ArrayList;
  */
 public class Livro {
 
+    public enum EstadoLivro{
+        DISPONIVEL,
+        ALUGADO;
+    }
+
     private String id;
+    private EstadoLivro estadoLivro;
+            
+            
     private String edicao;
     private int volume;
     private String editora;
@@ -27,6 +35,7 @@ public class Livro {
     private int quantidadeDeExemplaresEmprestados;
     
     Livro(  String  id, 
+            EstadoLivro estadoLivro,
             String  edicao,
             int     volume,
             String  editora,
@@ -39,6 +48,7 @@ public class Livro {
             int quantidadeDeExemplaresEmprestados) throws ServicoException{
         
         this.id = id;
+        this.estadoLivro = estadoLivro;
         this.edicao = edicao;
         this.volume = volume;
         this.editora = editora;
@@ -55,23 +65,24 @@ public class Livro {
         return this.id;
     }
     
-    public String edicao(){
-        return this.edicao;
+    public EstadoLivro getEstadoLivro(){
+        return this.estadoLivro;
     }
-     public String getEdicao() {
-        return edicao;
+    
+    public String getEdicao() {
+        return this.edicao;
     }
 
     public int getVolume() {
-        return volume;
+        return this.volume;
     }
 
     public String getEditora() {
-        return editora;
+        return this.editora;
     }
 
     public ArrayList<String> getAssunto() {
-        return assunto;
+        return this.assunto;
     }
        
     public String getTitulo() {
@@ -95,6 +106,6 @@ public class Livro {
     }
     
     public int getQuantidadeDeTotalDeExemplares() {
-        return quantidadeDeTotalDeExemplares;
+        return this.quantidadeDeTotalDeExemplares;
     }
 }

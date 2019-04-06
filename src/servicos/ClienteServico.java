@@ -11,7 +11,7 @@ import dados.ServicoException;
  * Interface com as regras de negócios de Cliente
  * @author Samuel Lucas de Moura Ferino
  */
-public interface ClienteServico {
+public interface ClienteServico extends UsuarioServico{
     
     /**
      * Salva o cliente no sistema
@@ -49,4 +49,10 @@ public interface ClienteServico {
      * @param cliente Cliente a ser bloqueado temporariamente
      */
     public void bloqueioTemporarioDeCliente(Cliente cliente);
+
+    /**
+     * Avalia o livro
+     * @param   notaLivro Nota do livro
+     */
+    public void avaliarLivro(int notaLivro) throws ServicoException;
 }

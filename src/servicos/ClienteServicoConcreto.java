@@ -88,4 +88,9 @@ public class ClienteServicoConcreto implements ClienteServico {
     public void bloqueioTemporarioDeCliente(Cliente cliente) {
         clienteDAO.bloqueioTemporarioDeCliente(cliente);
     }
+
+    @Override
+    public void avaliarLivro(int notaLivro) throws ServicoException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
