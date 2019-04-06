@@ -5,9 +5,9 @@
  */
 package servicos;
 
-import dados.AdministradorDAOArquivo;
 import dados.ServicoException;
 import dados.UsuarioDAO;
+import dados.UsuarioDAOFactory;
 
 /**
  * Implementa as regras de negócio da interface UsuarioServico
@@ -16,7 +16,7 @@ import dados.UsuarioDAO;
  */
 public class UsuarioServicoConcreto implements UsuarioServico {
  
-    private UsuarioDAO usuarioDAO;
+    private final UsuarioDAO usuarioDAO = UsuarioDAOFactory.getUsuarioDAO("USuarioDAOArquivo");
 
     /**
      * Construtor padrão
@@ -30,8 +30,7 @@ public class UsuarioServicoConcreto implements UsuarioServico {
      * @param senha Senha do usuário
      * @throws ServicoException 
      */
-    public void autenticacao( String login, String senha) throws ServicoException{    
-        this.usuarioDAO = new AdministradorDAOArquivo();
+    public Usuario autenticacao( String login, String senha) throws ServicoException{    
         usuarioDAO.autenticacao( login, senha );
     }
     

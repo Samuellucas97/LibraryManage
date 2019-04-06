@@ -11,7 +11,7 @@ import dados.ServicoException;
  * Interface das regras de negócio de Administrador
  * @author Samuel Lucas de Moura Ferino
  */
-public interface AdministradorServico {
+public interface AdministradorServico extends FuncionarioServico{
  
     /**
      * Exclui o livro

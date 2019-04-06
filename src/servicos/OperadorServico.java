@@ -11,7 +11,7 @@ import dados.ServicoException;
  * Interface com as regra de negócio de Operador
  * @author Samuel Lucas de Moura Ferino
  */
-public interface OperadorServico{
+public interface OperadorServico extends FuncionarioServico{
     
     /**
      * Efetua a devolução de um livro
