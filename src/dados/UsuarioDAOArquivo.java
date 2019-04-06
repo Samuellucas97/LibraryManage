@@ -21,25 +21,36 @@ import servicos.Usuario;
  *          José Wellinton
  */
 public abstract class UsuarioDAOArquivo implements UsuarioDAO{
+    private final UsuarioDAOArquivo clienteDAO;    
+    private final UsuarioDAOArquivo OperadorDAO;
+    private final UsuarioDAOArquivo AdministradorDAO;
     
-//    private HashMap<String, Usuario> hMapUsuarios = new HashMap<String, Usuario>();
+    public UsuarioDAOArquivo(){
+        this.clienteDAO = new ClienteDAOArquivo();
+        this.OperadorDAO = new OperadorDAOArquivo();
+        this.AdministradorDAO = new AdministradorDAOArquivo();
     
-    public UsuarioDAOArquivo(){}
+    }
     
     protected abstract void transformaStringEmHashMap(String conteudoArquivo );    
      
     protected abstract String autenticar( String login, String senha);
     
     @Override
-    public boolean autenticacao(String login, String senha) throws ServicoException{
-        
-        ClienteDAOArquivo cliente = new ClienteDAOArquivo();
-        AdministradorDAOArquivo administrador = new AdministradorDAOArquivo();
-        OperadorDAOArquivo operador = new OperadorDAOArquivo();
-        
-        if(cliente.autenticar(login, senha).equals("OK")) return true;
-        if(administrador.autenticar(login, senha).equals("OK")) return true;
-        if(operador.autenticar(login, senha).equals("OK")) return true;
+    public Usuario autenticacao(String login, String senha) throws ServicoException{
+
+        if(this.clienteDAO.autenticar(login, senha).equals("OK")){
+            Usuario cliente = this.clienteDAO.buscar(login);
+            return cliente;            
+        }
+        if(this.AdministradorDAO.autenticar(login, senha).equals("OK")){
+            Usuario administrador = this.AdministradorDAO.buscar(login);
+            return administrador;
+        }
+        if(this.OperadorDAO.autenticar(login, senha).equals("OK")){
+            Usuario operador = this.OperadorDAO.buscar(login);
+            return operador;
+        }
         
         throw new ServicoException( this.autenticar(login, senha) );      
     }   
@@ -96,5 +107,6 @@ public abstract class UsuarioDAOArquivo implements UsuarioDAO{
         }
     
     }
+    
     
 }

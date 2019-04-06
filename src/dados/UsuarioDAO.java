@@ -14,7 +14,7 @@ import servicos.Usuario;
  */
 public interface UsuarioDAO {
 
-    public boolean autenticacao(String login, String senha) throws ServicoException;
+    public Usuario autenticacao(String login, String senha) throws ServicoException;
     public Usuario buscar( String login ) throws NullPointerException;
     
 }
