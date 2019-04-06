@@ -106,6 +106,11 @@ public class FuncionarioServicoConcreto implements FuncionarioServico{
     }
     
     public void alterarLivro(){}
+
+    @Override
+    public void alterarLivro(Livro livro) throws ServicoException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     
 }
