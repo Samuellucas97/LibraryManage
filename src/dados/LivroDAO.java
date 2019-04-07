@@ -13,14 +13,20 @@ import servicos.Livro;
  */
 public interface LivroDAO {
     
+    public Livro consultaLivro(String idLivro) throws ServicoException;
+    
     public void registrarLivro(Livro livro) throws ServicoException;
-    public void alterarLivro() throws ServicoException;
-    public void bloqueioTemporarioDeLivro(Livro livro) throws ServicoException;
-    public void bloqueioPermanenteDeLivro(Livro livro) throws ServicoException;
+    public void alterarLivro(Livro livroAlterado);
     public void excluirLivro(Livro livro) throws ServicoException;
-    public void emprestimoDeLivro(Livro livro);
-    public void efetuarDevolucaoDeLivro(Livro livro);
-    public Livro consultaLivro(String idLivro);
+    
+    //public void alterarLivro() throws ServicoException;
+    
+    //public void bloqueioTemporarioDeLivro(Livro livro) throws ServicoException;
+    //public void bloqueioPermanenteDeLivro(Livro livro) throws ServicoException;
+    
+    //public void emprestimoDeLivro(Livro livro);
+    //public void efetuarDevolucaoDeLivro(Livro livro);
+    
 
-    public void alterarLivro(Livro livro);
+    
 }
