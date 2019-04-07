@@ -10,8 +10,7 @@ import java.util.HashMap;
 
 public class UsuarioDAOFactory {
     private static final HashMap<String,UsuarioDAO> mapUsuarios = new HashMap();
-
-        
+    
     public static UsuarioDAO getUsuarioDAO(String nome){
        UsuarioDAO usuarioDAO = UsuarioDAOFactory.mapUsuarios.get(nome);
         
