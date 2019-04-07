@@ -5,13 +5,36 @@
  */
 package servicos;
 
+import dados.ClienteDAOArquivo;
 import dados.ServicoException;
+import dados.UsuarioDAOFactory;
 
 /**
- * Interface com as regras de negócios de Cliente
- * @author Samuel Lucas de Moura Ferino
+ * 
+ * @author SamDan
  */
-public interface ClienteServico extends UsuarioServico{
+public class ClienteServico extends UsuarioServico implements IClienteServico {
+ 
+    private final ClienteDAOArquivo clienteDAOArquivo = (ClienteDAOArquivo) UsuarioDAOFactory.getUsuarioDAO("ClienteDAOArquivo");
+    private final ILivroServico livroServico = new LivroServico();
+    
+    /**
+     * Construtor padrão
+     */
+    public ClienteServico(){        
+        /// VAZIO
+    }
+    
+    /**
+     * Insere ranking no livro
+     * @param livro Livro a ser inserido o ranking
+     * @return 
+     */
+    private void inserirRankingLivro( Livro livro ){
+        /// Dúvida: é para inserir esse livro no atributo ranking da classe Cliente?
+        ///         E se for, eu o adiciono com qual ranking
+                
+    }
     
     /**
      * Salva o cliente no sistema
@@ -28,7 +51,20 @@ public interface ClienteServico extends UsuarioServico{
                         String nome,
                         String telefone,
                         int idade,
-                        String genero ) throws ServicoException;
+                        String genero ) throws ServicoException{
+    
+        Cliente cliente = new Cliente();
+        
+        cliente.setLogin(login);
+        cliente.setSenha(senha);
+        cliente.setNome(nome);
+        cliente.setTelefone(telefone);
+        cliente.setIdade(idade);
+        cliente.setGenero(genero);
+        
+        this.clienteDAOArquivo.salvar( cliente );
+            
+    }
     
     /**
      * Consulta cliente  
@@ -36,23 +72,32 @@ public interface ClienteServico extends UsuarioServico{
      * @return Cliente buscado
      * @throws ServicoException 
      */
-    public Cliente consultarCliente( String loginCliente ) throws ServicoException;
+    @Override
+    public Cliente consultarCliente( String loginCliente ) throws ServicoException{
+        return clienteDAOArquivo.buscarCliente(loginCliente);
+    }
     
     /**
      * Bloqueia cliente permanentemente
      * @param cliente Cliente a ser bloqueado permanentemente
      */
-    public void bloqueioPermanenteDeCliente(Cliente cliente);
+    @Override
+    public void bloqueioPermanenteDeCliente(Cliente cliente) {
+        clienteDAOArquivo.bloqueioPermanenteDeCliente(cliente);
+    }
 
     /**
      * Bloqueia cliente temporariamente
      * @param cliente Cliente a ser bloqueado temporariamente
      */
-    public void bloqueioTemporarioDeCliente(Cliente cliente);
+    @Override
+    public void bloqueioTemporarioDeCliente(Cliente cliente) {
+        clienteDAOArquivo.bloqueioTemporarioDeCliente(cliente);
+    }
 
-    /**
-     * Avalia o livro
-     * @param   notaLivro Nota do livro
-     */
-    public void avaliarLivro(int notaLivro) throws ServicoException;
+    @Override
+    public void avaliarLivro(int notaLivro) throws ServicoException {
+        /// TO DO
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

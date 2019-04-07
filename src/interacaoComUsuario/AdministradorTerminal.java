@@ -1,86 +1,145 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * @author Thiago da Costa Monteiro
+ * 
  */
+
+//Package
 package interacaoComUsuario;
 
+//Imports
 import dados.ServicoException;
-import servicos.Cliente;
-import servicos.FuncionarioServico;
-import servicos.FuncionarioServicoConcreto;
-import servicos.Livro;
+import java.util.Scanner;
+import servicos.AdministradorServico;
 import servicos.Usuario;
+import servicos.IUsuarioServico;
 
-/**
- *
- * @author Thiago da Costa Monteiro
- */
+//Classe AdministradorTerminal
 public class AdministradorTerminal extends Terminal{
-    private final FuncionarioServico funcionarioServico = new FuncionarioServicoConcreto();
-    
-    
-    public void consultarCliente(String loginCliente){
-        try{
-            funcionarioServico.consultarCliente(loginCliente);
-        }
-        catch (ServicoException ex) {
-            System.err.println(ex.getMessage());
-        }
-    
-    }
-    public void registrarCliente(String loginCliente, String senhaCliente, String nomeCliente,
-                                 String telefoneCliente, int idadeCliente, String generoCliente){
-        try{
-            funcionarioServico.registrarCliente(loginCliente, senhaCliente, nomeCliente,
-                                                telefoneCliente, idadeCliente, generoCliente);
-        }
-        catch (ServicoException ex) {
-            System.err.println(ex.getMessage());
-        }
-    
-    }
-    
-    public void bloqueioPermanenteDeCliente(Cliente cliente){
-        try{
-                funcionarioServico.bloqueioPermanenteDeCliente(cliente);
-        }
-        catch (ServicoException ex) {
-                System.err.println(ex.getMessage());
-        }
-    }
-    public void registrarLivro(Livro livro){
-        try{
-                funcionarioServico.registrarLivro(livro);
-        }
-        catch (ServicoException ex) {
-                System.err.println(ex.getMessage());
-        }
-    }
-    public void alterarLivro(Livro livro){
-        try{
-            funcionarioServico.alterarLivro(livro);
-        }
-        catch (ServicoException ex) {
-            System.err.println(ex.getMessage());
-        }
-    }
-    public void bloqueioTemporarioDeCliente(Cliente cliente){
-        try{
-            funcionarioServico.bloqueioTemporarioDeCliente(cliente);
-        }
-        catch (ServicoException ex) {
-            System.err.println(ex.getMessage());
-        }
-    }
+    //--ATRIBUTOS--//
+    IUsuarioServico administradorServico;
+    Usuario administrador;
 
+    public AdministradorTerminal() {
+        this.administradorServico = (IUsuarioServico) new AdministradorServico();
+    }
+    
+    //--METODOS--//
+    /*
+    public void consultarFuncionario(String loginFuncionario){
+        try{
+            administradorServico.consultarFuncionario(loginFuncionario);
+        }
+        catch (ServicoException ex) {
+            System.err.println(ex.getMessage());
+        }
+    
+    }
+    public void registrarFuncionario(String loginFuncionario, String senhaFuncionario, String nomeFuncionario,
+                                 String telefoneFuncionario, int idadeFuncionario, String generoFuncionario){
+        try{
+            funcionarioServico.registrarFuncionario(loginFuncionario, senhaFuncionario, nomeFuncionario,
+                                                telefoneFuncionario, idadeFuncionario, generoFuncionario);
+        }
+        catch (ServicoException ex) {
+            System.err.println(ex.getMessage());
+        }
+    
+    }
+    
+    public void bloqueioPermanenteDeFuncionario(Funcionario funcionario){
+        try{
+                funcionarioServico.bloqueioPermanenteDeFuncionario(funcionario);
+        }
+        catch (ServicoException ex) {
+                System.err.println(ex.getMessage());
+        }
+    }
+   
+    public void bloqueioTemporarioDeFuncionario(Funcionario funcionario){
+        try{
+            funcionarioServico.bloqueioTemporarioDeFuncionario(funcionario);
+        }
+        catch (ServicoException ex) {
+            System.err.println(ex.getMessage());
+        }
+    }
+    
+    public void excluirUsuario(Usuario usuario){
+        try{
+            funcionarioServico.excluirUsuario(usuario);
+        }
+        catch (ServicoException ex) {
+            System.err.println(ex.getMessage());
+        }
+    }
+    public void excluirLivro(Livro livro){
+        try{
+            funcionarioServico.excluirLivro(livro);
+        }
+        catch (ServicoException ex) {
+            System.err.println(ex.getMessage());
+        }
+    }
+    public void alterarFuncionario(Funcionario funcionario){
+        try{
+            funcionarioServico.alterarFuncionario(funcionario);
+        }
+        catch (ServicoException ex) {
+            System.err.println(ex.getMessage());
+        }
+    }
+    */
+    
     @Override
     protected Usuario autenticacao(String login, String senha) throws ServicoException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void apresentacao() {
+    public String apresentacao( ){
+        Scanner entradaUsuario = new Scanner(System.in);
+        System.out.println("Bem vindo(a), " + administrador.getNome() + " ao LibraryManage! \n"
+                        + "Digite o número de uma das opções: \n"
+                        + "(1)Buscar livro \n"
+                        + "(2)Efetuar empréstimo de livro \n"
+                        + "(3)Efetuar devolução de livro \n"
+                        + "(4)Registrar novo livro \n"
+                        + "(5)Buscar cliente \n"
+                        + "(6)Registrar novo cliente \n"
+                        + "(7)Buscar funcionario"
+                        + "(8)Registrar novo funcionario \n"
+                        + "(9)Realizar logout");
+        while(true){
+            String entradaNumero = entradaUsuario.next();
+            if(entradaNumero.equals("1") 
+               || entradaNumero.equals("2")
+               || entradaNumero.equals("3")
+               || entradaNumero.equals("4")
+               || entradaNumero.equals("5")
+               || entradaNumero.equals("6")
+               || entradaNumero.equals("7")
+               || entradaNumero.equals("8")
+               || entradaNumero.equals("9")){
+                return entradaNumero;
+            }
+            else{
+                 System.out.println("Escolha inválida! \n" 
+                                    + "Digite o número de uma das opções: \n"
+                                    + "(1)Buscar livro \n"
+                                    + "(2)Efetuar empréstimo de livro \n"
+                                    + "(3)Efetuar devolução de livro \n"
+                                    + "(4)Registrar novo livro \n"
+                                    + "(5)Buscar cliente \n"
+                                    + "(6)Registrar novo cliente \n"
+                                    + "(7)Buscar funcionario"
+                                    + "(8)Registrar novo funcionario \n"
+                                    + "(9)Realizar logout");
+            }
+        }
+    }
+
+    @Override
+    public Object tratamentoEscolha(String escolha) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
