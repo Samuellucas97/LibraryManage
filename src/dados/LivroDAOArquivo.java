@@ -11,9 +11,13 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import servicos.Cliente;
 import servicos.Livro;
 import servicos.Usuario;
@@ -33,14 +37,55 @@ public class LivroDAOArquivo implements LivroDAO{
     private void limparRegistro(){
         this.hMapLivro.clear();
         //adicionar repegar do arquivo
-        
     }
     
+    @Override
+    public Livro consultaLivro(String idLivro) throws ServicoException{
+        Livro livro = this.hMapLivro.get(idLivro);
+        
+        if(livro == null) throw new ServicoException("Livro não encotrado!");
+        
+        return livro;        
+    }
+       
+    @Override
+    public List<Livro> consultaLivros(List<String> params, List<String> keys) throws ServicoException{
+        List<Livro> livros = new ArrayList<>();
+        List<List<Livro> > listLivros = new ArrayList<>();
+        
+        if(params.size() != keys.size()) throw new ServicoException("Quantidade de chaves não confere com a quantidade de parametros!");
+        
+        int i = 0;
+        for(String param : params) listLivros.add(this.consultaLivros(param, keys.get(i++)));
+        
+        Collections.sort(listLivros, (o1, o2) -> {
+            if(o1.size() > o2.size()) return -1;
+            else if (o1.size() < o2.size()) return 1; 
+            return 0;
+        });
+        
+        for(Iterator<List<Livro>> iterator = listLivros.iterator(); iterator.hasNext();) {
+            List<Livro> next = iterator.next();
+            if(livros.isEmpty()) livros.addAll(next);
+            else{
+                List<Livro> auxLivros = new ArrayList<>();
+                auxLivros.addAll(livros);
+                auxLivros.removeAll(next);
+                livros.removeAll(auxLivros);
+            }
+            if(livros.isEmpty()) break;
+        }
+        
+        if(livros.isEmpty()) throw new ServicoException("Nenhum livro encontrado!");
+        
+        return livros;
+    }
     
+    @Override
     public List<Livro> consultaLivros(String param, String key) throws ServicoException{
         List<Livro> livros = new ArrayList<>();
         
-        for (Map.Entry<String, Livro> livro : hMapLivro.entrySet()) {
+        for (Map.Entry<String, Livro> livro : this.hMapLivro.entrySet()) {
             Livro value = livro.getValue();
             
             switch(param){
@@ -73,37 +118,39 @@ public class LivroDAOArquivo implements LivroDAO{
             }
             
         }
-        
-        
-        
+                
         if(livros.isEmpty()) throw new ServicoException("Nenhum livro encontrado!");
         
         return livros;
     }
     
     @Override
-    public Livro consultaLivro(String idLivro) throws ServicoException{
+    public void adicionarLivro(String idLivro, int quantidade) throws ServicoException{
         Livro livro = this.hMapLivro.get(idLivro);
+        
+        if(quantidade <= 0) throw new ServicoException("Quantidade inválida de exemplares!");
         
         if(livro == null) throw new ServicoException("Livro não encotrado!");
         
-        return livro;        
+        livro.setQuantidadeDeTotalDeExemplares(livro.getQuantidadeDeTotalDeExemplares() + quantidade);
+        
+        this.salvarArquivo("Livros.lm", this.transformarHashMapEmString());
+        
+        throw new ServicoException("Quantidade desse livro adicionada com sucesso!");
     }
     
     @Override
     public void registrarLivro(Livro livro) throws ServicoException {
         Livro livroVerificação = this.hMapLivro.get(livro.getId());
-        if(livroVerificação != null){
-            this.limparRegistro();
-            throw new ServicoException("Livro já registrado!");
-        }
         
+        if(livroVerificação != null) throw new ServicoException("Livro com esse ID já registrado!");
+                
         this.hMapLivro.put(livro.getId(), livro);
         this.salvarArquivo("Livros.lm", this.transformarHashMapEmString());
     }
     
     @Override
-    public void alterarLivro(Livro livroAlterado) {
+    public void alterarLivro(Livro livroAlterado) throws ServicoException{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
