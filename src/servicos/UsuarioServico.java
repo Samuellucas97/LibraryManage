@@ -6,12 +6,24 @@
 package servicos;
 
 import dados.ServicoException;
+import dados.UsuarioDAO;
+import dados.UsuarioDAOFactory;
 
 /**
- * Interface das regras de negócio de usuário
+ * Implementa as regras de negócio da interface IUsuarioServico
  * @author Samuel Lucas de Moura Ferino
+ * @author José Wellinton
  */
-public interface UsuarioServico {
+public class UsuarioServico implements IUsuarioServico {
+ 
+    private final UsuarioDAO usuarioDAO = UsuarioDAOFactory.getUsuarioDAO("UsuarioDAOArquivo");
+
+    /**
+     * Construtor padrão
+     */    
+    public UsuarioServico() {
+        /// VAZIO
+    }
     
     /**
      * Autentica o usuário em detrimento do login e da senha
@@ -19,6 +31,8 @@ public interface UsuarioServico {
      * @param senha Senha do usuário
      * @throws ServicoException 
      */
-    public Usuario autenticacao( String login, String senha) throws ServicoException;
+    public Usuario autenticacao( String login, String senha) throws ServicoException{    
+        return usuarioDAO.autenticacao( login, senha );
+    }
     
 }

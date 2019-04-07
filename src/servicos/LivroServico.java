@@ -10,10 +10,20 @@ import dados.LivroDAOArquivo;
 import dados.ServicoException;
 
 /**
- * Interface das regras de negócio de Livro
+ * Implementa a lógica de negócios relativa a Livro
  * @author Samuel Lucas de Moura Ferino
+ * @author José Wellinton 
  */
-public interface LivroServico {
+public class LivroServico implements ILivroServico{
+    
+    private final LivroDAO livroDAO = new LivroDAOArquivo();
+    
+    /**
+     * Construtor padrão
+     */
+    public LivroServico(){
+        /// VAZIO
+    }
     
     /**
      * Livro a ser consultado
@@ -21,47 +31,78 @@ public interface LivroServico {
      * @return  Livro com o id dado
      * @throws ServicoException 
      */
-    public Livro consultaLivro(String idLivro) throws ServicoException;    
+    @Override
+    public Livro consultaLivro(String idLivro) throws ServicoException{
+        return livroDAO.consultaLivro(idLivro);
+    }
     
     /**
      * Registra o livro
      * @param livro Livro a ser registrado
      * @throws ServicoException 
      */
-    public void registrarLivro(Livro livro) throws ServicoException;
+    @Override
+    public void registrarLivro(Livro livro) throws ServicoException{
+        this.livroDAO.registrarLivro(livro);
+    }
     
-    
-    public void alterarLivro() throws ServicoException;
+    /**
+     * Altera o estado do livro
+     * @param livro Livro a ser emprestado ou devolvido
+     * @throws ServicoException 
+     */
+    @Override
+    public void alterarLivro(Livro livro) throws ServicoException{
+        this.livroDAO.alterarLivro(livro);
+        //// Dúvida: está certo esse método?
+    }
     
     /**
      * Muda-se o status do livro para bloqueado temporariamente
      * @param livro Livro a ser bloqueado temporariamente
      * @throws ServicoException 
      */
-    public void bloqueioTemporarioDeLivro(Livro livro) throws ServicoException;
+    @Override
+    public void bloqueioTemporarioDeLivro(Livro livro) throws ServicoException{
+        this.livroDAO.bloqueioTemporarioDeLivro(livro);
+    }
     
     /**
      * Bloqueia-se permanentemente o livro
      * @param livro Livro a ser bloqueado permanentemente
      * @throws ServicoException 
      */
-    public void bloqueioPermanenteDeLivro(Livro livro) throws ServicoException;
+    @Override
+    public void bloqueioPermanenteDeLivro(Livro livro) throws ServicoException{
+        this.livroDAO.bloqueioPermanenteDeLivro(livro);
+    }
     
     /**
      * Exclui o livro
      * @param livro Livro a ser excluído
      * @throws ServicoException 
      */
-    public void excluirLivro(Livro livro) throws ServicoException;
+    @Override
+    public void excluirLivro(Livro livro) throws ServicoException{
+        this.livroDAO.excluirLivro(livro);
+    }
+
     /**
      * Efetua o devolução do livro
      * @param livro Livro a ser devolvido
      */
-    void efetuarDevolucaoDeLivro(Livro livro);
-    
+    @Override
+    public void efetuarDevolucaoDeLivro(Livro livro) {
+        this.livroDAO.efetuarDevolucaoDeLivro(livro);
+    }
+
     /**
      * Empresta o livro
      * @param livro Livro a ser emprestado
      */
-    void emprestimoDeLivro(Livro livro);   
+    @Override
+    public void emprestimoDeLivro(Livro livro) {
+        this.livroDAO.emprestimoDeLivro(livro);
+    }
+    
 }

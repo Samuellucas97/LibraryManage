@@ -21,4 +21,6 @@ public interface LivroDAO {
     public void emprestimoDeLivro(Livro livro);
     public void efetuarDevolucaoDeLivro(Livro livro);
     public Livro consultaLivro(String idLivro);
+
+    public void alterarLivro(Livro livro);
 }

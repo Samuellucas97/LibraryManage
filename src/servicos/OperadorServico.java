@@ -1,30 +1,48 @@
-/*
+   /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 package servicos;
 
+import dados.OperadorDAO;
 import dados.ServicoException;
+import dados.UsuarioDAOFactory;
 
 /**
- * Interface com as regra de negócio de Operador
+ * Implementa as regras de negócio relativas ao operador
  * @author Samuel Lucas de Moura Ferino
+ * @author José Wellinton 
  */
-public interface OperadorServico extends FuncionarioServico{
+public class OperadorServico extends FuncionarioServico implements IOperadorServico{
+  
+    private final OperadorDAO operadorDAO = (OperadorDAO) UsuarioDAOFactory.getUsuarioDAO("OperadorDAOArquivo");
+    private final LivroServico livroServico = new LivroServico();
+
+    /**
+     * Construtor da classe IOperadorServico
+     */
+    public OperadorServico() {
+        /// VAZIO
+    }
     
     /**
      * Efetua a devolução de um livro
      * @param livro Livro a ser devolvido
      * @throws ServicoException 
      */
-    public void efetuarDevolucaoDeLivro(Livro livro) throws ServicoException;
-    
+    @Override
+    public void efetuarDevolucaoDeLivro(Livro livro) throws ServicoException{
+        livroServico.efetuarDevolucaoDeLivro(livro);
+    }
     /**
      * Efetua o empréstimo de um livro
      * @param livro Livro a ser emprestado
      * @throws ServicoException 
      */
-    public void emprestimoDeLivro(Livro livro) throws ServicoException;   
-   
+    @Override
+    public void emprestimoDeLivro(Livro livro) throws ServicoException{
+        livroServico.emprestimoDeLivro(livro);
+    }    
+    
 }

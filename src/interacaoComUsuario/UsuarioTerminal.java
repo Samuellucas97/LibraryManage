@@ -14,18 +14,18 @@ import servicos.Cliente;
 import servicos.Operador;
 import servicos.Usuario;
 import servicos.UsuarioServico;
-import servicos.UsuarioServicoConcreto;
+import servicos.IUsuarioServico;
 
 
 public class UsuarioTerminal extends Terminal {
     
-    private final UsuarioServico usuarioServico;
+    private final IUsuarioServico usuarioServico;
     private int LoginErrado = 0; 
     private String login = "";
     private String senha = "";
 
     public UsuarioTerminal() {
-        this.usuarioServico = new UsuarioServicoConcreto();
+        this.usuarioServico = new UsuarioServico();
     }
     
     

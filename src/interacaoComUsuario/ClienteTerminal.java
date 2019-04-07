@@ -8,20 +8,20 @@ import dados.ServicoException;
 import java.util.Scanner;
 import servicos.Cliente;
 import servicos.ClienteServico;
-import servicos.ClienteServicoConcreto;
 import servicos.Usuario;
 import servicos.UsuarioServico;
-import servicos.UsuarioServicoConcreto;
+import servicos.IUsuarioServico;
+import servicos.IClienteServico;
 
 
 
 public class ClienteTerminal extends Terminal{
     
-    UsuarioServico clienteServico;
+    IUsuarioServico clienteServico;
     Usuario cliente;
 
     public ClienteTerminal() {
-        this.clienteServico = (UsuarioServico) new ClienteServicoConcreto();
+        this.clienteServico = (IUsuarioServico) new ClienteServico();
     }
 
     //public void avaliarLivros(int nota){}

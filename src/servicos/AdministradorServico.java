@@ -5,19 +5,66 @@
  */
 package servicos;
 
+import dados.AdministradorDAO;
 import dados.ServicoException;
+import dados.UsuarioDAOFactory;
 
 /**
- * Interface das regras de negócio de Administrador
+ * Implementa as regras de negócio de Administrador
  * @author Samuel Lucas de Moura Ferino
+ * @author José Wellinton Nunes Junior
+ * @author Thiago da Costa Monteiro
  */
-public interface AdministradorServico extends FuncionarioServico{
- 
+public class AdministradorServico extends FuncionarioServico implements IAdministradorServico{
+    
+    private final AdministradorDAO administradorDAO = (AdministradorDAO) UsuarioDAOFactory.getUsuarioDAO("AdministradorDAOArquivo");
+    private final LivroServico livroServico = new LivroServico();
+    
     /**
-     * Exclui o livro
+     * Construtor padrão
+     */
+    public AdministradorServico(){
+        super();
+    }
+    
+    /**
+     * Exclui livro
      * @param livro Livro a ser excluído
      * @throws ServicoException 
      */
-    public void excluirLivro(Livro livro) throws ServicoException;
-       
+    @Override
+    public void excluirLivro(Livro livro) throws ServicoException{
+        this.livroServico.excluirLivro(livro);
+    }
+    
+    @Override
+    public Funcionario consultarFuncionario(String nome) throws ServicoException{
+        /// O retorno desse método deve ser um Funcionario
+        return this.administradorDAO.consultarFuncionario(nome);
+    }
+    @Override
+    public void alterarFuncionario() throws ServicoException{
+        /// O que esse método faz?
+    }
+    
+    @Override
+    public void registrarFuncionario(Funcionario funcionario) throws ServicoException{
+        this.administradorDAO.registrarFuncionario(funcionario);
+    }
+    
+    @Override
+    public void excluirUsuario(Usuario usuario) throws ServicoException{
+        this.administradorDAO.excluirUsuario(usuario);
+    }
+    
+    @Override
+    public void bloqueioPermanenteDeFuncionario(Funcionario funcionario) throws ServicoException{
+        this.administradorDAO.bloqueioPermanenteDeFuncionario(funcionario);
+    }
+    
+    @Override
+    public void bloqueioTemporarioDeFuncionario(Funcionario funcionario) throws ServicoException{
+        this.administradorDAO.bloqueioTemporarioDeFuncionario(funcionario);
+    }
+
 }

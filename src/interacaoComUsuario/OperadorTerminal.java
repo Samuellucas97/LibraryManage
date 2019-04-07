@@ -8,18 +8,18 @@ package interacaoComUsuario;
 //Imports
 import dados.ServicoException;
 import java.util.Scanner;
-import servicos.OperadorServicoConcreto;
+import servicos.OperadorServico;
 import servicos.Usuario;
-import servicos.UsuarioServico;
+import servicos.IUsuarioServico;
 
 //Classe OperadorTerminal
 public class OperadorTerminal extends Terminal{
     
-    UsuarioServico operadorServico;
+    IUsuarioServico operadorServico;
     Usuario operador;
 
     public OperadorTerminal() {
-        this.operadorServico = (UsuarioServico) new OperadorServicoConcreto();
+        this.operadorServico = (IUsuarioServico) new OperadorServico();
     }
     
     //--METODOS--//

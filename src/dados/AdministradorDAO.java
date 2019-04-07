@@ -6,6 +6,8 @@
 package dados;
 
 import servicos.Administrador;
+import servicos.Funcionario;
+import servicos.Usuario;
 
 /**
  *
@@ -13,5 +15,15 @@ import servicos.Administrador;
  */
 public interface AdministradorDAO {
     public void salvar(Administrador administrador) throws ServicoException;
+
+    public Funcionario consultarFuncionario(String nome);
+
+    public void registrarFuncionario(Funcionario funcionario);
+
+    public void excluirUsuario(Usuario usuario);
+
+    public void bloqueioPermanenteDeFuncionario(Funcionario funcionario);
+
+    public void bloqueioTemporarioDeFuncionario(Funcionario funcionario);
 
 }

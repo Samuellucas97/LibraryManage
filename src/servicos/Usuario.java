@@ -20,7 +20,7 @@ public class Usuario {
     protected String genero;
     
     /**
-     * Construtor padrão da classe Usuario
+     * Construtor padrão
      */
     public Usuario(){
         this.login = new String();

@@ -9,18 +9,18 @@ package interacaoComUsuario;
 //Imports
 import dados.ServicoException;
 import java.util.Scanner;
-import servicos.AdministradorServicoConcreto;
+import servicos.AdministradorServico;
 import servicos.Usuario;
-import servicos.UsuarioServico;
+import servicos.IUsuarioServico;
 
 //Classe AdministradorTerminal
 public class AdministradorTerminal extends Terminal{
     //--ATRIBUTOS--//
-    UsuarioServico administradorServico;
+    IUsuarioServico administradorServico;
     Usuario administrador;
 
     public AdministradorTerminal() {
-        this.administradorServico = (UsuarioServico) new AdministradorServicoConcreto();
+        this.administradorServico = (IUsuarioServico) new AdministradorServico();
     }
     
     //--METODOS--//
