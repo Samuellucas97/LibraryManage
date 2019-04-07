@@ -10,7 +10,7 @@ import dados.ServicoException;
 import dados.UsuarioDAOFactory;
 
 /**
- *
+ * 
  * @author SamDan
  */
 public class ClienteServico extends UsuarioServico implements IClienteServico {

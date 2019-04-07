@@ -28,7 +28,13 @@ public interface IAdministradorServico extends IUsuarioServico{
      */
     public Funcionario consultarFuncionario(String nome) throws ServicoException;
     
-    public void alterarFuncionario() throws ServicoException;
+    /**
+     * Altera o funcionário
+     * @param login Login do funcionário
+     * @param funcionario   Funcionário a ser alterado
+     * @throws ServicoException
+     */
+    public void alterarFuncionario(String login, Funcionario funcionario) throws ServicoException;
     
     /**
      * Registra o funcionário
@@ -53,7 +59,7 @@ public interface IAdministradorServico extends IUsuarioServico{
     
     /**
      * Bloqueia temporariamente o funcionário
-     * @param funcionario
+     * @param funcionario Funcionário a ser bloqueado temporariamente
      * @throws ServicoException 
      */
     public void bloqueioTemporarioDeFuncionario(Funcionario funcionario) throws ServicoException;

@@ -37,31 +37,65 @@ public class AdministradorServico extends FuncionarioServico implements IAdminis
         this.livroServico.excluirLivro(livro);
     }
     
+    /**
+     * Consulta o funcionário
+     * @param nome  Nome do funcionário
+     * @return  Funcionario buscado
+     * @throws ServicoException 
+     */
     @Override
     public Funcionario consultarFuncionario(String nome) throws ServicoException{
         /// O retorno desse método deve ser um Funcionario
         return this.administradorDAO.consultarFuncionario(nome);
     }
+
+    /**
+     * Altera o funcionário
+     * @param login Login do funcionário
+     * @param funcionario   Funcionário a ser alterado
+     * @throws ServicoException
+     */
     @Override
-    public void alterarFuncionario() throws ServicoException{
+    public void alterarFuncionario(String login, Funcionario funcionario) throws ServicoException{
         /// O que esse método faz?
+        this.administradorDAO.alterarFuncionario( login, funcionario );
     }
     
+    /**
+     * Registra o funcionário
+     * @param funcionario   Funcionário a ser registrado
+     * @throws ServicoException 
+     */
     @Override
     public void registrarFuncionario(Funcionario funcionario) throws ServicoException{
         this.administradorDAO.registrarFuncionario(funcionario);
     }
     
+    /**
+     * Exclui usuário
+     * @param usuario   Usuário a ser excluído
+     * @throws ServicoException 
+     */
     @Override
     public void excluirUsuario(Usuario usuario) throws ServicoException{
         this.administradorDAO.excluirUsuario(usuario);
     }
     
+    /**
+     * Bloqueia permanentemente o funcionário
+     * @param funcionario Funcionário a ser bloqueado permanentemente
+     * @throws ServicoException 
+     */
     @Override
     public void bloqueioPermanenteDeFuncionario(Funcionario funcionario) throws ServicoException{
         this.administradorDAO.bloqueioPermanenteDeFuncionario(funcionario);
     }
     
+    /**
+     * Bloqueia temporariamente o funcionário
+     * @param funcionario Funcionário a ser bloqueado temporariamente
+     * @throws ServicoException 
+     */
     @Override
     public void bloqueioTemporarioDeFuncionario(Funcionario funcionario) throws ServicoException{
         this.administradorDAO.bloqueioTemporarioDeFuncionario(funcionario);
