@@ -6,7 +6,6 @@
 package interacaoComUsuario;
 
 import dados.ServicoException;
-import servicos.Usuario;
 
 public abstract class Terminal {
     

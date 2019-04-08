@@ -101,36 +101,72 @@ public class UsuarioTerminal extends Terminal {
             String key;
             System.out.println("Você escolheu a opção (2) - Buscar livro");
             System.out.println("As opções de busca são:");
-            System.out.print("(1) Busca por Título");
-            System.out.print("(2) Busca por Autor");
-            System.out.print("(3) Busca por Assunto");
+            System.out.println("(1) Buscar por Título");
+            System.out.println("(2) Buscar por Autor");
+            System.out.println("(3) Buscar por Assunto");
+            System.out.println("(4) Buscar por Data de Lançamento");
+            System.out.println("(5) Buscar por Edição");
+            System.out.println("(6) Buscar por Editora");
+            System.out.println("(7) Buscar por ID do livro");
+
             while(true){
-            op = entradaUsuario.next();
-            if(op.equals("1")){
-                System.out.print("Digite o título do livro: ");
-                key = entradaUsuario.next();
-                
-                return efetuarBusca("Titulo" , key);
+                op = entradaUsuario.next();
+                if(op.equals("1")){
+                    System.out.print("Digite o título do livro: ");
+                    key = entradaUsuario.next();
+
+                    return efetuarBusca("Titulo" , key);
+                }
+                else if(op.equals("2")){
+                    System.out.print("Digite o nome do autor do livro: ");
+                    key = entradaUsuario.next();
+
+                    return efetuarBusca("Autor" , key);
+                }
+                else if(op.equals("3")){
+                    System.out.print("Digite o assunto do livro: ");
+                    key = entradaUsuario.next();
+
+                    return efetuarBusca("Assunto" , key);
+                }
+                else if(op.equals("4")){
+                    System.out.print("Digite a data de lançamento do livro: ");
+                    key = entradaUsuario.next();
+
+                    return efetuarBusca("DataDeLancamento" , key);
+                }
+                else if(op.equals("5")){
+                    System.out.print("Digite a edição do livro: ");
+                    key = entradaUsuario.next();
+
+                    return efetuarBusca("Edicao" , key);
+                }
+                else if(op.equals("6")){
+                    System.out.print("Digite o nome da editora: ");
+                    key = entradaUsuario.next();
+
+                    return efetuarBusca("Editora" , key);
+                }
+                else if(op.equals("7")){
+                    System.out.print("Digite o ID do livro: ");
+                    key = entradaUsuario.next();
+
+                    return efetuarBusca("ID" , key);
+                }
+                else{
+                    System.out.println("Escolha inválida! \n"); 
+                    System.out.println("As opções de busca são:");
+                    System.out.println("(1) Buscar por Título");
+                    System.out.println("(2) Buscar por Autor");
+                    System.out.println("(3) Buscar por Assunto");
+                    System.out.println("(4) Buscar por Data de Lançamento");
+                    System.out.println("(5) Buscar por Edição");
+                    System.out.println("(6) Buscar por Editora");
+                    System.out.println("(7) Buscar por ID do livro");
+
+                                    
+                }
             }
-            else if(op.equals("2")){
-                System.out.print("Digite o nome do autor do livro: ");
-                key = entradaUsuario.next();
-                
-                return efetuarBusca("Autor" , key);
-            }
-            else if(op.equals("3")){
-                System.out.print("Digite o assunto do livro: ");
-                key = entradaUsuario.next();
-                
-                return efetuarBusca("Assunto" , key);
-            }
-            else{
-                 System.out.println("Escolha inválida! \n" 
-                                    + "Digite o número de uma das opções: \n"
-                                    + "(1)Realizar login \n"
-                                    + "(2)Buscar livro \n");
-            }
-        }
             
         }
         
