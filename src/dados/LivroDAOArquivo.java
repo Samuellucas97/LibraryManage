@@ -5,30 +5,17 @@
  */
 package dados;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import servicos.Livro;
 
 /**
  *
- * @author SamDan
+ * @author José Welliton Nunes Júnior
  */
 public class LivroDAOArquivo implements LivroDAO{
     
@@ -37,9 +24,7 @@ public class LivroDAOArquivo implements LivroDAO{
     
     private LivroDAOArquivo() throws ServicoException{
         this.hMapLivro = new HashMap<>();
-        //String conteudoArquivo = lerArquivo("Livros.lm");
-        //this.transformaStringEmHashMap(conteudoArquivo);
-        lerArquivo("Livros.lm");        
+        lerArquivo("Livros");        
     }
     
     public static LivroDAOArquivo getInstancia() throws ServicoException{
@@ -50,7 +35,6 @@ public class LivroDAOArquivo implements LivroDAO{
     
     private void limparRegistro(){
         this.hMapLivro.clear();
-        //adicionar repegar do arquivo
     }
     
     @Override
@@ -139,18 +123,39 @@ public class LivroDAOArquivo implements LivroDAO{
     }
     
     @Override
-    public void adicionarLivro(String idLivro, int quantidade) throws ServicoException{
+    public void adicionarQuantidadeLivro(String idLivro, int quantidade) throws ServicoException{
         Livro livro = this.hMapLivro.get(idLivro);
-        
-        if(quantidade <= 0) throw new ServicoException("Quantidade inválida de exemplares!");
         
         if(livro == null) throw new ServicoException("Livro não encotrado!");
         
+        if(quantidade <= 0) throw new ServicoException("Quantidade inválida de exemplares!");
+              
         livro.setQuantidadeDeTotalDeExemplares(livro.getQuantidadeDeTotalDeExemplares() + quantidade);
         
-        this.salvarArquivo("Livros");//, this.transformarHashMapEmString());
+        if(livro.getEstadoLivro().compareTo(Livro.EstadoLivro.ALUGADO) == 0) livro.setEstadoLivro(Livro.EstadoLivro.DISPONIVEL);
+        
+        this.salvarArquivo("Livros");
         
         throw new ServicoException("Quantidade desse livro adicionada com sucesso!");
+    }
+    
+    @Override
+    public void removerQuantidadeLivro(String idLivro, int quantidade) throws ServicoException{
+        Livro livro = this.hMapLivro.get(idLivro);
+        
+        if(livro == null) throw new ServicoException("Livro não encotrado!");
+        
+        if(quantidade < (livro.getQuantidadeDeTotalDeExemplares() - livro.getQuantidadeDeExemplaresEmprestados())) throw new ServicoException("Quantidade inválida de exemplares!");
+        
+        livro.setQuantidadeDeTotalDeExemplares(livro.getQuantidadeDeTotalDeExemplares() - quantidade);
+        
+        if(livro.getEstadoLivro().compareTo(Livro.EstadoLivro.DISPONIVEL) == 0 && (livro.getQuantidadeDeTotalDeExemplares() - livro.getQuantidadeDeExemplaresEmprestados())== 0) 
+            livro.setEstadoLivro(Livro.EstadoLivro.ALUGADO);
+        
+        this.salvarArquivo("Livros");
+        
+        throw new ServicoException("Quantidade desse livro adicionada com sucesso!");
+        
     }
     
     @Override
@@ -167,162 +172,21 @@ public class LivroDAOArquivo implements LivroDAO{
     public void alterarLivro(Livro livroAlterado) throws ServicoException{
         
     }
-    
-//    @Override
-//    public void bloqueioTemporarioDeLivro(Livro livro) throws ServicoException {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
-
-//    @Override
-//    public void bloqueioPermanenteDeLivro(Livro livro) throws ServicoException {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
 
     @Override
     public void excluirLivro(Livro livro) throws ServicoException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean verification =  this.hMapLivro.remove(livro.getId(), livro);
+        if(!verification) throw new ServicoException("Esse livro não existe no catálogo e não pode ser excluído!");
+        
+        this.salvarArquivo("Livros");
     }
 
-//    @Override
-//    public void alterarLivro() throws ServicoException {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
-
-//    @Override
-//    public void emprestimoDeLivro(Livro livro) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
-
-//    @Override
-//    public void efetuarDevolucaoDeLivro(Livro livro) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
-
-   
-    
-//    private void transformaStringEmHashMap(String conteudoArquivo){
-//    
-//        this.hMapLivro.clear();
-//        
-//        Cliente cliente = new Cliente();
-//        
-//        for(String linhaDoArquivo: conteudoArquivo.split("\n") ){
-//
-//            cliente.setLogin( linhaDoArquivo.split(";")[1].split(":")[1] );
-//            cliente.setSenha( linhaDoArquivo.split(";")[2].split(":")[1] );
-//            cliente.setNome( linhaDoArquivo.split(";")[3].split(":")[1] );
-//            cliente.setTelefone( linhaDoArquivo.split(";")[4].split(":")[1] );
-//            cliente.setIdade( Integer.parseInt(linhaDoArquivo.split(";")[5].split(":")[1] ));
-//            cliente.setGenero( linhaDoArquivo.split(";")[6].split(":")[1] );
-//            cliente.
-//
-//            hMapCliente.put( cliente.getLogin(), cliente);
-//
-//        }
-//    
-//    }    
-//    
-//    private String transformarHashMapEmString(){
-//        
-//    }
-//    
-//    public String verificacao(String idLivro) throws ServicoException{
-//        
-//        this.transformaStringEmHashMap(this.lerArquivo(""));
-//        
-//        Livro livroTemporario = this.hMapLivro.get(idLivro);
-//        
-//        if(this.clienteDAO.autenticar(login, senha).equals("OK")){
-//            Usuario cliente = this.clienteDAO.buscar(login);
-//            return cliente;
-//        }
-//           if(livroTemporario == null)   return "Livro não encontrado";     
-//        
-//        
-//        return "OK";
-//    }   
-    	
     private void lerArquivo(String nomeDoArquivo) throws ServicoException{
           this.hMapLivro = (HashMap<String, Livro>) Serializator.unserialize(nomeDoArquivo);
-//        byte[] bytes;
-//        FileInputStream read;
-//        ByteArrayInputStream bis;
-//        
-//        ObjectInput in;
-//        
-////        String leitura = new String();
-//                
-//        try{            
-//            //BufferedReader buffReader = new BufferedReader(new FileReader( nomeDoArquivo ));
-//            read = new FileInputStream(nomeDoArquivo);
-//            bytes = new byte[read.available()];
-//            read.read(bytes);
-//            
-//            bis = new ByteArrayInputStream(bytes);
-//            in = new ObjectInputStream(bis);
-//            this.hMapLivro = (HashMap<String, Livro>) in.readObject();
-//            
-//            //            while( buffReader.ready() ){              // -> LENDO CADA LINHA  
-////                leitura += buffReader.readLine() + "\n";
-////            }
-////            
-////            buffReader.close();
-//        }
-//        catch(FileNotFoundException e){  // -> Arquivo não existe
-//            System.err.println( e.getMessage() );
-//        }
-//        catch( NullPointerException | IOException e){
-//            System.err.println( e.getMessage() );
-//        } catch (ClassNotFoundException ex) {
-//            Logger.getLogger(LivroDAOArquivo.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        // -> OCORREU OUTRO ERRO, SENDO ESSE DESCONHECIDO
-//        
-////        return leitura;
-        
     }
     
-    private boolean salvarArquivo(String nomeArquivo) throws ServicoException{//, String conteudoArquivo){
-        
+    private boolean salvarArquivo(String nomeArquivo) throws ServicoException{
         Serializator.serialize(this.hMapLivro, nomeArquivo);
-        
-//ByteArrayOutputStream bos = new ByteArrayOutputStream();
-//        ObjectOutputStream out;
-//        FileOutputStream writer;
-//        //byte[] bytes;
-//	File binaryFile = new File(nomeArquivo);
-////        if( conteudoArquivo.equals("") ) {
-////                return false;
-////        }
-//	
-//	try{
-//            //nomeArquivo += ".dat";
-//            writer = new FileOutputStream(binaryFile);
-//            out = new ObjectOutputStream(writer);
-//            out.writeObject(this.hMapLivro);
-//            out.flush();
-//            
-//            // = bos.toByteArray();
-//                        
-//            
-//            //FileWriter writer = new FileWriter(nomeArquivo);
-//            //writer.write(bytes);
-//            //writer.write(conteudoArquivo);
-//            //bos.close();
-//            out.close();
-//            writer.close(); 		
-//            return true;
-//
-//        }
-//        catch(FileNotFoundException e){   // -> ARQUIVO NãO EXISTE
-//	    System.err.println( e.getMessage() );
-//            //System.out.println("Arquivo não criado");
-//	    return false;        
-//        }
-//        catch(IOException e){  // -> OCORREU OUTRO ERRO, SENDO ESSE DESCONHECIDO
-//            System.err.println( e.getMessage() );
-//            return false;
-//        }
         return true;
     }   
     

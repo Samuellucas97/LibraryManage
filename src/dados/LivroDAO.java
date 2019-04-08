@@ -19,7 +19,8 @@ public interface LivroDAO {
     public List<Livro> consultaLivros(List<String> params, List<String> keys) throws ServicoException;
     public List<Livro> consultaLivros(String param, String key) throws ServicoException;
     
-    public void adicionarLivro(String idLivro, int quantidade) throws ServicoException;
+    public void adicionarQuantidadeLivro(String idLivro, int quantidade) throws ServicoException;
+    public void removerQuantidadeLivro(String idLivro, int quantidade) throws ServicoException;
     
     public void registrarLivro(Livro livro) throws ServicoException;
     public void alterarLivro(Livro livroAlterado) throws ServicoException;

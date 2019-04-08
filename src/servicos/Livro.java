@@ -188,4 +188,8 @@ public class Livro implements java.io.Serializable{
     public void setQuantidadeDeTotalDeExemplares(int quantidadeDeTotalDeExemplares) {
         this.quantidadeDeTotalDeExemplares = quantidadeDeTotalDeExemplares;
     }
+    
+    public void setEstadoLivro(EstadoLivro estado){
+        this.estadoLivro = estado;
+    }
 }
