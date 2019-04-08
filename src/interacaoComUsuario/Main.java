@@ -8,6 +8,8 @@ import servicos.Usuario;
 /**
  * Implementação da Main
  * @author	Samuel Lucas de Moura Ferino
+ * @author      Thiago da Costa Monteiro   
+ * @author      José Wellinton Nunes Jr.
  * @since	08.03.2019 
  * @version	0.0.1
  */

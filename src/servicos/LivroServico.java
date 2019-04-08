@@ -113,5 +113,9 @@ public class LivroServico implements ILivroServico{
     public List<Livro> consultaLivros(List<String> params, List<String> keys) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    public List<Livro> listaLivrosAvaliados() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

@@ -176,7 +176,14 @@ public class UsuarioTerminal extends Terminal {
     }
     
     private List<Livro> efetuarBusca(List<String> params, List<String> keys){
-        return this.livroServico.consultaLivros(params, keys);
+        try{
+            return this.livroServico.consultaLivros(params, keys);
+            
+        }
+        catch (ServicoException ex) {
+            System.err.println(ex.getMessage());
+        }
+        
         
     }
     
