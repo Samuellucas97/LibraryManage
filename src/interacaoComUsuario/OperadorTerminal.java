@@ -36,7 +36,7 @@ public class OperadorTerminal extends Terminal{
     
     
     @Override
-    protected Usuario autenticacao(String login, String senha){
+    protected void autenticacao(String login, String senha){
         try{
             this.operador = this.operadorServico.autenticacao(login, senha);
            

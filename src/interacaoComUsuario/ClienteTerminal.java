@@ -24,7 +24,7 @@ public class ClienteTerminal extends Terminal{
     //public void avaliarLivros(int nota){}
     
     @Override
-    protected Usuario autenticacao(String login, String senha){
+    protected void autenticacao(String login, String senha){
         try{
             this.cliente = this.clienteServico.autenticacao(login, senha);
            
@@ -32,7 +32,6 @@ public class ClienteTerminal extends Terminal{
         catch (ServicoException ex) {
             System.err.println(ex.getMessage());
         }
-        return this.cliente;
     }
 
     @Override

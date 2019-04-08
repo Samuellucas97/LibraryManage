@@ -5,9 +5,15 @@
 package interacaoComUsuario;
 
 import dados.ServicoException;
+import java.util.List;
 import java.util.Scanner;
+import servicos.Administrador;
+import servicos.Cliente;
 import servicos.UsuarioServico;
 import servicos.IUsuarioServico;
+import servicos.Livro;
+import servicos.LivroServico;
+import servicos.Operador;
 import servicos.Usuario;
 
 
@@ -15,16 +21,12 @@ public class UsuarioTerminal extends Terminal {
     
     private final IUsuarioServico usuarioServico;
     private Usuario usuario;
-    private int LoginErrado = 0; 
     private String login = "";
     private String senha = "";
 
     public UsuarioTerminal() {
         this.usuarioServico = new UsuarioServico();
     }
-    
-    
-    //public abstract void realizarLogin(String login, String senha);
     
     @Override
     public String apresentacao( ){
@@ -33,8 +35,9 @@ public class UsuarioTerminal extends Terminal {
                         + "Digite o número de uma das opções: \n"
                         + "(1)Realizar login \n"
                         + "(2)Buscar livro \n");
+        String entradaNumero;
         while(true){
-            String entradaNumero = entradaUsuario.next();
+            entradaNumero = entradaUsuario.next();
             if(entradaNumero.equals("1") || entradaNumero.equals("2")){
                 return entradaNumero;
             }
@@ -48,7 +51,7 @@ public class UsuarioTerminal extends Terminal {
     }
 
     @Override
-    protected Usuario autenticacao(String login, String senha){
+    protected void autenticacao(String login, String senha){
         try{
             this.usuario = this.usuarioServico.autenticacao(login, senha);
            
@@ -56,41 +59,99 @@ public class UsuarioTerminal extends Terminal {
         catch (ServicoException ex) {
             System.err.println(ex.getMessage());
         }
-        return this.usuario;
-    }
-
-    @Override
-    public Object tratamentoEscolha(String escolha) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-}
-    
-    
+    }   
 
    @Override
-    public Terminal login(String login, String senha) throws ServicoException {
+    public Terminal login(String login, String senha){
+             
+        autenticacao(login, senha);
         
-        Usuario usr = autenticacao(login, senha);
-        
-        
-        if(usr.getClass().isInstance(new Cliente())){
+        if(usuario.getClass().isInstance(new Cliente())){
             return new ClienteTerminal();
         }
-        else if(usr.getClass().isInstance(new Administrador())){
+        else if(usuario.getClass().isInstance(new Administrador())){
             return new AdministradorTerminal();
         }       
-        else if(usr.getClass().isInstance(new Operador())){
+        else if(usuario.getClass().isInstance(new Operador())){
             return new OperadorTerminal();
         }
         else{
-            throw new ServicoException("Usuário não é de tipo válido!");
+            return null;
         }
     }
+    
+    
 
     @Override
     public Object tratamentoEscolha(String escolha) {
-        if(escolha.equals("1")
+        Scanner entradaUsuario = new Scanner(System.in);
+        if(escolha.equals("1")){
+            System.out.print("Você escolheu a opção (1) - Realizar login \n"
+                        + "Digite o seu login: ");
+            login = entradaUsuario.next();
+            System.out.print("\n Digite sua senha: ");
+            System.out.println("");
+            senha = entradaUsuario.next();
+            return login(login, senha);
+
+            
+        }
+        if(escolha.equals("2")){
+            String op;
+            String key;
+            System.out.println("Você escolheu a opção (2) - Buscar livro");
+            System.out.println("As opções de busca são:");
+            System.out.print("(1) Busca por Título");
+            System.out.print("(2) Busca por Autor");
+            System.out.print("(3) Busca por Assunto");
+            while(true){
+            op = entradaUsuario.next();
+            if(op.equals("1")){
+                System.out.print("Digite o título do livro: ");
+                key = entradaUsuario.next();
+                
+                return efetuarBusca("Titulo" , key);
+            }
+            else if(op.equals("2")){
+                System.out.print("Digite o nome do autor do livro: ");
+                key = entradaUsuario.next();
+                
+                return efetuarBusca("Autor" , key);
+            }
+            else if(op.equals("3")){
+                System.out.print("Digite o assunto do livro: ");
+                key = entradaUsuario.next();
+                
+                return efetuarBusca("Assunto" , key);
+            }
+            else{
+                 System.out.println("Escolha inválida! \n" 
+                                    + "Digite o número de uma das opções: \n"
+                                    + "(1)Realizar login \n"
+                                    + "(2)Buscar livro \n");
+            }
+        }
+            
+        }
+        
+        return null;
     }
    
+    private List<Livro> efetuarBusca(String param, String key){
+        LivroServico livroServico = new LivroServico(); 
+        return livroServico.efetuarBusca(param, key);
+        
+    }
+    
+    private List<Livro> efetuarBusca(List<String> params, List<String> keys){
+        LivroServico livroServico = new LivroServico(); 
+        return livroServico.efetuarBusca(params, keys);
+    }
+    
+    public Usuario getUsuario(){
+        return this.usuario;
+    }
+     public void setUsuario(Usuario usr){
+         this.usuario = usr;
+     }
 }
-
