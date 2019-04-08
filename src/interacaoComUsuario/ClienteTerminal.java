@@ -63,13 +63,8 @@ public class ClienteTerminal extends Terminal{
     public Object tratamentoEscolha(String escolha) {
         Scanner entradaUsuario = new Scanner(System.in);
         if(escolha.equals("1")){
-            avaliacao
             System.out.print("Você escolheu a opção (1) - Avaliar livro \n");
-            login = entradaUsuario.next();
-            System.out.print("\n Digite sua senha: ");
-            System.out.println("");
-            senha = entradaUsuario.next();
-            return login(login, senha);
+            
 
             
         }

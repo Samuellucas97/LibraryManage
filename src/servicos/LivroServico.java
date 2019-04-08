@@ -8,6 +8,7 @@ package servicos;
 import dados.LivroDAO;
 import dados.LivroDAOArquivo;
 import dados.ServicoException;
+import java.util.List;
 
 /**
  * Implementa a lógica de negócios relativa a Livro
@@ -103,6 +104,14 @@ public class LivroServico implements ILivroServico{
     @Override
     public void emprestimoDeLivro(Livro livro) {
         this.livroDAO.emprestimoDeLivro(livro);
+    }
+
+    public List<Livro> consultaLivros(String param, String key) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public List<Livro> consultaLivros(List<String> params, List<String> keys) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
