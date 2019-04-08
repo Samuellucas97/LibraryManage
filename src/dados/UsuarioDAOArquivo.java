@@ -55,58 +55,11 @@ public abstract class UsuarioDAOArquivo implements UsuarioDAO{
         throw new ServicoException( this.autenticar(login, senha) );      
     }   
     	
-    protected String lerArquivo(String nomeDoArquivo){
-        
-        String linha = new String();
-                
-        try{
-            BufferedReader buffReader = new BufferedReader(new FileReader( nomeDoArquivo ));
-            
-            while( buffReader.ready() ){              // -> LENDO CADA LINHA  
-                linha += buffReader.readLine() + "\n";
-            }
-            
-            buffReader.close();
-        }
-        catch(FileNotFoundException e){  // -> Arquivo não existe
-            System.err.println( e.getMessage() );
-        }
-        catch( NullPointerException e){
-            System.err.println( e.getMessage() );
-        }
-        catch(IOException e){  // -> OCORREU OUTRO ERRO, SENDO ESSE DESCONHECIDO
-            System.err.println( e.getMessage() );
-        }
-        
-        return linha;
-        
-    }
+    protected abstract void lerArquivo(String nomeDoArquivo) throws ServicoException;
     
-    private boolean salvarArquivo(String nomeArquivo, String conteudoArquivo){
-		
-        if( conteudoArquivo.equals("") ) {
-                return false;
-        }
-	
-	try{
-
-          nomeArquivo += ".dat";
-		  FileWriter writer = new FileWriter(nomeArquivo);     
-		  writer.write(conteudoArquivo);
-		  writer.close(); 		
-		  return true;
-
-        }
-        catch(FileNotFoundException e){   // -> ARQUIVO NãO EXISTE
-	        System.err.println( e.getMessage() );
-	        return false;        
-        }
-        catch(IOException e){  // -> OCORREU OUTRO ERRO, SENDO ESSE DESCONHECIDO
-            System.err.println( e.getMessage() );
-            return false;
-        }
-    
-    }
-    
+    protected boolean salvarArquivo(String nomeArquivo) throws ServicoException{
+        Serializator.serialize(this.hMapLivro, nomeArquivo);
+        return true;
+    } 
     
 }
