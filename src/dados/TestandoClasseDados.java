@@ -22,9 +22,10 @@ public class TestandoClasseDados {
         List<Livro> livros = new ArrayList<>();
         ArrayList<String> assunto = new ArrayList<>();
         Livro livro;
-        LivroDAO livroDAO = LivroDAOArquivo.getInstancia();
+        LivroDAO livroDAO;
         
         try {
+            livroDAO = LivroDAOArquivo.getInstancia();
             assunto.add("Suspense");
             assunto.add("Ficção");
             livro = new Livro("978-85-457-0367-1", Livro.EstadoLivro.DISPONIVEL, "Português", 1, "Moderna", "A volta dos perdedores", "Welliton", "São Paulo", assunto, "25/06/2008", 1, 0);
@@ -42,8 +43,8 @@ public class TestandoClasseDados {
             assunto = new ArrayList<>();
             for (Livro next : livros) {
                 livroDAO.registrarLivro(next);
-            }            
-        
+            }
+                    
         } catch (ServicoException ex) {
             System.err.println(ex.getMessage());
         }

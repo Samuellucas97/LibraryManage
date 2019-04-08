@@ -11,13 +11,13 @@ import java.util.ArrayList;
 /**
  *  Representa um livro
  */
-public class Livro {
+public class Livro implements java.io.Serializable{
 
     /**
      * Representa uma data temporal
      * @author Samuel Lucas de Moura Ferino
      */
-    public class Data {
+    public class Data implements java.io.Serializable{
 
         private String dia;
         private String mes;
