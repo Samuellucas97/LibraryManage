@@ -2,6 +2,7 @@ package dados;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -22,21 +23,35 @@ public class Serializator {
         }
     }
 
-    public static Object unserialize(String key) throws ServicoException {
-        try {
-            String filename = key.concat(".lm");
+    public static Object unserialize(Object object, String key) throws ServicoException{
+        String filename = key.concat(".lm");
+        File file;
+        FileInputStream fis;
+        
+        
+        try {           
+            file = FileUtils.getFile(filename);
 
-            File file = FileUtils.getFile(filename);
+            if( !file.exists()) 
+                serialize(object, key);
 
-            if( !file.exists() ) return null;
-
-            FileInputStream fis = new FileInputStream(file);
-            ObjectInputStream ois = new ObjectInputStream(fis);
+            fis = new FileInputStream(file);
+            
+            if(fis.read() == -1)
+                serialize(object, key);
+            
+            fis.close();
+            fis = new FileInputStream(file);
+            
+            ObjectInputStream ois = new ObjectInputStream(fis);  
+                        
             Object obj = ois.readObject();
             ois.close();
+            //fis.close();
             return obj;            
         } catch (IOException | ClassNotFoundException e) {
-            throw new ServicoException(e.getMessage());
+            serialize(object, key);      
+            throw new ServicoException("Arquivo estava corrompido e foi recriado com informações vazias!");
         }
     }
 }

@@ -23,34 +23,36 @@ public class TestandoClasseDados {
         
         try {
             livroDAO = LivroDAOArquivo.getInstancia();
-            assunto.add("Suspense");
-            assunto.add("Ficção");
-            livro = new Livro("978-85-457-0367-1", Livro.EstadoLivro.DISPONIVEL, "Português", 1, "Moderna", "A volta dos perdedores", "Welliton", "São Paulo", assunto, "25/06/2008", 1, 0);
-            livros.add(livro);
-            assunto = new ArrayList<>();
-            assunto.add("Reportagem");
-            assunto.add("Jornalismo");
-            livro = new Livro("978-85-457-0367-4", Livro.EstadoLivro.DISPONIVEL, "Inglês", 1, "Rocco", "Out Here!!!", "Welliton", "New York", assunto, "30/05/2008", 1, 0);
-            livros.add(livro);
-            assunto = new ArrayList<>();
-            assunto.add("Drama");
-            assunto.add("Ficção Científica");
-            livro = new Livro("978-85-457-0367-0", Livro.EstadoLivro.DISPONIVEL, "Português", 1, "JBC", "Akira", "Katsuhiro Otomo", "Japão", assunto, "20/12/1982", 1, 0);
-            livros.add(livro);
-            assunto = new ArrayList<>();
-            for (Livro next : livros) {
-                livroDAO.registrarLivro(next);
-            }
-//            livro = livroDAO.consultaLivro("978-85-457-0367-0");
+//            assunto.add("Suspense");
+//            assunto.add("Ficção");
+//            livro = new Livro("978-85-457-0367-1", Livro.EstadoLivro.DISPONIVEL, "Português", 1, "Moderna", "A volta dos perdedores", "Welliton", "São Paulo", assunto, "25/06/2008", 1, 0);
+//            livros.add(livro);
+//            assunto = new ArrayList<>();
+//            assunto.add("Reportagem");
+//            assunto.add("Jornalismo");
+//            livro = new Livro("978-85-457-0367-4", Livro.EstadoLivro.DISPONIVEL, "Inglês", 1, "Rocco", "Out Here!!!", "Welliton", "New York", assunto, "30/05/2008", 1, 0);
+//            livros.add(livro);
+//            assunto = new ArrayList<>();
+//            assunto.add("Drama");
+//            assunto.add("Ficção Científica");
+//            livro = new Livro("978-85-457-0367-0", Livro.EstadoLivro.DISPONIVEL, "Português", 1, "JBC", "Akira", "Katsuhiro Otomo", "Japão", assunto, "20/12/1982", 1, 0);
+//            livros.add(livro);
+//            assunto = new ArrayList<>();
+//            for (Livro next : livros) {
+//                livroDAO.registrarLivro(next);
+//            }
+            livro = livroDAO.consultaLivro("978-85-457-0367-0");
 //            livroDAO.excluirLivro(livro);
 
-            List<Livro> livrosBuscados = livroDAO.consultaLivros("Titulo", "A");
-            
-            System.out.println("Livros encontrados: ");
-            for (Livro livroBuscado : livrosBuscados) {
-                System.out.println("ID: " + livroBuscado.getId());
-                System.out.println("Titulo: " + livroBuscado.getTitulo());
-            }
+//            List<Livro> livrosBuscados = livroDAO.consultaLivros("Titulo", "A");
+//            
+//            System.out.println("Livros encontrados: ");
+//            for (Livro livroBuscado : livrosBuscados) {
+//                System.out.println("ID: " + livroBuscado.getId());
+//                System.out.println("Titulo: " + livroBuscado.getTitulo());
+//            }
+
+            livro.
             
         } catch (ServicoException ex) {
             System.err.println(ex.getMessage());

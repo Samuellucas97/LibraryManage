@@ -11,6 +11,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import servicos.Livro;
 
 /**
@@ -20,15 +22,17 @@ import servicos.Livro;
 public class LivroDAOArquivo implements LivroDAO{
     
     private static LivroDAOArquivo instancia = null;
-    private HashMap<String, Livro> hMapLivro;
+    private static HashMap<String, Livro> hMapLivro;
     
     private LivroDAOArquivo() throws ServicoException{
-        this.hMapLivro = new HashMap<>();
-        lerArquivo("Livros");        
+        LivroDAOArquivo.hMapLivro = new HashMap<>();
+        lerArquivo("Livros");
     }
     
     public static LivroDAOArquivo getInstancia() throws ServicoException{
-        if(LivroDAOArquivo.instancia == null) LivroDAOArquivo.instancia = new LivroDAOArquivo();
+        if(LivroDAOArquivo.instancia == null) {
+            LivroDAOArquivo.instancia = new LivroDAOArquivo();            
+        }
                 
         return LivroDAOArquivo.instancia;
     }
@@ -175,9 +179,9 @@ public class LivroDAOArquivo implements LivroDAO{
     }
     
     @Override
-    public void alterarLivro(Livro livro, Livro livroAlterado) throws ServicoException{
-        if(livro.getId().equals(livroAlterado.getId())){
-            this.hMapLivro.remove(livro.getId());
+    public void alterarLivro(String IDlivro, Livro livroAlterado) throws ServicoException{
+        if(IDlivro.equals(livroAlterado.getId())){
+            this.hMapLivro.remove(IDlivro);
             this.hMapLivro.put(livroAlterado.getId(), livroAlterado);
             this.salvarArquivo("Livros");
         }
@@ -186,7 +190,7 @@ public class LivroDAOArquivo implements LivroDAO{
                 throw new ServicoException("A alteração não foi concluida! \n O ID escolhido já é utilizado");
             }
             else{
-                this.hMapLivro.remove(livro.getId());
+                this.hMapLivro.remove(IDlivro);
                 this.hMapLivro.put(livroAlterado.getId(), livroAlterado);
                 this.salvarArquivo("Livros");
             }
@@ -202,7 +206,7 @@ public class LivroDAOArquivo implements LivroDAO{
     }
 
     private void lerArquivo(String nomeDoArquivo) throws ServicoException{
-          this.hMapLivro = (HashMap<String, Livro>) Serializator.unserialize(nomeDoArquivo);
+          this.hMapLivro = (HashMap<String, Livro>) Serializator.unserialize(this.hMapLivro, nomeDoArquivo);
     }
     
     private boolean salvarArquivo(String nomeArquivo) throws ServicoException{
