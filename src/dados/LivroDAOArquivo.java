@@ -7,6 +7,7 @@ package dados;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -34,16 +35,16 @@ public class LivroDAOArquivo implements LivroDAO{
     private static LivroDAOArquivo instancia = null;
     private HashMap<String, Livro> hMapLivro;
     
-    private LivroDAOArquivo(){
+    private LivroDAOArquivo() throws ServicoException{
         this.hMapLivro = new HashMap<>();
         //String conteudoArquivo = lerArquivo("Livros.lm");
         //this.transformaStringEmHashMap(conteudoArquivo);
-        lerArquivo("Livros.lm");
+        lerArquivo("Livros.lm");        
     }
     
-    public static LivroDAOArquivo getInstancia(){
+    public static LivroDAOArquivo getInstancia() throws ServicoException{
         if(LivroDAOArquivo.instancia == null) LivroDAOArquivo.instancia = new LivroDAOArquivo();
-        
+                
         return LivroDAOArquivo.instancia;
     }
     
@@ -147,7 +148,7 @@ public class LivroDAOArquivo implements LivroDAO{
         
         livro.setQuantidadeDeTotalDeExemplares(livro.getQuantidadeDeTotalDeExemplares() + quantidade);
         
-        this.salvarArquivo("Livros.lm");//, this.transformarHashMapEmString());
+        this.salvarArquivo("Livros");//, this.transformarHashMapEmString());
         
         throw new ServicoException("Quantidade desse livro adicionada com sucesso!");
     }
@@ -159,7 +160,7 @@ public class LivroDAOArquivo implements LivroDAO{
         if(livroVerificação != null) throw new ServicoException("Livro com esse ID já registrado!");
         
         this.hMapLivro.put(livro.getId(), livro);
-        this.salvarArquivo("Livros.lm");//, this.transformarHashMapEmString());
+        this.salvarArquivo("Livros");//, this.transformarHashMapEmString());
     }
     
     @Override
@@ -241,83 +242,88 @@ public class LivroDAOArquivo implements LivroDAO{
 //        return "OK";
 //    }   
     	
-    private void lerArquivo(String nomeDoArquivo){
-        byte[] bytes;
-        FileInputStream read;
-        ByteArrayInputStream bis;
-        
-        ObjectInput in;
-        
-//        String leitura = new String();
-                
-        try{            
-            //BufferedReader buffReader = new BufferedReader(new FileReader( nomeDoArquivo ));
-            read = new FileInputStream(nomeDoArquivo);
-            bytes = new byte[read.available()];
-            read.read(bytes);
-            
-            bis = new ByteArrayInputStream(bytes);
-            in = new ObjectInputStream(bis);
-            this.hMapLivro = (HashMap<String, Livro>) in.readObject();
-            
-            //            while( buffReader.ready() ){              // -> LENDO CADA LINHA  
-//                leitura += buffReader.readLine() + "\n";
-//            }
+    private void lerArquivo(String nomeDoArquivo) throws ServicoException{
+          this.hMapLivro = (HashMap<String, Livro>) Serializator.unserialize(nomeDoArquivo);
+//        byte[] bytes;
+//        FileInputStream read;
+//        ByteArrayInputStream bis;
+//        
+//        ObjectInput in;
+//        
+////        String leitura = new String();
+//                
+//        try{            
+//            //BufferedReader buffReader = new BufferedReader(new FileReader( nomeDoArquivo ));
+//            read = new FileInputStream(nomeDoArquivo);
+//            bytes = new byte[read.available()];
+//            read.read(bytes);
 //            
-//            buffReader.close();
-        }
-        catch(FileNotFoundException e){  // -> Arquivo não existe
-            System.err.println( e.getMessage() );
-        }
-        catch( NullPointerException | IOException e){
-            System.err.println( e.getMessage() );
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(LivroDAOArquivo.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        // -> OCORREU OUTRO ERRO, SENDO ESSE DESCONHECIDO
-        
-//        return leitura;
+//            bis = new ByteArrayInputStream(bytes);
+//            in = new ObjectInputStream(bis);
+//            this.hMapLivro = (HashMap<String, Livro>) in.readObject();
+//            
+//            //            while( buffReader.ready() ){              // -> LENDO CADA LINHA  
+////                leitura += buffReader.readLine() + "\n";
+////            }
+////            
+////            buffReader.close();
+//        }
+//        catch(FileNotFoundException e){  // -> Arquivo não existe
+//            System.err.println( e.getMessage() );
+//        }
+//        catch( NullPointerException | IOException e){
+//            System.err.println( e.getMessage() );
+//        } catch (ClassNotFoundException ex) {
+//            Logger.getLogger(LivroDAOArquivo.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        // -> OCORREU OUTRO ERRO, SENDO ESSE DESCONHECIDO
+//        
+////        return leitura;
         
     }
     
-    private boolean salvarArquivo(String nomeArquivo){//, String conteudoArquivo){
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        ObjectOutput out;
-        FileOutputStream writer;
-        byte[] bytes;
-	
-//        if( conteudoArquivo.equals("") ) {
-//                return false;
+    private boolean salvarArquivo(String nomeArquivo) throws ServicoException{//, String conteudoArquivo){
+        
+        Serializator.serialize(this.hMapLivro, nomeArquivo);
+        
+//ByteArrayOutputStream bos = new ByteArrayOutputStream();
+//        ObjectOutputStream out;
+//        FileOutputStream writer;
+//        //byte[] bytes;
+//	File binaryFile = new File(nomeArquivo);
+////        if( conteudoArquivo.equals("") ) {
+////                return false;
+////        }
+//	
+//	try{
+//            //nomeArquivo += ".dat";
+//            writer = new FileOutputStream(binaryFile);
+//            out = new ObjectOutputStream(writer);
+//            out.writeObject(this.hMapLivro);
+//            out.flush();
+//            
+//            // = bos.toByteArray();
+//                        
+//            
+//            //FileWriter writer = new FileWriter(nomeArquivo);
+//            //writer.write(bytes);
+//            //writer.write(conteudoArquivo);
+//            //bos.close();
+//            out.close();
+//            writer.close(); 		
+//            return true;
+//
 //        }
-	
-	try{
-            //nomeArquivo += ".dat";
-            
-            out = new ObjectOutputStream(bos);
-            out.writeObject(this.hMapLivro);
-            out.flush();
-            
-            bytes = bos.toByteArray();
-                        
-            writer = new FileOutputStream(nomeArquivo);
-            //FileWriter writer = new FileWriter(nomeArquivo);
-            writer.write(bytes);
-            //writer.write(conteudoArquivo);
-            bos.close();
-            writer.close(); 		
-            return true;
-
-        }
-        catch(FileNotFoundException e){   // -> ARQUIVO NãO EXISTE
-	    System.err.println( e.getMessage() );
-            //System.out.println("Arquivo não criado");
-	    return false;        
-        }
-        catch(IOException e){  // -> OCORREU OUTRO ERRO, SENDO ESSE DESCONHECIDO
-            System.err.println( e.getMessage() );
-            return false;
-        }
-    
+//        catch(FileNotFoundException e){   // -> ARQUIVO NãO EXISTE
+//	    System.err.println( e.getMessage() );
+//            //System.out.println("Arquivo não criado");
+//	    return false;        
+//        }
+//        catch(IOException e){  // -> OCORREU OUTRO ERRO, SENDO ESSE DESCONHECIDO
+//            System.err.println( e.getMessage() );
+//            return false;
+//        }
+        return true;
     }   
     
 }
