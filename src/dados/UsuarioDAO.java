@@ -5,6 +5,7 @@
  */
 package dados;
 
+import java.util.List;
 import servicos.Usuario;
 
 /**
@@ -15,6 +16,13 @@ import servicos.Usuario;
 public interface UsuarioDAO {
 
     public Usuario autenticacao(String login, String senha) throws ServicoException;
-    public Usuario buscar( String login ) throws NullPointerException;
+    public Usuario consultar( String login ) throws NullPointerException;
+    
+    public List<Usuario> consultaUsuarios(List<String> params, List<String> keys) throws ServicoException;
+    public List<Usuario> consultaUsuarios(String param, String key) throws ServicoException;
+    
+    public void registrar(Usuario usuario) throws ServicoException;
+    public void alterar(Usuario usuario,  Usuario usuarioAlterado) throws ServicoException;
+    public void excluir(Usuario usuario) throws ServicoException;
     
 }
