@@ -5,22 +5,26 @@
  */
 package dados;
 
-import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutput;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import servicos.Cliente;
 import servicos.Livro;
-import servicos.Usuario;
 
 /**
  *
@@ -32,6 +36,9 @@ public class LivroDAOArquivo implements LivroDAO{
     
     public LivroDAOArquivo(){
         this.hMapLivro = new HashMap<>();
+        //String conteudoArquivo = lerArquivo("Livros.lm");
+        //this.transformaStringEmHashMap(conteudoArquivo);
+        lerArquivo("Livros.lm");
     }
     
     private void limparRegistro(){
@@ -134,7 +141,7 @@ public class LivroDAOArquivo implements LivroDAO{
         
         livro.setQuantidadeDeTotalDeExemplares(livro.getQuantidadeDeTotalDeExemplares() + quantidade);
         
-        this.salvarArquivo("Livros.lm", this.transformarHashMapEmString());
+        this.salvarArquivo("Livros.lm");//, this.transformarHashMapEmString());
         
         throw new ServicoException("Quantidade desse livro adicionada com sucesso!");
     }
@@ -144,14 +151,14 @@ public class LivroDAOArquivo implements LivroDAO{
         Livro livroVerificação = this.hMapLivro.get(livro.getId());
         
         if(livroVerificação != null) throw new ServicoException("Livro com esse ID já registrado!");
-                
+        
         this.hMapLivro.put(livro.getId(), livro);
-        this.salvarArquivo("Livros.lm", this.transformarHashMapEmString());
+        this.salvarArquivo("Livros.lm");//, this.transformarHashMapEmString());
     }
     
     @Override
     public void alterarLivro(Livro livroAlterado) throws ServicoException{
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
     
 //    @Override
@@ -186,102 +193,124 @@ public class LivroDAOArquivo implements LivroDAO{
 
    
     
-    protected void transformaStringEmHashMap(String conteudoArquivo){
-    
-        hMapCliente.clear();
-        
-        Cliente cliente = new Cliente();
-        
-        for(String linhaDoArquivo: conteudoArquivo.split("\n") ){
-
-            cliente.setLogin( linhaDoArquivo.split(";")[1].split(":")[1] );
-            cliente.setSenha( linhaDoArquivo.split(";")[2].split(":")[1] );
-            cliente.setNome( linhaDoArquivo.split(";")[3].split(":")[1] );
-            cliente.setTelefone( linhaDoArquivo.split(";")[4].split(":")[1] );
-            cliente.setIdade( Integer.parseInt(linhaDoArquivo.split(";")[5].split(":")[1] ));
-            cliente.setGenero( linhaDoArquivo.split(";")[6].split(":")[1] );
-            cliente.
-
-            hMapCliente.put( cliente.getLogin(), cliente);
-
-        }
-    
-    }    
-    
-    private String transformarHashMapEmString(){
-        
-    }
-    
-    public String verificacao(String idLivro) throws ServicoException{
-        
-        this.transformaStringEmHashMap(this.lerArquivo(""));
-        
-        Livro livroTemporario = this.hMapLivro.get(idLivro);
-        
-        if(this.clienteDAO.autenticar(login, senha).equals("OK")){
-            Usuario cliente = this.clienteDAO.buscar(login);
-            return cliente;
-        }
-           if(livroTemporario == null)   return "Livro não encontrado";     
-        
-        
-        return "OK";
-    }   
+//    private void transformaStringEmHashMap(String conteudoArquivo){
+//    
+//        this.hMapLivro.clear();
+//        
+//        Cliente cliente = new Cliente();
+//        
+//        for(String linhaDoArquivo: conteudoArquivo.split("\n") ){
+//
+//            cliente.setLogin( linhaDoArquivo.split(";")[1].split(":")[1] );
+//            cliente.setSenha( linhaDoArquivo.split(";")[2].split(":")[1] );
+//            cliente.setNome( linhaDoArquivo.split(";")[3].split(":")[1] );
+//            cliente.setTelefone( linhaDoArquivo.split(";")[4].split(":")[1] );
+//            cliente.setIdade( Integer.parseInt(linhaDoArquivo.split(";")[5].split(":")[1] ));
+//            cliente.setGenero( linhaDoArquivo.split(";")[6].split(":")[1] );
+//            cliente.
+//
+//            hMapCliente.put( cliente.getLogin(), cliente);
+//
+//        }
+//    
+//    }    
+//    
+//    private String transformarHashMapEmString(){
+//        
+//    }
+//    
+//    public String verificacao(String idLivro) throws ServicoException{
+//        
+//        this.transformaStringEmHashMap(this.lerArquivo(""));
+//        
+//        Livro livroTemporario = this.hMapLivro.get(idLivro);
+//        
+//        if(this.clienteDAO.autenticar(login, senha).equals("OK")){
+//            Usuario cliente = this.clienteDAO.buscar(login);
+//            return cliente;
+//        }
+//           if(livroTemporario == null)   return "Livro não encontrado";     
+//        
+//        
+//        return "OK";
+//    }   
     	
-    protected String lerArquivo(String nomeDoArquivo){
+    private void lerArquivo(String nomeDoArquivo){
+        byte[] bytes;
+        FileInputStream read;
+        ByteArrayInputStream bis;
         
-        String linha = new String();
+        ObjectInput in;
+        
+//        String leitura = new String();
                 
-        try{
-            BufferedReader buffReader = new BufferedReader(new FileReader( nomeDoArquivo ));
+        try{            
+            //BufferedReader buffReader = new BufferedReader(new FileReader( nomeDoArquivo ));
+            read = new FileInputStream(nomeDoArquivo);
+            bytes = new byte[read.available()];
+            read.read(bytes);
             
-            while( buffReader.ready() ){              // -> LENDO CADA LINHA  
-                linha += buffReader.readLine() + "\n";
-            }
+            bis = new ByteArrayInputStream(bytes);
+            in = new ObjectInputStream(bis);
+            this.hMapLivro = (HashMap<String, Livro>) in.readObject();
             
-            buffReader.close();
+            //            while( buffReader.ready() ){              // -> LENDO CADA LINHA  
+//                leitura += buffReader.readLine() + "\n";
+//            }
+//            
+//            buffReader.close();
         }
         catch(FileNotFoundException e){  // -> Arquivo não existe
             System.err.println( e.getMessage() );
         }
-        catch( NullPointerException e){
+        catch( NullPointerException | IOException e){
             System.err.println( e.getMessage() );
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(LivroDAOArquivo.class.getName()).log(Level.SEVERE, null, ex);
         }
-        catch(IOException e){  // -> OCORREU OUTRO ERRO, SENDO ESSE DESCONHECIDO
-            System.err.println( e.getMessage() );
-        }
+        // -> OCORREU OUTRO ERRO, SENDO ESSE DESCONHECIDO
         
-        return linha;
+//        return leitura;
         
     }
     
-    private boolean salvarArquivo(String nomeArquivo, String conteudoArquivo){
-		
-        if( conteudoArquivo.equals("") ) {
-                return false;
-        }
+    private boolean salvarArquivo(String nomeArquivo){//, String conteudoArquivo){
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        ObjectOutput out;
+        FileOutputStream writer;
+        byte[] bytes;
+	
+//        if( conteudoArquivo.equals("") ) {
+//                return false;
+//        }
 	
 	try{
-
-          nomeArquivo += ".dat";
-		  FileWriter writer = new FileWriter(nomeArquivo);     
-		  writer.write(conteudoArquivo);
-		  writer.close(); 		
-		  return true;
+            //nomeArquivo += ".dat";
+            
+            out = new ObjectOutputStream(bos);
+            out.writeObject(this.hMapLivro);
+            out.flush();
+            
+            bytes = bos.toByteArray();
+                        
+            writer = new FileOutputStream(nomeArquivo);
+            //FileWriter writer = new FileWriter(nomeArquivo);
+            writer.write(bytes);
+            //writer.write(conteudoArquivo);
+            bos.close();
+            writer.close(); 		
+            return true;
 
         }
         catch(FileNotFoundException e){   // -> ARQUIVO NãO EXISTE
-	        System.err.println( e.getMessage() );
-	        return false;        
+	    System.err.println( e.getMessage() );
+	    return false;        
         }
         catch(IOException e){  // -> OCORREU OUTRO ERRO, SENDO ESSE DESCONHECIDO
             System.err.println( e.getMessage() );
             return false;
         }
     
-    }
-
-    
-    
+    }   
     
 }
