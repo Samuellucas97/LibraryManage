@@ -184,7 +184,7 @@ public class UsuarioTerminal extends Terminal {
             System.err.println(ex.getMessage());
         }
         
-        
+        return null;
     }
     
     public Usuario getUsuario(){
