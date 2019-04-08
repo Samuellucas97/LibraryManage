@@ -69,10 +69,10 @@ public class ClienteTerminal extends Terminal{
     public Object tratamentoEscolha(String escolha) {
         Scanner entradaUsuario = new Scanner(System.in);
         if(escolha.equals("1")){
-            List<Livro> livrosAvaliados = livroServico.listaLivrosAvaliados();
+            List<Livro> livrosAvaliados = livroServico.listaLivrosAlugados();
             System.out.print("Você escolheu a opção (1) - Avaliar livro \n");
             System.out.print("Gerando lista de livros que foram alugados por você... \n");
-            for(livrosAvaliados.size())
+            for()
             
             
 

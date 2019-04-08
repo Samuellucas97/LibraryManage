@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class LivroServico implements ILivroServico{
     
-    private final LivroDAO livroDAO = new LivroDAOArquivo();
+    private final LivroDAO livroDAO = LivroDAOArquivo.getInstancia();
     
     /**
      * Construtor padrão
@@ -47,17 +47,7 @@ public class LivroServico implements ILivroServico{
         this.livroDAO.registrarLivro(livro);
     }
     
-    /**
-     * Altera o estado do livro
-     * @param livro Livro a ser emprestado ou devolvido
-     * @throws ServicoException 
-     */
-    @Override
-    public void alterarLivro(Livro livro) throws ServicoException{
-        this.livroDAO.alterarLivro(livro);
-        //// Dúvida: está certo esse método?
-    }
-    
+      
     /**
      * Muda-se o status do livro para bloqueado temporariamente
      * @param livro Livro a ser bloqueado temporariamente
@@ -65,7 +55,10 @@ public class LivroServico implements ILivroServico{
      */
     @Override
     public void bloqueioTemporarioDeLivro(Livro livro) throws ServicoException{
-        this.livroDAO.bloqueioTemporarioDeLivro(livro);
+        
+        Livro livroAlterado = new Livro(livro);
+        livroAlterado.setEstadoLivro(Livro.EstadoLivro.BLOQUEADO_TEMPORARIAMENTE); 
+        this.livroDAO.alterarLivro(livro.getId(), livroAlterado);
     }
     
     /**
@@ -75,7 +68,11 @@ public class LivroServico implements ILivroServico{
      */
     @Override
     public void bloqueioPermanenteDeLivro(Livro livro) throws ServicoException{
-        this.livroDAO.bloqueioPermanenteDeLivro(livro);
+        
+        Livro livroAlterado = new Livro(livro);
+        livroAlterado.setEstadoLivro(Livro.EstadoLivro.BLOQUEADO_PERMANENTEMENTE); 
+        this.livroDAO.alterarLivro(livro, livroAlterado);
+        
     }
     
     /**
@@ -91,27 +88,62 @@ public class LivroServico implements ILivroServico{
     /**
      * Efetua o devolução do livro
      * @param livro Livro a ser devolvido
+     * @throws dados.ServicoException
      */
     @Override
-    public void efetuarDevolucaoDeLivro(Livro livro) {
-        this.livroDAO.efetuarDevolucaoDeLivro(livro);
+    public void efetuarDevolucaoDeLivro(Livro livro) throws ServicoException  {
+    
+        Livro livroAlterado = livro;
+        
+        this.livroDAO.adicionarQuantidadeLivro(livro.getId(), 1);
+        livroAlterado.setEstadoLivro(Livro.EstadoLivro.DISPONIVEL);
+        this.livroDAO.alterarLivro( livro, livroAlterado);
+        
     }
 
     /**
      * Empresta o livro
      * @param livro Livro a ser emprestado
+     * @throws dados.ServicoException
      */
     @Override
-    public void emprestimoDeLivro(Livro livro) {
-        this.livroDAO.emprestimoDeLivro(livro);
+    public void emprestimoDeLivro(Livro livro) throws ServicoException {
+        
+        Livro livroAlterado = livro;
+        
+        this.livroDAO.removerQuantidadeLivro(livro.getId(), 1);
+        livroAlterado.setEstadoLivro(Livro.EstadoLivro.ALUGADO);
+        this.livroDAO.alterarLivro( livro, livroAlterado);
+    
     }
 
-    public List<Livro> consultaLivros(String param, String key) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Livro> consultaLivros(String param, String key) throws ServicoException {
+        return this.livroDAO.consultaLivros(param, key);
     }
 
-    public List<Livro> consultaLivros(List<String> params, List<String> keys) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Livro> consultaLivros(List<String> params, List<String> keys) throws ServicoException {
+        return this.livroDAO.consultaLivros(params, keys);
+    }
+
+    @Override
+    public void renomearAssunto(String idLivro, ArrayList<String> novoAssunto) throws ServicoException {
+        Livro livroAlterado = this.consultaLivro(idLivro);
+        livroAlterado.setAssunto(novoAssunto);
+        this.livroDAO.alterarLivro(idLivro, livroAlterado);
+    
+    
+    @Override
+    public void renomearAssunto(String idLivro, ArrayList<String> novoAssunto) throws ServicoException {
+        Livro livroAlterado = this.consultaLivro(idLivro);
+        livroAlterado.setAssunto(novoAssunto);
+        this.livroDAO.alterarLivro(idLivro, livroAlterado);
+    }
+    
+    @Override
+    public void renomearTitulo(String idLivro, String novoTitulo) throws ServicoException {
+        Livro livroAlterado = this.consultaLivro(idLivro);
+        livroAlterado.setTitulo(novoTitulo);
+        this.livroDAO.alterarLivro(idLivro, livroAlterado);
     }
 
     public List<Livro> listaLivrosAvaliados() {

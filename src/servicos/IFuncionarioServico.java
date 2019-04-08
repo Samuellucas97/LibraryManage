@@ -75,5 +75,5 @@ public interface IFuncionarioServico extends IUsuarioServico{
      */
     public void registrarLivro(Livro livro) throws ServicoException;
     
-    public void alterarLivro(Livro livro) throws ServicoException;    
+    
 }

@@ -23,4 +23,5 @@ public interface IUsuarioServico {
      */
     public Usuario autenticacao( String login, String senha) throws ServicoException;
     
+    
 }
