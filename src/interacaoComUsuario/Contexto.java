@@ -33,3 +33,5 @@ public class Contexto {
         return estadoAtual;
     }
 }
+
+// avaliacao seria a media ponderada de um float
