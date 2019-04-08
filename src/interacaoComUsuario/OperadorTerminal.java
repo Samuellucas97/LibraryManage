@@ -15,8 +15,8 @@ import servicos.IUsuarioServico;
 //Classe OperadorTerminal
 public class OperadorTerminal extends Terminal{
     
-    IUsuarioServico operadorServico;
-    Usuario operador;
+    private final IUsuarioServico operadorServico;
+    private Usuario operador;
 
     public OperadorTerminal() {
         this.operadorServico = (IUsuarioServico) new OperadorServico();
@@ -88,13 +88,4 @@ public class OperadorTerminal extends Terminal{
     public Object tratamentoEscolha(String escolha) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-}
-
-    @Override
-    public Object tratamentoEscolha(String escolha) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-   
-    
 }

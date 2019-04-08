@@ -16,12 +16,12 @@ import servicos.IUsuarioServico;
 //Classe AdministradorTerminal
 public class AdministradorTerminal extends Terminal{
     //--ATRIBUTOS--//
-    IUsuarioServico administradorServico;
-    Usuario administrador;
+    private final IUsuarioServico administradorServico;
+    private Usuario administrador;
 
     public AdministradorTerminal() {
         this.administradorServico = (IUsuarioServico) new AdministradorServico();
-    }
+    }  
     
     //--METODOS--//
     /*
@@ -91,8 +91,15 @@ public class AdministradorTerminal extends Terminal{
     */
     
     @Override
-    protected Usuario autenticacao(String login, String senha) throws ServicoException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    protected Usuario autenticacao(String login, String senha){
+        try{
+            this.administrador = this.administradorServico.autenticacao(login, senha);
+           
+        }
+        catch (ServicoException ex) {
+            System.err.println(ex.getMessage());
+        }
+        return this.administrador;
     }
 
     @Override

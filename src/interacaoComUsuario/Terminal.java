@@ -1,7 +1,7 @@
 /**
- *
  * @author Thiago da Costa Monteiro
  * @author José Wellinton
+ * 
  */
 package interacaoComUsuario;
 

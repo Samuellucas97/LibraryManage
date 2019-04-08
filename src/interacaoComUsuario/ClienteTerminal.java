@@ -6,19 +6,16 @@ package interacaoComUsuario;
 
 import dados.ServicoException;
 import java.util.Scanner;
-import servicos.Cliente;
 import servicos.ClienteServico;
 import servicos.Usuario;
-import servicos.UsuarioServico;
 import servicos.IUsuarioServico;
-import servicos.IClienteServico;
 
 
 
 public class ClienteTerminal extends Terminal{
     
-    IUsuarioServico clienteServico;
-    Usuario cliente;
+    private final IUsuarioServico clienteServico;
+    private Usuario cliente;
 
     public ClienteTerminal() {
         this.clienteServico = (IUsuarioServico) new ClienteServico();
@@ -62,7 +59,6 @@ public class ClienteTerminal extends Terminal{
             }
         }
     }
-}
 
     @Override
     public Object tratamentoEscolha(String escolha) {

@@ -6,20 +6,15 @@ package interacaoComUsuario;
 
 import dados.ServicoException;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import jdk.internal.util.xml.impl.Pair;
-import servicos.Administrador;
-import servicos.Cliente;
-import servicos.Operador;
-import servicos.Usuario;
 import servicos.UsuarioServico;
 import servicos.IUsuarioServico;
+import servicos.Usuario;
 
 
 public class UsuarioTerminal extends Terminal {
     
     private final IUsuarioServico usuarioServico;
+    private Usuario usuario;
     private int LoginErrado = 0; 
     private String login = "";
     private String senha = "";
@@ -51,14 +46,26 @@ public class UsuarioTerminal extends Terminal {
             }
         }
     }
+
+    @Override
+    protected Usuario autenticacao(String login, String senha){
+        try{
+            this.usuario = this.usuarioServico.autenticacao(login, senha);
+           
+        }
+        catch (ServicoException ex) {
+            System.err.println(ex.getMessage());
+        }
+        return this.usuario;
+    }
+
+    @Override
+    public Object tratamentoEscolha(String escolha) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
     
     
-   
-    @Override
-    protected Usuario autenticacao(String login, String senha) throws ServicoException {
-        return this.usuarioServico.autenticacao(login, senha);
-    }
 
    @Override
     public Terminal login(String login, String senha) throws ServicoException {
