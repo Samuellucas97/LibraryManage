@@ -88,29 +88,35 @@ public class LivroDAOArquivo implements LivroDAO{
             
             switch(param){
                 case "Assunto":
-                    if(value.getAssunto().contains(key)) livros.add(value);
+                    for(String assunto: value.getAssunto()){
+                        if(assunto.toLowerCase().contains(key.toLowerCase())){
+                            livros.add(value);
+                            break;
+                        }
+                    }                    
                     break;
                 case "Autor":
-                    if(value.getAutor().equals(key)) livros.add(value);
+                    if(value.getAutor().toLowerCase().contains(key.toLowerCase())) livros.add(value);
                     break;
                 case "CidadeDePublicacao":
-                    if(value.getCidadeDePublicacao().equals(key)) livros.add(value);
+                    if(value.getCidadeDePublicacao().toLowerCase().contains(key.toLowerCase())) livros.add(value);
                     break;
                 case "DataDeLancamento":
-                    if(value.getDataDeLancamento().equals(key)) livros.add(value);
+                    if(value.getDataDeLancamento().toLowerCase().contains(key.toLowerCase())) livros.add(value);
                     break;
                 case "Edicao":
-                    if(value.getEdicao().equals(key)) livros.add(value);
+                    if(value.getEdicao().toLowerCase().contains(key.toLowerCase())) livros.add(value);
                     break;
                 case "Editora":
-                    if(value.getEditora().equals(key)) livros.add(value);
+                    if(value.getEditora().toLowerCase().contains(key.toLowerCase())) livros.add(value);
                     break;
                 case "EstadoLivro":
-                    if(value.getEstadoLivro().toString().equals(key)) livros.add(value);
+                    if(value.getEstadoLivro().toString().toLowerCase().contains(key.toLowerCase())) livros.add(value);
                     break;
                 case "Titulo":
-                    if(value.getTitulo().equals(key)) livros.add(value);
+                    if(value.getTitulo().toLowerCase().contains(key.toLowerCase())) livros.add(value);
                     break;
+                    //case "Avaliacao": fazer
                 default:
                     if(value.getId().equals(key)) livros.add(value);
             }
@@ -169,7 +175,7 @@ public class LivroDAOArquivo implements LivroDAO{
     }
     
     @Override
-    public void alterarLivro(Livro livroAlterado) throws ServicoException{
+    public void alterarLivro(Livro livro, Livro livroAlterado) throws ServicoException{
         
     }
 

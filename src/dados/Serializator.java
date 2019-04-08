@@ -22,7 +22,7 @@ public class Serializator {
         }
     }
 
-    public static Object unserialize(String key) throws ServicoException, ServicoException {
+    public static Object unserialize(String key) throws ServicoException {
         try {
             String filename = key.concat(".lm");
 

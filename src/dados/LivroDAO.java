@@ -23,7 +23,7 @@ public interface LivroDAO {
     public void removerQuantidadeLivro(String idLivro, int quantidade) throws ServicoException;
     
     public void registrarLivro(Livro livro) throws ServicoException;
-    public void alterarLivro(Livro livroAlterado) throws ServicoException;
+    public void alterarLivro(Livro livro,  Livro livroAlterado) throws ServicoException;
     public void excluirLivro(Livro livro) throws ServicoException;
     
     //public void alterarLivro() throws ServicoException;
