@@ -16,7 +16,7 @@ import servicos.Usuario;
 public interface UsuarioDAO {
 
     public Usuario autenticacao(String login, String senha) throws ServicoException;
-    public Usuario consultar( String login ) throws NullPointerException;
+    public Usuario consultar( String login ) throws ServicoException;
     
     public List<Usuario> consultaUsuarios(List<String> params, List<String> keys) throws ServicoException;
     public List<Usuario> consultaUsuarios(String param, String key) throws ServicoException;
