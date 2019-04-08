@@ -94,7 +94,9 @@ public class Livro implements java.io.Serializable{
      */
     public enum EstadoLivro{
         DISPONIVEL,
-        ALUGADO;
+        ALUGADO,
+        BLOQUEADO_TEMPORARIAMENTE,
+        BLOQUEADO_PERMANENTEMENTE;
     }
     
     private String id;
@@ -104,11 +106,27 @@ public class Livro implements java.io.Serializable{
     private String editora;
     private String titulo;
     private String autor;
-    private String cidadeDePublicacao;
     private ArrayList<String> assunto;
     private Data dataDeLancamento;
     private int quantidadeDeTotalDeExemplares;
     private int quantidadeDeExemplaresEmprestados;
+    
+    public Livro( Livro livro) throws ServicoException{
+        this.id = livro.getId();
+        this.estadoLivro = livro.getEstadoLivro();
+        this.edicao = livro.getEdicao();
+        this.volume = livro.getVolume();
+        this.editora = livro.getEditora();
+        this.titulo = livro.getTitulo();
+        this.autor = livro.getAutor();
+        this.dataDeLancamento =  new Data( livro.getDataDeLancamento() );
+        this.assunto = livro.getAssunto();
+        this.quantidadeDeTotalDeExemplares = livro.getQuantidadeDeTotalDeExemplares();
+        this.quantidadeDeExemplaresEmprestados = livro.getQuantidadeDeExemplaresEmprestados();
+    
+    
+    }
+    
     
     public Livro(  String  id, 
             EstadoLivro estadoLivro,
@@ -117,7 +135,6 @@ public class Livro implements java.io.Serializable{
             String  editora,
             String  titulo, 
             String  autor, 
-            String cidadeDePublicacao,
             ArrayList<String> assunto,
             String  dataDeLancamento, 
             int quantidadeTotalDeExemplares,
@@ -130,7 +147,6 @@ public class Livro implements java.io.Serializable{
         this.editora = editora;
         this.titulo = titulo;
         this.autor = autor;
-        this.cidadeDePublicacao = cidadeDePublicacao;
         this.dataDeLancamento =  new Data(dataDeLancamento);
         this.assunto = assunto;
         this.quantidadeDeTotalDeExemplares = quantidadeTotalDeExemplares;
@@ -169,9 +185,6 @@ public class Livro implements java.io.Serializable{
         return this.autor;
     }
 
-    public String getCidadeDePublicacao() {
-        return cidadeDePublicacao;
-    }
 
     public String getDataDeLancamento() {
         return this.dataDeLancamento.toString();
@@ -191,5 +204,41 @@ public class Livro implements java.io.Serializable{
     
     public void setEstadoLivro(EstadoLivro estado){
         this.estadoLivro = estado;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setEdicao(String edicao) {
+        this.edicao = edicao;
+    }
+
+    public void setVolume(int volume) {
+        this.volume = volume;
+    }
+
+    public void setEditora(String editora) {
+        this.editora = editora;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public void setAutor(String autor) {
+        this.autor = autor;
+    }
+
+    public void setAssunto(ArrayList<String> assunto) {
+        this.assunto = assunto;
+    }
+
+    public void setDataDeLancamento(Data dataDeLancamento) {
+        this.dataDeLancamento = dataDeLancamento;
+    }
+
+    public void setQuantidadeDeExemplaresEmprestados(int quantidadeDeExemplaresEmprestados) {
+        this.quantidadeDeExemplaresEmprestados = quantidadeDeExemplaresEmprestados;
     }
 }

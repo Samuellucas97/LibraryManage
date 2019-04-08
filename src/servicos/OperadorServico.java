@@ -5,7 +5,7 @@
  */
 package servicos;
 
-import dados.OperadorDAO;
+import dados.OperadorDAOArquivo;
 import dados.ServicoException;
 import dados.UsuarioDAOFactory;
 
@@ -16,7 +16,7 @@ import dados.UsuarioDAOFactory;
  */
 public class OperadorServico extends FuncionarioServico implements IOperadorServico{
   
-    private final OperadorDAO operadorDAO = (OperadorDAO) UsuarioDAOFactory.getUsuarioDAO("OperadorDAOArquivo");
+    private final OperadorDAOArquivo operadorDAOArquivo = (OperadorDAOArquivo) UsuarioDAOFactory.getUsuarioDAO("OperadorDAOArquivo");
     private final LivroServico livroServico = new LivroServico();
 
     /**

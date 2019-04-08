@@ -20,14 +20,13 @@ public class Cliente extends Usuario{
     private int numeroEmprestimos = 0;
     private int numeroDevolucoes = 0;
     private ArrayList<Pair<String,String> > listaId_e_DataDeEmprestimoLivros = new ArrayList< Pair<String, String> >();
-    private ArrayList<Boolean> ranking;
+    private ArrayList<Boolean> ranking = new ArrayList<Boolean>();    
     private HashMap<String, ArrayList<Boolean> > hMapRankingLivros = new HashMap<String, ArrayList<Boolean> >(); 
-    
+    private ArrayList<Livro> livrosAlugados = new ArrayList<Livro>();
+            
     public Cliente( String login, String senha){
         
         super(login, senha);
-        
-        this.ranking = new ArrayList<Boolean>();
         
         ranking.add(false); 
         ranking.add(false);
@@ -73,6 +72,15 @@ public class Cliente extends Usuario{
 
     public void setNumeroDevolucoes(int numeroDevolucoes) {
         this.numeroDevolucoes = numeroDevolucoes;
+    }
+    
+    
+    public ArrayList<Livro> getLivrosAlugados() {
+        return livrosAlugados;
+    }
+
+    public void setLivrosAlugados(ArrayList<Livro> livrosAlugados) {
+        this.livrosAlugados = livrosAlugados;
     }
     
 }

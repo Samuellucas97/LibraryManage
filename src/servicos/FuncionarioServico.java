@@ -113,10 +113,6 @@ public class FuncionarioServico extends UsuarioServico implements IFuncionarioSe
         this.livroServico.registrarLivro(livro);
     }
     
-    @Override
-    public void alterarLivro(Livro livro) throws ServicoException {
-        this.livroServico.alterarLivro(livro);
-    }
     
     
 }

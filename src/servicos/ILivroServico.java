@@ -27,14 +27,7 @@ public interface ILivroServico {
      * @throws ServicoException 
      */
     public void registrarLivro(Livro livro) throws ServicoException;
-    
-    /**
-     * Altera o estado do livro
-     * @param livro Livro a ser emprestado ou devolvido
-     * @throws ServicoException 
-     */
-    public void alterarLivro(Livro livro) throws ServicoException;
-    
+        
     /**
      * Muda-se o status do livro para bloqueado temporariamente
      * @param livro Livro a ser bloqueado temporariamente
@@ -66,4 +59,6 @@ public interface ILivroServico {
      * @param livro Livro a ser emprestado
      */
     void emprestimoDeLivro(Livro livro);   
+    
+    void renomearTitulo(String idLivro, String novoTitulo) throws ServicoException;
 }

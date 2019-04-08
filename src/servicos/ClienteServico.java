@@ -97,7 +97,6 @@ public class ClienteServico extends UsuarioServico implements IClienteServico {
 
     @Override
     public void avaliarLivro(int notaLivro) throws ServicoException {
-        /// TO DO
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 }
