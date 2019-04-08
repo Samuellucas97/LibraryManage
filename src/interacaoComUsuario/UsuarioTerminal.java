@@ -20,11 +20,15 @@ import servicos.Usuario;
 public class UsuarioTerminal extends Terminal {
     
     private final IUsuarioServico usuarioServico;
+    private LivroServico livroServico; 
+
     private Usuario usuario;
     private String login = "";
     private String senha = "";
+    
 
     public UsuarioTerminal() {
+        this.livroServico = new LivroServico();
         this.usuarioServico = new UsuarioServico();
     }
     
@@ -111,60 +115,53 @@ public class UsuarioTerminal extends Terminal {
 
             while(true){
                 op = entradaUsuario.next();
-                if(op.equals("1")){
-                    System.out.print("Digite o título do livro: ");
-                    key = entradaUsuario.next();
-
-                    return efetuarBusca("Titulo" , key);
-                }
-                else if(op.equals("2")){
-                    System.out.print("Digite o nome do autor do livro: ");
-                    key = entradaUsuario.next();
-
-                    return efetuarBusca("Autor" , key);
-                }
-                else if(op.equals("3")){
-                    System.out.print("Digite o assunto do livro: ");
-                    key = entradaUsuario.next();
-
-                    return efetuarBusca("Assunto" , key);
-                }
-                else if(op.equals("4")){
-                    System.out.print("Digite a data de lançamento do livro: ");
-                    key = entradaUsuario.next();
-
-                    return efetuarBusca("DataDeLancamento" , key);
-                }
-                else if(op.equals("5")){
-                    System.out.print("Digite a edição do livro: ");
-                    key = entradaUsuario.next();
-
-                    return efetuarBusca("Edicao" , key);
-                }
-                else if(op.equals("6")){
-                    System.out.print("Digite o nome da editora: ");
-                    key = entradaUsuario.next();
-
-                    return efetuarBusca("Editora" , key);
-                }
-                else if(op.equals("7")){
-                    System.out.print("Digite o ID do livro: ");
-                    key = entradaUsuario.next();
-
-                    return efetuarBusca("ID" , key);
-                }
-                else{
-                    System.out.println("Escolha inválida! \n"); 
-                    System.out.println("As opções de busca são:");
-                    System.out.println("(1) Buscar por Título");
-                    System.out.println("(2) Buscar por Autor");
-                    System.out.println("(3) Buscar por Assunto");
-                    System.out.println("(4) Buscar por Data de Lançamento");
-                    System.out.println("(5) Buscar por Edição");
-                    System.out.println("(6) Buscar por Editora");
-                    System.out.println("(7) Buscar por ID do livro");
-
-                                    
+                switch (op) {
+                    case "1":
+                        System.out.print("Digite o título do livro: ");
+                        key = entradaUsuario.next();
+                        
+                        return efetuarBusca("Titulo" , key);
+                    case "2":
+                        System.out.print("Digite o nome do autor do livro: ");
+                        key = entradaUsuario.next();
+                        
+                        return efetuarBusca("Autor" , key);
+                    case "3":
+                        System.out.print("Digite o assunto do livro: ");
+                        key = entradaUsuario.next();
+                        
+                        return efetuarBusca("Assunto" , key);
+                    case "4":
+                        System.out.print("Digite a data de lançamento do livro: ");
+                        key = entradaUsuario.next();
+                        
+                        return efetuarBusca("DataDeLancamento" , key);
+                    case "5":
+                        System.out.print("Digite a edição do livro: ");
+                        key = entradaUsuario.next();
+                        
+                        return efetuarBusca("Edicao" , key);
+                    case "6":
+                        System.out.print("Digite o nome da editora: ");
+                        key = entradaUsuario.next();
+                        
+                        return efetuarBusca("Editora" , key);
+                    case "7":
+                        System.out.print("Digite o ID do livro: ");
+                        key = entradaUsuario.next();
+                        
+                        return efetuarBusca("ID" , key);
+                    default:
+                        System.out.println("Escolha inválida! \n");
+                        System.out.println("As opções de busca são:");
+                        System.out.println("(1) Buscar por Título");
+                        System.out.println("(2) Buscar por Autor");
+                        System.out.println("(3) Buscar por Assunto");
+                        System.out.println("(4) Buscar por Data de Lançamento");
+                        System.out.println("(5) Buscar por Edição");
+                        System.out.println("(6) Buscar por Editora");
+                        System.out.println("(7) Buscar por ID do livro");
+                        break;
                 }
             }
             
@@ -174,14 +171,13 @@ public class UsuarioTerminal extends Terminal {
     }
    
     private List<Livro> efetuarBusca(String param, String key){
-        LivroServico livroServico = new LivroServico(); 
-        return livroServico.efetuarBusca(param, key);
+        return livroServico.consultaLivros(param, key);
         
     }
     
     private List<Livro> efetuarBusca(List<String> params, List<String> keys){
-        LivroServico livroServico = new LivroServico(); 
-        return livroServico.efetuarBusca(params, keys);
+        return this.livroServico.consultaLivros(params, keys);
+        
     }
     
     public Usuario getUsuario(){
