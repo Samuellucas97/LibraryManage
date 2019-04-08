@@ -176,7 +176,14 @@ public class LivroDAOArquivo implements LivroDAO{
     
     @Override
     public void alterarLivro(Livro livro, Livro livroAlterado) throws ServicoException{
-        
+        if(livro.getId().equals(livroAlterado.getId())){
+            this.hMapLivro.remove(livro.getId());
+            this.hMapLivro.put(livroAlterado.getId(), livroAlterado);
+            this.salvarArquivo("Livros");
+        }
+        else{
+            
+        }
     }
 
     @Override
