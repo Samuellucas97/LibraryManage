@@ -51,7 +51,7 @@ public class LivroDAOArquivo implements LivroDAO{
         List<Livro> livros = new ArrayList<>();
         List<List<Livro> > listLivros = new ArrayList<>();
         
-        if(params.size() != keys.size()) throw new ServicoException("Quantidade de chaves não confere com a quantidade de parametros!");
+        if(params.size() != keys.size()) throw new ServicoException("Quantidade de chaves não confere com a quantidade de parâmetros!");
         
         int i = 0;
         for(String param : params) listLivros.add(this.consultaLivros(param, keys.get(i++)));
@@ -166,12 +166,12 @@ public class LivroDAOArquivo implements LivroDAO{
     
     @Override
     public void registrarLivro(Livro livro) throws ServicoException {
-        Livro livroVerificação = this.hMapLivro.get(livro.getId());
-        
-        if(livroVerificação != null) throw new ServicoException("Livro com esse ID já registrado!");
-        
-        this.hMapLivro.put(livro.getId(), livro);
-        this.salvarArquivo("Livros");//, this.transformarHashMapEmString());
+        if(!this.hMapLivro.containsKey(livro.getId())){
+            this.hMapLivro.put(livro.getId(), livro);
+            this.salvarArquivo("Livros");
+        }              
+        else throw new ServicoException("Livro com esse ID já registrado!");
+
     }
     
     @Override

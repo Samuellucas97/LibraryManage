@@ -145,5 +145,9 @@ public class LivroServico implements ILivroServico{
         livroAlterado.setTitulo(novoTitulo);
         this.livroDAO.alterarLivro(idLivro, livroAlterado);
     }
+
+    public List<Livro> listaLivrosAvaliados() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

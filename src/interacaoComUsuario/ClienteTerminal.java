@@ -1,27 +1,33 @@
 /**
  * @author Thiago da Costa Monteiro
  * 
+ * 
  */
 package interacaoComUsuario;
 
 import dados.ServicoException;
+import java.lang.reflect.Array;
+import java.util.List;
 import java.util.Scanner;
 import servicos.ClienteServico;
 import servicos.Usuario;
 import servicos.IUsuarioServico;
+import servicos.Livro;
+import servicos.LivroServico;
+import java.util.Iterator;
 
 
 
 public class ClienteTerminal extends Terminal{
     
     private final IUsuarioServico clienteServico;
+    private LivroServico livroServico; 
     private Usuario cliente;
 
     public ClienteTerminal() {
+        this.livroServico = new LivroServico();      
         this.clienteServico = (IUsuarioServico) new ClienteServico();
     }
-
-    //public void avaliarLivros(int nota){}
     
     @Override
     protected void autenticacao(String login, String senha){
@@ -63,10 +69,13 @@ public class ClienteTerminal extends Terminal{
     public Object tratamentoEscolha(String escolha) {
         Scanner entradaUsuario = new Scanner(System.in);
         if(escolha.equals("1")){
+            List<Livro> livrosAvaliados = livroServico.listaLivrosAlugados();
             System.out.print("Você escolheu a opção (1) - Avaliar livro \n");
+            System.out.print("Gerando lista de livros que foram alugados por você... \n");
+            for()
+            
             
 
-            
         }
         else if(escolha.equals("2")){
             String op;
@@ -126,7 +135,6 @@ public class ClienteTerminal extends Terminal{
 
                     return efetuarBusca("ID" , key);
                 }
-                }
                 else{
                     System.out.println("Escolha inválida! \n"); 
                     System.out.println("As opções de busca são:");
@@ -137,14 +145,32 @@ public class ClienteTerminal extends Terminal{
                     System.out.println("(5) Buscar por Edição");
                     System.out.println("(6) Buscar por Editora");
                     System.out.println("(7) Buscar por ID do livro");
-
-
-                                    
                 }
             }
             
+             
+
         }
         
-        return null;    }
+        else if(escolha.equals("3")){
+        System.out.println("Você escolheu a opção (3) - Realizar logout");
+        System.out.println("REALIZANDO LOGOUT...");
+
+        return new UsuarioTerminal();
+        
+        }
+        
+        return null;   
+    }
+    private List<Livro> efetuarBusca(String param, String key){
+        return livroServico.consultaLivros(param, key);
+
+    }
+
+    private List<Livro> efetuarBusca(List<String> params, List<String> keys){
+        return this.livroServico.consultaLivros(params, keys);
+
+    }
+        
 
 }
