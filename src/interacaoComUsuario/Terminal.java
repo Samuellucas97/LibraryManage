@@ -10,7 +10,7 @@ import servicos.Usuario;
 
 public abstract class Terminal {
     
-    protected abstract Usuario autenticacao(String login, String senha) throws ServicoException;
+    protected abstract void autenticacao(String login, String senha) throws ServicoException;
     public abstract String apresentacao();
     public abstract Object tratamentoEscolha(String escolha);
     

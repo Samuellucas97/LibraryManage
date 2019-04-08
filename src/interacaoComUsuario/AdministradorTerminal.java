@@ -91,7 +91,7 @@ public class AdministradorTerminal extends Terminal{
     */
     
     @Override
-    protected Usuario autenticacao(String login, String senha){
+    protected void autenticacao(String login, String senha){
         try{
             this.administrador = this.administradorServico.autenticacao(login, senha);
            

@@ -5,13 +5,23 @@
  */
 package interacaoComUsuario;
 
+// Pattern STATE
 public class Contexto {
     private Terminal estadoAtual;
+    // Pattern SINGLETON
+    private static Contexto instance;
 
     //CONSTRUTOR
-    public Contexto() {
+    private Contexto() {
         this.estadoAtual = new UsuarioTerminal();
         
+    }
+    
+    public static Contexto getInstance(){
+        if(instance == null){
+            Contexto.instance = new Contexto();
+        }
+        return Contexto.instance;
     }
     
     // GET/SET ESTADO
