@@ -182,7 +182,14 @@ public class LivroDAOArquivo implements LivroDAO{
             this.salvarArquivo("Livros");
         }
         else{
-            
+            if(this.hMapLivro.containsKey(livroAlterado.getId())){
+                throw new ServicoException("A alteração não foi concluida! \n O ID escolhido já é utilizado");
+            }
+            else{
+                this.hMapLivro.remove(livro.getId());
+                this.hMapLivro.put(livroAlterado.getId(), livroAlterado);
+                this.salvarArquivo("Livros");
+            }
         }
     }
 
