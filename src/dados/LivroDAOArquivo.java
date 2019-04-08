@@ -23,7 +23,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import servicos.Cliente;
 import servicos.Livro;
 
 /**
@@ -31,14 +30,21 @@ import servicos.Livro;
  * @author SamDan
  */
 public class LivroDAOArquivo implements LivroDAO{
-
+    
+    private static LivroDAOArquivo instancia = null;
     private HashMap<String, Livro> hMapLivro;
     
-    public LivroDAOArquivo(){
+    private LivroDAOArquivo(){
         this.hMapLivro = new HashMap<>();
         //String conteudoArquivo = lerArquivo("Livros.lm");
         //this.transformaStringEmHashMap(conteudoArquivo);
         lerArquivo("Livros.lm");
+    }
+    
+    public static LivroDAOArquivo getInstancia(){
+        if(LivroDAOArquivo.instancia == null) LivroDAOArquivo.instancia = new LivroDAOArquivo();
+        
+        return LivroDAOArquivo.instancia;
     }
     
     private void limparRegistro(){
@@ -304,6 +310,7 @@ public class LivroDAOArquivo implements LivroDAO{
         }
         catch(FileNotFoundException e){   // -> ARQUIVO NãO EXISTE
 	    System.err.println( e.getMessage() );
+            //System.out.println("Arquivo não criado");
 	    return false;        
         }
         catch(IOException e){  // -> OCORREU OUTRO ERRO, SENDO ESSE DESCONHECIDO

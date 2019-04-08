@@ -97,20 +97,20 @@ public class Livro {
         ALUGADO;
     }
     
-    private final String id;
-    private final EstadoLivro estadoLivro;
-    private final String edicao;
-    private final int volume;
-    private final String editora;
-    private final String titulo;
-    private final String autor;
-    private final String cidadeDePublicacao;
-    private final ArrayList<String> assunto;
-    private final Data dataDeLancamento;
-    private final int quantidadeDeTotalDeExemplares;
-    private final int quantidadeDeExemplaresEmprestados;
+    private String id;
+    private EstadoLivro estadoLivro;
+    private String edicao;
+    private int volume;
+    private String editora;
+    private String titulo;
+    private String autor;
+    private String cidadeDePublicacao;
+    private ArrayList<String> assunto;
+    private Data dataDeLancamento;
+    private int quantidadeDeTotalDeExemplares;
+    private int quantidadeDeExemplaresEmprestados;
     
-    Livro(  String  id, 
+    public Livro(  String  id, 
             EstadoLivro estadoLivro,
             String  edicao,
             int     volume,
@@ -183,5 +183,9 @@ public class Livro {
     
     public int getQuantidadeDeTotalDeExemplares() {
         return this.quantidadeDeTotalDeExemplares;
+    }
+    
+    public void setQuantidadeDeTotalDeExemplares(int quantidadeDeTotalDeExemplares) {
+        this.quantidadeDeTotalDeExemplares = quantidadeDeTotalDeExemplares;
     }
 }

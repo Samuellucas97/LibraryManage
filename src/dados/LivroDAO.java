@@ -5,6 +5,7 @@
  */
 package dados;
 
+import java.util.List;
 import servicos.Livro;
 
 /**
@@ -15,8 +16,13 @@ public interface LivroDAO {
     
     public Livro consultaLivro(String idLivro) throws ServicoException;
     
+    public List<Livro> consultaLivros(List<String> params, List<String> keys) throws ServicoException;
+    public List<Livro> consultaLivros(String param, String key) throws ServicoException;
+    
+    public void adicionarLivro(String idLivro, int quantidade) throws ServicoException;
+    
     public void registrarLivro(Livro livro) throws ServicoException;
-    public void alterarLivro(Livro livroAlterado);
+    public void alterarLivro(Livro livroAlterado) throws ServicoException;
     public void excluirLivro(Livro livro) throws ServicoException;
     
     //public void alterarLivro() throws ServicoException;
