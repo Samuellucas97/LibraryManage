@@ -19,17 +19,27 @@ import java.util.List;
  */
 public class LivroServico implements ILivroServico{
     
-    private final LivroDAO livroDAO;
+    
+    private static LivroServico instance;
+    private static LivroDAO livroDAO;
     
     /**
      * Construtor padrão
      * @throws dados.ServicoException
      */
-    public LivroServico() throws ServicoException{
-        this.livroDAO = LivroDAOArquivo.getInstancia();
+    private LivroServico() throws ServicoException{
+        
         /// VAZIO
     }
-        
+    
+    public static LivroServico getInstance() throws ServicoException{
+        if(LivroServico.instance == null){
+            LivroServico.instance = new LivroServico();
+            livroDAO = LivroDAOArquivo.getInstancia();
+        }
+        return LivroServico.instance; 
+    }
+    
     @Override
     public Livro consultaLivro(String idLivro) throws ServicoException{
         return livroDAO.consultaLivro(idLivro);

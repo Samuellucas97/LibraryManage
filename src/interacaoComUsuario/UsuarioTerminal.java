@@ -15,11 +15,15 @@ import servicos.Livro;
 import servicos.LivroServico;
 import servicos.Operador;
 import servicos.Usuario;
+import servicos.UsuarioServicoFactory;
 
 
 public class UsuarioTerminal extends Terminal {
     
-    private final IUsuarioServico usuarioServico;
+    private UsuarioServico clienteServico;
+    private UsuarioServico operadorServico;
+    private UsuarioServico administradorServico;
+
     private LivroServico livroServico; 
 
     private Usuario usuario;
@@ -28,8 +32,17 @@ public class UsuarioTerminal extends Terminal {
     
 
     public UsuarioTerminal() {
-        this.livroServico = new LivroServico();
-        this.usuarioServico = new UsuarioServico();
+        try{
+            this.clienteServico = UsuarioServicoFactory.getUsuarioDAO("ClienteServico");
+            this.operadorServico = UsuarioServicoFactory.getUsuarioDAO("OperadorServico");
+            this.administradorServico = UsuarioServicoFactory.getUsuarioDAO("AdministradorServico");
+            this.livroServico = LivroServico.getInstance();
+
+        }
+        catch (ServicoException ex) {
+            System.err.println(ex.getMessage());
+        }
+        
     }
     
     @Override
