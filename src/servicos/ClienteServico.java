@@ -16,7 +16,7 @@ import java.util.List;
  * 
  * @author SamDan
  */
-public class ClienteServico extends UsuarioServico implements IClienteServico {
+public class ClienteServico implements IUsuarioServico{
  
     private ClienteDAOArquivo clienteDAOArquivo;
     private ILivroServico livroServico;
@@ -58,7 +58,6 @@ public class ClienteServico extends UsuarioServico implements IClienteServico {
      * @param genero    Gênero do cliente    
      * @throws ServicoException 
      */
-    @Override
     public void salvar( String login, 
                         String senha, 
                         String nome,
@@ -85,7 +84,6 @@ public class ClienteServico extends UsuarioServico implements IClienteServico {
      * @return Cliente buscado
      * @throws ServicoException 
      */
-    @Override
     public Cliente consultarCliente( String loginCliente ) throws ServicoException{
         return (Cliente) clienteDAOArquivo.consultar(loginCliente);
     }
@@ -94,7 +92,6 @@ public class ClienteServico extends UsuarioServico implements IClienteServico {
      * Bloqueia cliente permanentemente
      * @param cliente Cliente a ser bloqueado permanentemente
      */
-    @Override
     public void bloqueioPermanenteDeCliente(Cliente cliente) {
         this.alterar(cliente, "EstadoCliente", "BLOQUEADO_PERMANENTEMENTE");
     }
@@ -103,12 +100,10 @@ public class ClienteServico extends UsuarioServico implements IClienteServico {
      * Bloqueia cliente temporariamente
      * @param cliente Cliente a ser bloqueado temporariamente
      */
-    @Override
     public void bloqueioTemporarioDeCliente(Cliente cliente) {
         this.alterar(cliente, "EstadoCliente", "BLOQUEADO_TEMPORARIAMENTE");
     }
 
-    @Override
     public void avaliarLivro( notaLivro) throws ServicoException {
         
     }
@@ -121,12 +116,10 @@ public class ClienteServico extends UsuarioServico implements IClienteServico {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
     public void avaliarLivro(int notaLivro) throws ServicoException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
-    @Override
     public Cliente copia(Cliente cliente) throws ServicoException{
         ArrayList<String> listAssunto;
         String[] assuntos;
@@ -152,7 +145,6 @@ public class ClienteServico extends UsuarioServico implements IClienteServico {
         return clienteCopiado;
     }
 
-@Override
 public void alterar(Cliente cliente, List<String> params, List<String> keys) throws ServicoException{     
     //String idLivro = livro.getId();
     Cliente clienteAlterado = this.copia(livro);
@@ -168,7 +160,6 @@ public void alterar(Cliente cliente, List<String> params, List<String> keys) thr
     this.clienteDAO.alterarLivro(cliente.getId(), clienteAlterado);
 }
 
-@Override
 public void alterar(Livro livro, String param, String key) throws ServicoException{
     Livro livroAlterado = this.copia(livro);
     ArrayList<String> listAssunto;
@@ -340,5 +331,30 @@ private Livro alterarSemSalvar(Livro livro, String param, String key) throws Ser
     }
     return livroAlterado;
 }
+
+    @Override
+    public Usuario autenticacao(String login, String senha) throws ServicoException {
+        return this.clienteDAOArquivo.autenticacao(login, senha);
+    }
+
+    @Override
+    public void consulta(Object objeto) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void registrar(Object objeto) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void alterar(String id, Object objeto) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void excluir(Object objeto) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }
