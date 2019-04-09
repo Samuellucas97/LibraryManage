@@ -6,22 +6,22 @@
 package servicos;
 
 import dados.ServicoException;
-import dados.UsuarioDAO;
-import dados.UsuarioDAOFactory;
 
 /**
  * Implementa as regras de negócio da interface IUsuarioServico
  * @author Samuel Lucas de Moura Ferino
  * @author José Wellinton
  */
-public class UsuarioServico implements IUsuarioServico {
+public abstract class UsuarioServico implements IUsuarioServico {
  
-    private final UsuarioDAO usuarioDAO = UsuarioDAOFactory.getUsuarioDAO("UsuarioDAOArquivo");
+   // private final UsuarioDAO usuarioDAO; Há a necessidade?
 
     /**
      * Construtor padrão
+     * @throws dados.ServicoException
      */    
-    public UsuarioServico() {
+    public UsuarioServico() throws ServicoException {
+   ///     this.usuarioDAO = UsuarioDAOFactory.getUsuarioDAO("UsuarioDAOArquivo");
         /// VAZIO
     }
     
@@ -31,8 +31,36 @@ public class UsuarioServico implements IUsuarioServico {
      * @param senha Senha do usuário
      * @throws ServicoException 
      */
-    public Usuario autenticacao( String login, String senha) throws ServicoException{    
-        return usuarioDAO.autenticacao( login, senha );
-    }
+    @Override
+    public abstract Usuario autenticacao( String login, String senha) throws ServicoException;
+    
+    /**
+     * Realiza consulta
+     * @param   objeto  Objeto a ser consultado
+     */
+    @Override
+    public abstract void consulta(Object objeto);
+    
+    /**
+     * Registra objeto
+     * @param   objeto  Objeto a ser registrado
+     */
+    @Override
+    public abstract void registrar(Object objeto);
+
+    /**
+     * Altera o objeto
+     * @param id    Identificação do objeto
+     * @param objeto    Objeto a ser alterado
+     */
+    @Override
+    public abstract void alterar(String id, Object objeto);
+    
+    /**
+     * Excluir o objeto
+     * @param objeto    Objeto a ser excluído 
+     */
+    @Override
+    public abstract void excluir(Object objeto);
     
 }

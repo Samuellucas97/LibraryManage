@@ -13,10 +13,10 @@ import java.util.HashMap;
  * @author SamDan
  */
 public class UsuarioServicoFactory {
-    private static final HashMap<String, UsuarioServico> mapUsuariosServico = new HashMap();
+    private static final HashMap<String, IUsuarioServico> mapUsuariosServico = new HashMap();
     
-    public static UsuarioServico getUsuarioDAO(String nome){
-       UsuarioServico usuarioServico = UsuarioServicoFactory.mapUsuariosServico.get(nome);
+    public static IUsuarioServico getUsuarioDAO(String nome){
+       IUsuarioServico usuarioServico = UsuarioServicoFactory.mapUsuariosServico.get(nome);
         
         if(usuarioServico == null){
             if(nome.equals("ClienteServico") ){

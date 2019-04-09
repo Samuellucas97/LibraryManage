@@ -13,15 +13,18 @@ import dados.ServicoException;
  * @author  José Wellinton 
  * @author  Thiago da Costa Monteiro
  */
-public class FuncionarioServico extends UsuarioServico implements IFuncionarioServico{
+public abstract class FuncionarioServico implements IUsuarioServico{
     
     private final IClienteServico clienteServico = new ClienteServico();
-    private final ILivroServico livroServico = new LivroServico();
+    private final ILivroServico livroServico;
     
     /**
      * Construtor padrão
+     * @throws dados.ServicoException
      */
-    public FuncionarioServico(){}
+    public FuncionarioServico() throws ServicoException{
+        this.livroServico = new LivroServico();
+    }
     
     /**
      * Consulta cliente
@@ -29,7 +32,6 @@ public class FuncionarioServico extends UsuarioServico implements IFuncionarioSe
      * @return  Cliente buscado
      * @throws ServicoException 
      */
-    @Override
     public Cliente consultarCliente( String loginCliente ) throws ServicoException{
        return this.clienteServico.consultarCliente(loginCliente);
     }
@@ -44,7 +46,6 @@ public class FuncionarioServico extends UsuarioServico implements IFuncionarioSe
      * @param genero    Gênero do cliente
      * @throws ServicoException 
      */
-    @Override
     public void registrarCliente(   String login, 
                                     String senha, 
                                     String nome,
@@ -68,7 +69,6 @@ public class FuncionarioServico extends UsuarioServico implements IFuncionarioSe
      * @param livro Livro a ser bloqueado permanentemente
      * @throws ServicoException 
      */
-    @Override
     public void bloqueioPermanenteDeLivro(Livro livro) throws ServicoException{
         this.livroServico.bloqueioPermanenteDeLivro(livro);
     }
@@ -78,7 +78,6 @@ public class FuncionarioServico extends UsuarioServico implements IFuncionarioSe
      * @param livro Livro a ser bloqueado
      * @throws ServicoException 
      */
-    @Override
     public void bloqueioTemporarioDeLivro(Livro livro) throws ServicoException{
         this.livroServico.bloqueioTemporarioDeLivro(livro);
     }
@@ -88,7 +87,6 @@ public class FuncionarioServico extends UsuarioServico implements IFuncionarioSe
      * @param cliente Cliente a ser bloqueado permanentemente
      * @throws ServicoException 
      */
-    @Override
     public void bloqueioPermanenteDeCliente(Cliente cliente) throws ServicoException{
         this.clienteServico.bloqueioPermanenteDeCliente(cliente);
     }
@@ -98,7 +96,6 @@ public class FuncionarioServico extends UsuarioServico implements IFuncionarioSe
      * @param cliente   Cliente a ser bloqueado
      * @throws ServicoException 
      */
-    @Override
     public void bloqueioTemporarioDeCliente(Cliente cliente) throws ServicoException{
         this.clienteServico.bloqueioTemporarioDeCliente(cliente);
     }
@@ -108,11 +105,24 @@ public class FuncionarioServico extends UsuarioServico implements IFuncionarioSe
      * @param livro Livro a ser registrado
      * @throws ServicoException 
      */
-    @Override
     public void registrarLivro(Livro livro) throws ServicoException{
         this.livroServico.registrarLivro(livro);
     }
+
+    @Override
+    public abstract Usuario autenticacao(String login, String senha) throws ServicoException;
     
+    @Override
+    public abstract void consulta(Object objeto);
+
+    @Override
+    public abstract void registrar(Object objeto);
+    
+    @Override
+    public abstract void alterar(String id, Object objeto);
+        
+    @Override
+    public abstract void excluir(Object objeto);
     
     
 }
