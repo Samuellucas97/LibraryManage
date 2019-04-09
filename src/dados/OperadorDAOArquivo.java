@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import servicos.Operador;
 import servicos.Usuario;
 
@@ -88,8 +89,36 @@ public class OperadorDAOArquivo extends UsuarioDAOArquivo {
 
     @Override
     public List<Usuario> consultaUsuarios(String param, String key) throws ServicoException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Usuario> operadores = new ArrayList<>();
+        
+        for (Map.Entry<String, Operador> operador : this.hMapOperador.entrySet()) {
+            Operador value = operador.getValue();
+            
+            switch(param){
+                case "Login":
+                    if(value.getLogin().equals(key)) operadores.add(value);                    
+                    break;
+                case "Nome":
+                    if(value.getNome().toLowerCase().contains(key.toLowerCase())) operadores.add(value);
+                    break;
+                case "Idade":
+                    if(String.valueOf(value.getIdade()).equals(key)) operadores.add(value);
+                    break;
+                case "Genero":
+                    if(value.getGenero().toString().toLowerCase().contains(key.toLowerCase())) operadores.add(value);
+                    break;
+                case "Salario":
+                    if(String.valueOf(value.getSalario()).equals(key)) operadores.add(value);
+                    break;
+                default:
+                    
+            }
+        }
+        if(operadores.isEmpty()) throw new ServicoException("Nenhum Operador encontrado!");
+        
+        return operadores;
     }
+        
 
     @Override
     public void registrar(Usuario usuario) throws ServicoException {

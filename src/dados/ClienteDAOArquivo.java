@@ -118,7 +118,9 @@ public class ClienteDAOArquivo extends UsuarioDAOArquivo{
                 case "NumeroDevolucoes":
                     if(String.valueOf(value.getNumeroDevolucoes()).equals(key)) clientes.add(value);
                     break;
-                //case "Avaliacao": fazer
+                case "RankingCliente": 
+                    if(String.valueOf(value.getRankingInt()).equals(key)) clientes.add(value);
+                    break;
                 default:
                     
             }

@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import servicos.Administrador;
 import servicos.Funcionario;
 import servicos.Usuario;
@@ -89,7 +90,34 @@ public class AdministradorDAOArquivo extends FuncionarioDAOArquivo{
 
     @Override
     public List<Usuario> consultaUsuarios(String param, String key) throws ServicoException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Usuario> administradores = new ArrayList<>();
+        
+        for (Map.Entry<String, Administrador> operador : this.hMapAdministrador.entrySet()) {
+            Administrador value = operador.getValue();
+            
+            switch(param){
+                case "Login":
+                    if(value.getLogin().equals(key)) administradores.add(value);                    
+                    break;
+                case "Nome":
+                    if(value.getNome().toLowerCase().contains(key.toLowerCase())) administradores.add(value);
+                    break;
+                case "Idade":
+                    if(String.valueOf(value.getIdade()).equals(key)) administradores.add(value);
+                    break;
+                case "Genero":
+                    if(value.getGenero().toString().toLowerCase().contains(key.toLowerCase())) administradores.add(value);
+                    break;
+                case "Salario":
+                    if(String.valueOf(value.getSalario()).equals(key)) administradores.add(value);
+                    break;
+                default:
+                    
+            }
+        }
+        if(administradores.isEmpty()) throw new ServicoException("Nenhum Operador encontrado!");
+        
+        return administradores;
     }
 
     @Override

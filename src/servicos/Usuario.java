@@ -12,12 +12,17 @@ package servicos;
  */
 public class Usuario {
 
+    public enum Genero{
+        MASCULINO,
+        FEMININO;
+    }
+    
     protected String login;
     protected String senha;
     protected String nome;
     protected String telefone;
     protected int idade;
-    protected String genero;
+    protected Genero genero;
     
     /**
      * Construtor padrão
@@ -28,7 +33,6 @@ public class Usuario {
         this.nome  = new String();
         this.telefone = new String();
         this.idade = 0;
-        this.genero = new String();
     }
 
     /**
@@ -44,7 +48,6 @@ public class Usuario {
         this.nome  = new String();
         this.telefone = new String();
         this.idade = 0;
-        this.genero = new String();
     }
     
     public String getLogin() {
@@ -87,11 +90,12 @@ public class Usuario {
         this.idade = idade;
     }
 
-    public String getGenero() {
+    public Genero getGenero() {
         return genero;
     }
+    
 
-    public void setGenero(String genero) {
+    public void setGenero(Genero genero) {
         this.genero = genero;
     }
 }
