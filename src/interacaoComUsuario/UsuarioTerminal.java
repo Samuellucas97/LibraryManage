@@ -21,9 +21,9 @@ import servicos.UsuarioServicoFactory;
 
 public class UsuarioTerminal extends Terminal {
     
-    private UsuarioServico clienteServico;
-    private UsuarioServico operadorServico;
-    private UsuarioServico administradorServico;
+    private IUsuarioServico clienteServico;
+    private IUsuarioServico operadorServico;
+    private IUsuarioServico administradorServico;
 
     private ILivroServico livroServico; 
 
