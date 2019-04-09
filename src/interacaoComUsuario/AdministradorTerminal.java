@@ -16,7 +16,7 @@ import servicos.IUsuarioServico;
 //Classe AdministradorTerminal
 public class AdministradorTerminal extends Terminal{
     //--ATRIBUTOS--//
-    private final IUsuarioServico administradorServico;
+    private IUsuarioServico administradorServico;
     private Usuario administrador;
 
     public AdministradorTerminal() {

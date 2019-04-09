@@ -14,17 +14,17 @@ import servicos.Usuario;
  * @version	0.0.1
  */
 public class Main {
-    
+    private Contexto estados = Contexto.getInstance();
+    private Usuario usr = new Usuario();
    
 	
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        Contexto estados = Contexto.getInstance();
-        Usuario usr = new Usuario();
+    public void main(String args[]) {
         
         while(true){
+            // Se estado for um UsuarioTerminal
             if(estados.getEstado().getClass().isInstance(new UsuarioTerminal())){
                 String escolha = estados.getEstado().apresentacao();
                 Object obj = estados.getEstado().tratamentoEscolha(escolha);
@@ -83,7 +83,7 @@ public class Main {
 
             
             }
-        
+            // Se estado for um ClienteTerminal
             else if(estados.getEstado().getClass().isInstance(new ClienteTerminal())){
                 String escolha = estados.getEstado().apresentacao();
                 Object obj = estados.getEstado().tratamentoEscolha(escolha);
@@ -132,11 +132,10 @@ public class Main {
 
             
             }
-        
-        
-        
-        
-        
+            else{
+            
+            
+            }       
         
         }
         
