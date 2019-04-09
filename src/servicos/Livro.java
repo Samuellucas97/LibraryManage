@@ -111,25 +111,14 @@ public class Livro implements java.io.Serializable{
     private int quantidadeDeTotalDeExemplares;
     private int quantidadeDeExemplaresEmprestados;
     
-    public Livro( Livro livro) throws ServicoException{
-        this.id = livro.getId();
-        this.estadoLivro = livro.getEstadoLivro();
-        this.edicao = livro.getEdicao();
-        this.volume = livro.getVolume();
-        this.editora = livro.getEditora();
-        this.titulo = livro.getTitulo();
-        this.autor = livro.getAutor();
-        this.dataDeLancamento =  new Data( livro.getDataDeLancamento() );
-        this.assunto = livro.getAssunto();
-        this.quantidadeDeTotalDeExemplares = livro.getQuantidadeDeTotalDeExemplares();
-        this.quantidadeDeExemplaresEmprestados = livro.getQuantidadeDeExemplaresEmprestados();
-    
-    
+    public Livro(){
+        this.assunto = new ArrayList<>();
+        this.quantidadeDeTotalDeExemplares = 1;
+        this.estadoLivro = EstadoLivro.DISPONIVEL;
+        this.quantidadeDeExemplaresEmprestados = 0;
     }
     
-    
     public Livro(  String  id, 
-            EstadoLivro estadoLivro,
             String  edicao,
             int     volume,
             String  editora,
@@ -137,11 +126,10 @@ public class Livro implements java.io.Serializable{
             String  autor, 
             ArrayList<String> assunto,
             String  dataDeLancamento, 
-            int quantidadeTotalDeExemplares,
-            int quantidadeDeExemplaresEmprestados) throws ServicoException{
+            int quantidadeTotalDeExemplares) throws ServicoException{
         
         this.id = id;
-        this.estadoLivro = estadoLivro;
+        this.estadoLivro = EstadoLivro.DISPONIVEL;
         this.edicao = edicao;
         this.volume = volume;
         this.editora = editora;
@@ -150,7 +138,7 @@ public class Livro implements java.io.Serializable{
         this.dataDeLancamento =  new Data(dataDeLancamento);
         this.assunto = assunto;
         this.quantidadeDeTotalDeExemplares = quantidadeTotalDeExemplares;
-        this.quantidadeDeExemplaresEmprestados = quantidadeDeExemplaresEmprestados;
+        this.quantidadeDeExemplaresEmprestados = 0;
     }
    
     public String getId(){
@@ -198,7 +186,14 @@ public class Livro implements java.io.Serializable{
         return this.quantidadeDeTotalDeExemplares;
     }
     
-    public void setQuantidadeDeTotalDeExemplares(int quantidadeDeTotalDeExemplares) {
+    public void setQuantidadeDeTotalDeExemplares(int quantidadeDeTotalDeExemplares) throws ServicoException {
+        if(quantidadeDeTotalDeExemplares < this.quantidadeDeExemplaresEmprestados) 
+            throw new ServicoException("Quantidade inválida de exemplares!");
+        
+        if(quantidadeDeTotalDeExemplares == this.quantidadeDeExemplaresEmprestados 
+                && this.getEstadoLivro().equals(EstadoLivro.DISPONIVEL))
+            this.setEstadoLivro(EstadoLivro.ALUGADO);
+        
         this.quantidadeDeTotalDeExemplares = quantidadeDeTotalDeExemplares;
     }
     
@@ -234,11 +229,18 @@ public class Livro implements java.io.Serializable{
         this.assunto = assunto;
     }
 
-    public void setDataDeLancamento(Data dataDeLancamento) {
-        this.dataDeLancamento = dataDeLancamento;
+    public void setDataDeLancamento(String dataDeLancamento) throws ServicoException {
+        this.dataDeLancamento = new Data(dataDeLancamento);
     }
 
-    public void setQuantidadeDeExemplaresEmprestados(int quantidadeDeExemplaresEmprestados) {
+    public void setQuantidadeDeExemplaresEmprestados(int quantidadeDeExemplaresEmprestados) throws ServicoException {
+         if(quantidadeDeExemplaresEmprestados < 0 && quantidadeDeExemplaresEmprestados > this.quantidadeDeTotalDeExemplares) 
+            throw new ServicoException("Quantidade inválida de livros emprestados!");
+         
+         if(this.quantidadeDeTotalDeExemplares == quantidadeDeExemplaresEmprestados 
+                && this.getEstadoLivro().equals(EstadoLivro.DISPONIVEL))
+            this.setEstadoLivro(EstadoLivro.ALUGADO);
+         
         this.quantidadeDeExemplaresEmprestados = quantidadeDeExemplaresEmprestados;
     }
 }

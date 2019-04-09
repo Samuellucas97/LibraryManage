@@ -8,6 +8,8 @@ package servicos;
 import dados.LivroDAO;
 import dados.LivroDAOArquivo;
 import dados.ServicoException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -17,104 +19,54 @@ import java.util.List;
  */
 public class LivroServico implements ILivroServico{
     
-    private final LivroDAO livroDAO = LivroDAOArquivo.getInstancia();
+    private final LivroDAO livroDAO;
     
     /**
      * Construtor padrão
+     * @throws dados.ServicoException
      */
-    public LivroServico(){
+    public LivroServico() throws ServicoException{
+        this.livroDAO = LivroDAOArquivo.getInstancia();
         /// VAZIO
     }
-    
-    /**
-     * Livro a ser consultado
-     * @param idLivro   Identificador do livro a ser consultado
-     * @return  Livro com o id dado
-     * @throws ServicoException 
-     */
+        
     @Override
     public Livro consultaLivro(String idLivro) throws ServicoException{
         return livroDAO.consultaLivro(idLivro);
-    }
+    }    
     
-    /**
-     * Registra o livro
-     * @param livro Livro a ser registrado
-     * @throws ServicoException 
-     */
     @Override
     public void registrarLivro(Livro livro) throws ServicoException{
         this.livroDAO.registrarLivro(livro);
     }
-    
-      
-    /**
-     * Muda-se o status do livro para bloqueado temporariamente
-     * @param livro Livro a ser bloqueado temporariamente
-     * @throws ServicoException 
-     */
+             
     @Override
-    public void bloqueioTemporarioDeLivro(Livro livro) throws ServicoException{
-        
-        Livro livroAlterado = new Livro(livro);
-        livroAlterado.setEstadoLivro(Livro.EstadoLivro.BLOQUEADO_TEMPORARIAMENTE); 
-        this.livroDAO.alterarLivro(livro.getId(), livroAlterado);
+    public void efetuarBloqueioTemporarioDeLivro(Livro livro) throws ServicoException{
+        this.alterar(livro, "EstadoLivro", "BLOQUEADO_TEMPORARIAMENTE");
     }
     
-    /**
-     * Bloqueia-se permanentemente o livro
-     * @param livro Livro a ser bloqueado permanentemente
-     * @throws ServicoException 
-     */
+    
     @Override
-    public void bloqueioPermanenteDeLivro(Livro livro) throws ServicoException{
-        
-        Livro livroAlterado = new Livro(livro);
-        livroAlterado.setEstadoLivro(Livro.EstadoLivro.BLOQUEADO_PERMANENTEMENTE); 
-        this.livroDAO.alterarLivro(livro, livroAlterado);
-        
+    public void efetuarBloqueioPermanenteDeLivro(Livro livro) throws ServicoException{
+        this.alterar(livro, "EstadoLivro", "BLOQUEADO_PERMANENTEMENTE");
     }
     
-    /**
-     * Exclui o livro
-     * @param livro Livro a ser excluído
-     * @throws ServicoException 
-     */
     @Override
     public void excluirLivro(Livro livro) throws ServicoException{
         this.livroDAO.excluirLivro(livro);
     }
 
-    /**
-     * Efetua o devolução do livro
-     * @param livro Livro a ser devolvido
-     * @throws dados.ServicoException
-     */
-    @Override
-    public void efetuarDevolucaoDeLivro(Livro livro) throws ServicoException  {
     
-        Livro livroAlterado = livro;
-        
-        this.livroDAO.adicionarQuantidadeLivro(livro.getId(), 1);
-        livroAlterado.setEstadoLivro(Livro.EstadoLivro.DISPONIVEL);
-        this.livroDAO.alterarLivro( livro, livroAlterado);
-        
+    @Override
+    public void efetuarDevolucaoDeLivro(Livro livro) throws ServicoException  {    
+        this.alterar(livro, "QuantidadeDeExemplaresEmprestados", 
+                String.valueOf(livro.getQuantidadeDeExemplaresEmprestados() - 1));
     }
-
-    /**
-     * Empresta o livro
-     * @param livro Livro a ser emprestado
-     * @throws dados.ServicoException
-     */
-    @Override
-    public void emprestimoDeLivro(Livro livro) throws ServicoException {
-        
-        Livro livroAlterado = livro;
-        
-        this.livroDAO.removerQuantidadeLivro(livro.getId(), 1);
-        livroAlterado.setEstadoLivro(Livro.EstadoLivro.ALUGADO);
-        this.livroDAO.alterarLivro( livro, livroAlterado);
     
+    @Override
+    public void efetuarEmprestimoDeLivro(Livro livro) throws ServicoException {        
+        this.alterar(livro, "QuantidadeDeExemplaresEmprestados", 
+                String.valueOf(livro.getQuantidadeDeExemplaresEmprestados() + 1));   
     }
 
     public List<Livro> consultaLivros(String param, String key) throws ServicoException {
@@ -125,29 +77,220 @@ public class LivroServico implements ILivroServico{
         return this.livroDAO.consultaLivros(params, keys);
     }
 
+        
     @Override
-    public void renomearAssunto(String idLivro, ArrayList<String> novoAssunto) throws ServicoException {
-        Livro livroAlterado = this.consultaLivro(idLivro);
-        livroAlterado.setAssunto(novoAssunto);
-        this.livroDAO.alterarLivro(idLivro, livroAlterado);
-    
-    
-    @Override
-    public void renomearAssunto(String idLivro, ArrayList<String> novoAssunto) throws ServicoException {
-        Livro livroAlterado = this.consultaLivro(idLivro);
-        livroAlterado.setAssunto(novoAssunto);
-        this.livroDAO.alterarLivro(idLivro, livroAlterado);
-    }
-    
-    @Override
-    public void renomearTitulo(String idLivro, String novoTitulo) throws ServicoException {
-        Livro livroAlterado = this.consultaLivro(idLivro);
-        livroAlterado.setTitulo(novoTitulo);
-        this.livroDAO.alterarLivro(idLivro, livroAlterado);
-    }
+    public Livro copia(Livro livro) throws ServicoException{
+        ArrayList<String> listAssunto;
+        String[] assuntos;
+        Livro livroCopiado = new Livro();
+        
+        livroCopiado.setId(livro.getId());
+        livroCopiado.setEdicao(livro.getEdicao());
+        livroCopiado.setVolume(livro.getVolume());
+        livroCopiado.setEditora(livro.getEditora());
+        livroCopiado.setTitulo(livro.getTitulo());
+        livroCopiado.setAutor(livro.getAutor());
 
-    public List<Livro> listaLivrosAvaliados() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        listAssunto = new ArrayList<>();
+        assuntos = (String[]) livro.getAssunto().toArray();
+        listAssunto.addAll(Arrays.asList(assuntos));
+        livroCopiado.setAssunto(listAssunto);
+
+        livroCopiado.setDataDeLancamento(livro.getDataDeLancamento());
+        livroCopiado.setQuantidadeDeTotalDeExemplares(livro.getQuantidadeDeTotalDeExemplares());
+        livroCopiado.setQuantidadeDeExemplaresEmprestados(livro.getQuantidadeDeExemplaresEmprestados());
+        livroCopiado.setEstadoLivro(livro.getEstadoLivro());
+        
+        return livroCopiado;
+    }
+    
+    @Override
+    public void alterar(Livro livro, List<String> params, List<String> keys) throws ServicoException{     
+        //String idLivro = livro.getId();
+        Livro livroAlterado = this.copia(livro);
+        
+        if(params.size() != keys.size()) 
+            throw new ServicoException("Quantidade de chaves não confere com a quantidade de parâmetros!");
+        
+        int cont = 0;
+        for(String param : params) {
+            livroAlterado = this.alterarSemSalvar(livroAlterado, param, keys.get(cont++));
+        }
+        
+        this.livroDAO.alterarLivro(livro.getId(), livroAlterado);
+    }
+    
+    @Override
+    public void alterar(Livro livro, String param, String key) throws ServicoException{
+        Livro livroAlterado = this.copia(livro);
+        ArrayList<String> listAssunto;
+        String[] assuntos;
+        
+        switch(param){
+            case "ID":
+                livroAlterado.setId(key);
+                break;
+            case "Edicao":
+                livroAlterado.setEdicao(key);
+                break;
+            case "Volume":
+                try {
+                    Integer it = new Integer(key);
+                    livroAlterado.setVolume(it);                    
+                }
+                catch(NumberFormatException ex){
+                    throw new ServicoException("Volume inválido!");
+                }
+                break;                
+            case "Editora":
+                livroAlterado.setEditora(key);
+                break;
+            case "Titulo":
+                livroAlterado.setTitulo(key);
+                break;
+            case "Autor":
+                livroAlterado.setAutor(key);
+                break;
+            case "Assunto":
+                listAssunto = new ArrayList<>();
+                assuntos = key.split(",");
+                listAssunto.addAll(Arrays.asList(assuntos));
+                livroAlterado.setAssunto(listAssunto);
+                break;
+            case "DataDeLancamento":
+                livroAlterado.setDataDeLancamento(key);
+                break;
+            case "QuantidadeTotalDeExemplares":
+                try {
+                    Integer it = new Integer(key);
+                    livroAlterado.setQuantidadeDeTotalDeExemplares(it);                   
+                }
+                catch(NumberFormatException ex){
+                    throw new ServicoException("Quantidade total de exemplares inválida!");
+                }
+                break;
+            case "QuantidadeDeExemplaresEmprestados":
+                try {
+                    Integer it = new Integer(key);
+                    livroAlterado.setQuantidadeDeExemplaresEmprestados(it);
+                }
+                catch(NumberFormatException ex){
+                    throw new ServicoException("Quantidade de exemplares emprestados inválida!");
+                }
+                break;
+            case "EstadoLivro":
+                if("DISPONIVEL".toLowerCase().contains(key.toLowerCase())){
+                    if(livro.getQuantidadeDeTotalDeExemplares() > livro.getQuantidadeDeExemplaresEmprestados())
+                        livroAlterado.setEstadoLivro(Livro.EstadoLivro.DISPONIVEL);
+                    else
+                        throw new ServicoException("Estado do livro não permitido!");
+                }
+                else if("ALUGADO".toLowerCase().contains(key.toLowerCase())){
+                    if(livro.getQuantidadeDeTotalDeExemplares() == livro.getQuantidadeDeExemplaresEmprestados())
+                        livroAlterado.setEstadoLivro(Livro.EstadoLivro.ALUGADO);
+                    else
+                        throw new ServicoException("Estado do livro não permitido!");
+                }
+                else if("BLOQUEADO_TEMPORARIAMENTE".toLowerCase().contains(key.toLowerCase()))
+                    livroAlterado.setEstadoLivro(Livro.EstadoLivro.BLOQUEADO_TEMPORARIAMENTE);
+                
+                else if("BLOQUEADO_PERMANENTEMENTE".toLowerCase().contains(key.toLowerCase()))
+                    livroAlterado.setEstadoLivro(Livro.EstadoLivro.BLOQUEADO_PERMANENTEMENTE);
+                
+                else{
+                    throw new ServicoException("Estado do livro inválido!");
+                }
+                break;
+            default:
+                
+        }        
+        this.livroDAO.alterarLivro(livro.getId(), livroAlterado);
+    }
+    
+    private Livro alterarSemSalvar(Livro livro, String param, String key) throws ServicoException{
+        Livro livroAlterado = this.copia(livro);
+        ArrayList<String> listAssunto;
+        String[] assuntos;
+        
+        switch(param){
+            case "ID":
+                livroAlterado.setId(key);
+                break;
+            case "Edicao":
+                livroAlterado.setEdicao(key);
+                break;
+            case "Volume":
+                try {
+                    Integer it = new Integer(key);
+                    livroAlterado.setVolume(it);                    
+                }
+                catch(NumberFormatException ex){
+                    throw new ServicoException("Volume inválido!");
+                }
+                break;                
+            case "Editora":
+                livroAlterado.setEditora(key);
+                break;
+            case "Titulo":
+                livroAlterado.setTitulo(key);
+                break;
+            case "Autor":
+                livroAlterado.setAutor(key);
+                break;
+            case "Assunto":
+                listAssunto = new ArrayList<>();
+                assuntos = key.split(",");
+                listAssunto.addAll(Arrays.asList(assuntos));
+                livroAlterado.setAssunto(listAssunto);
+                break;
+            case "DataDeLancamento":
+                livroAlterado.setDataDeLancamento(key);
+                break;
+            case "QuantidadeTotalDeExemplares":
+                try {
+                    Integer it = new Integer(key);
+                    livroAlterado.setQuantidadeDeTotalDeExemplares(it);                   
+                }
+                catch(NumberFormatException ex){
+                    throw new ServicoException("Quantidade total de exemplares inválida!");
+                }
+                break;
+            case "QuantidadeDeExemplaresEmprestados":
+                try {
+                    Integer it = new Integer(key);
+                    livroAlterado.setQuantidadeDeExemplaresEmprestados(it);
+                }
+                catch(NumberFormatException ex){
+                    throw new ServicoException("Quantidade de exemplares emprestados inválida!");
+                }
+                break;
+            case "EstadoLivro":
+                if("DISPONIVEL".toLowerCase().contains(key.toLowerCase())){
+                    if(livro.getQuantidadeDeTotalDeExemplares() > livro.getQuantidadeDeExemplaresEmprestados())
+                        livroAlterado.setEstadoLivro(Livro.EstadoLivro.DISPONIVEL);
+                    else
+                        throw new ServicoException("Estado do livro não permitido!");
+                }
+                else if("ALUGADO".toLowerCase().contains(key.toLowerCase())){
+                    if(livro.getQuantidadeDeTotalDeExemplares() == livro.getQuantidadeDeExemplaresEmprestados())
+                        livroAlterado.setEstadoLivro(Livro.EstadoLivro.ALUGADO);
+                    else
+                        throw new ServicoException("Estado do livro não permitido!");
+                }
+                else if("BLOQUEADO_TEMPORARIAMENTE".toLowerCase().contains(key.toLowerCase()))
+                    livroAlterado.setEstadoLivro(Livro.EstadoLivro.BLOQUEADO_TEMPORARIAMENTE);
+                
+                else if("BLOQUEADO_PERMANENTEMENTE".toLowerCase().contains(key.toLowerCase()))
+                    livroAlterado.setEstadoLivro(Livro.EstadoLivro.BLOQUEADO_PERMANENTEMENTE);
+                
+                else{
+                    throw new ServicoException("Estado do livro inválido!");
+                }
+                break;
+            default:
+                
+        }
+        return livroAlterado;
     }
     
 }
