@@ -89,7 +89,7 @@ public class AdministradorTerminal extends Terminal{
         }
     }
     */
-    
+    /*
     @Override
     protected void autenticacao(String login, String senha){
         try{
@@ -100,7 +100,7 @@ public class AdministradorTerminal extends Terminal{
             System.err.println(ex.getMessage());
         }
         return this.administrador;
-    }
+    } */
 
     @Override
     public String apresentacao( ){

@@ -9,24 +9,33 @@ import dados.ServicoException;
 import java.util.List;
 import java.util.Scanner;
 import servicos.ClienteServico;
+import servicos.ILivroServico;
 import servicos.Usuario;
 import servicos.IUsuarioServico;
 import servicos.Livro;
 import servicos.LivroServico;
+import servicos.UsuarioServicoFactory;
 
 
 
 public class ClienteTerminal extends Terminal{
     
-    private final IUsuarioServico clienteServico;
-    private LivroServico livroServico; 
+    private IUsuarioServico clienteServico;
+    private ILivroServico livroServico;  
     private Usuario cliente;
 
     public ClienteTerminal() {
-        this.livroServico = new LivroServico();      
-        this.clienteServico = (IUsuarioServico) new ClienteServico();
+        try{
+            this.livroServico = LivroServico.getInstance();      
+            this.clienteServico = UsuarioServicoFactory.getUsuarioDAO("ClienteServico");
+        }
+        catch (ServicoException ex) {
+            System.err.println(ex.getMessage());
+        }
+        
     }
     
+    /*
     @Override
     protected void autenticacao(String login, String senha){
         try{
@@ -36,7 +45,7 @@ public class ClienteTerminal extends Terminal{
         catch (ServicoException ex) {
             System.err.println(ex.getMessage());
         }
-    }
+    }*/
 
     @Override
     public String apresentacao( ){
@@ -67,7 +76,7 @@ public class ClienteTerminal extends Terminal{
     public Object tratamentoEscolha(String escolha) {
         Scanner entradaUsuario = new Scanner(System.in);
         if(escolha.equals("1")){
-            List<Livro> livrosAvaliados = livroServico.listaLivrosAlugados();
+            List<Livro> livrosAvaliados = ((ClienteServico) clienteServico).listaLivrosAlugados();
             System.out.print("Você escolheu a opção (1) - Avaliar livro \n");
             System.out.print("Gerando lista de livros que foram alugados por você... \n");
             for (int i = 0; i < livrosAvaliados.size(); i++) {
@@ -90,7 +99,7 @@ public class ClienteTerminal extends Terminal{
                 }
 
                 if(numeric && (num>0) && (num<=livrosAvaliados.size())){
-                    double avaliacao = 0.0;
+                    Double avaliacao = 0.0;
                     System.out.println("De uma nota de 0 a 5 para o livro: " + livrosAvaliados.get(num.intValue()).getTitulo());
                     Double num2 = 0.0;
                     boolean key2while = true;
@@ -103,8 +112,8 @@ public class ClienteTerminal extends Terminal{
                         catch (NumberFormatException e) {
                             numeric = false;
                         }
-                        if(numeric && (num>=0) && (num<=5)){
-                        avaliacao = num;
+                        if(numeric && (num2>=0) && (num2<=5)){
+                        avaliacao = num2;
                         key2while = false;
                         }
                         else{
@@ -113,7 +122,7 @@ public class ClienteTerminal extends Terminal{
                         }
                     }
                     
-                    return livroServico.avaliarLivro(livrosAvaliados.get(num.intValue()), avaliacao);
+                    return ((ClienteServico)clienteServico).avaliarLivro(livrosAvaliados.get(num.intValue()), avaliacao.intValue());
                 }
                 else{
                     System.out.println("Escolha inválida! \n"); 
@@ -213,13 +222,26 @@ public class ClienteTerminal extends Terminal{
         return null;   
     }
     private List<Livro> efetuarBusca(String param, String key){
-        return livroServico.consultaLivros(param, key);
-
+        try {
+            return livroServico.consultaLivros(param, key);
+        } 
+        catch (ServicoException ex) {
+            System.err.println(ex.getMessage());
+        }
+        
+        return null;
     }
 
     private List<Livro> efetuarBusca(List<String> params, List<String> keys){
-        return this.livroServico.consultaLivros(params, keys);
+        try{
+            return this.livroServico.consultaLivros(params, keys);
 
+        }
+        catch (ServicoException ex) {
+            System.err.println(ex.getMessage());
+        }
+        
+        return null;
     }
         
 
