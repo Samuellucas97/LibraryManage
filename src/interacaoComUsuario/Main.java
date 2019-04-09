@@ -14,14 +14,14 @@ import servicos.Usuario;
  * @version	0.0.1
  */
 public class Main {
-    private Contexto estados = Contexto.getInstance();
-    private Usuario usr = new Usuario();
+    private static Contexto estados = Contexto.getInstance();
+    private static Usuario usr = new Usuario();
    
 	
     /**
      * @param args the command line arguments
      */
-    public void main(String args[]) {
+    public static void main(String args[]) {
         
         while(true){
             // Se estado for um UsuarioTerminal
