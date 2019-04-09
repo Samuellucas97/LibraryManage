@@ -11,7 +11,7 @@ import java.util.HashMap;
 public class UsuarioDAOFactory {
     private static final HashMap<String,UsuarioDAO> mapUsuarios = new HashMap();
     
-    public static UsuarioDAO getUsuarioDAO(String nome){
+    public static UsuarioDAO getUsuarioDAO(String nome) throws ServicoException{
        UsuarioDAO usuarioDAO = UsuarioDAOFactory.mapUsuarios.get(nome);
         
         if(usuarioDAO == null){

@@ -18,17 +18,18 @@ import servicos.Usuario;
  * @author SamDan
  */
 public class ClienteDAOArquivo extends UsuarioDAOArquivo{
-
+    
+    private final String nomeDoArquivo = "Clientes";
     private HashMap<String, Cliente> hMapCliente;   
 
     public ClienteDAOArquivo() throws ServicoException {
-        this.hMapCliente = new HashMap<>();        
-        this.lerArquivo("Clientes");
+        this.hMapCliente = new HashMap<>();       
+        this.lerArquivo(this.nomeDoArquivo);
     }    
     
     @Override
     protected void lerArquivo(String nomeDoArquivo) throws ServicoException {
-        this.hMapCliente = (HashMap<String, Cliente>) Serializator.unserialize(nomeDoArquivo);
+        this.hMapCliente = (HashMap<String, Cliente>) Serializator.unserialize(this.hMapCliente,nomeDoArquivo);
     }
 
     @Override
