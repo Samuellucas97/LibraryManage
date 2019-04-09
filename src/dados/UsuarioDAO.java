@@ -22,7 +22,7 @@ public interface UsuarioDAO {
     public List<Usuario> consultaUsuarios(String param, String key) throws ServicoException;
     
     public void registrar(Usuario usuario) throws ServicoException;
-    public void alterar(Usuario usuario,  Usuario usuarioAlterado) throws ServicoException;
+    public void alterar(String usuarioLogin,  Usuario usuarioAlterado) throws ServicoException;
     public void excluir(Usuario usuario) throws ServicoException;
     
 }

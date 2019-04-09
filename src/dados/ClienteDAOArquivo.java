@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import servicos.Cliente;
 import servicos.Usuario;
 
@@ -78,10 +79,10 @@ public class ClienteDAOArquivo extends UsuarioDAOArquivo{
             List<Usuario> next = iterator.next();
             if(clientes.isEmpty()) clientes.addAll(next);
             else{
-                List<Usuario> auxLivros = new ArrayList<>();
-                auxLivros.addAll(clientes);
-                auxLivros.removeAll(next);
-                clientes.removeAll(auxLivros);
+                List<Usuario> auxClientes = new ArrayList<>();
+                auxClientes.addAll(clientes);
+                auxClientes.removeAll(next);
+                clientes.removeAll(auxClientes);
             }
             if(clientes.isEmpty()) break;
         }
@@ -93,94 +94,78 @@ public class ClienteDAOArquivo extends UsuarioDAOArquivo{
 
     @Override
     public List<Usuario> consultaUsuarios(String param, String key) throws ServicoException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Usuario> clientes = new ArrayList<>();
+        
+        for (Map.Entry<String, Cliente> livro : this.hMapCliente.entrySet()) {
+            Cliente value = livro.getValue();
+            
+            switch(param){
+                case "Login":
+                    if(value.getLogin().equals(key)) clientes.add(value);                    
+                    break;
+                case "Nome":
+                    if(value.getNome().toLowerCase().contains(key.toLowerCase())) clientes.add(value);
+                    break;
+                case "Idade":
+                    if(String.valueOf(value.getIdade()).equals(key)) clientes.add(value);
+                    break;
+                case "Genero":
+                    if(value.getGenero().toString().toLowerCase().contains(key.toLowerCase())) clientes.add(value);
+                    break;
+                case "NumeroEmprestimos":
+                    if(String.valueOf(value.getNumeroEmprestimos()).equals(key)) clientes.add(value);
+                    break;
+                case "NumeroDevolucoes":
+                    if(String.valueOf(value.getNumeroDevolucoes()).equals(key)) clientes.add(value);
+                    break;
+                case "RankingCliente": 
+                    if(String.valueOf(value.getRankingInt()).equals(key)) clientes.add(value);
+                    break;
+                default:
+                    
+            }
+            
+        }
+                
+        if(clientes.isEmpty()) throw new ServicoException("Nenhum cliente encontrado!");
+        
+        return clientes;
     }
 
     @Override
     public void registrar(Usuario usuario) throws ServicoException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(!this.hMapCliente.containsKey(usuario.getLogin())){
+            this.hMapCliente.put(usuario.getLogin(),(Cliente) usuario);
+            this.salvarArquivo(this.nomeDoArquivo);
+        }              
+        else throw new ServicoException("Cliente com esse login já registrado!");
     }
 
     @Override
-    public void alterar(Usuario usuario, Usuario usuarioAlterado) throws ServicoException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void alterar(String usuarioLogin, Usuario usuarioAlterado) throws ServicoException {
+         if(usuarioLogin.equals(usuarioAlterado.getLogin())){
+            this.hMapCliente.remove(usuarioLogin);
+            this.hMapCliente.put(usuarioAlterado.getLogin(), (Cliente) usuarioAlterado);
+            this.salvarArquivo(this.nomeDoArquivo);
+        }
+        else{
+            if(this.hMapCliente.containsKey(usuarioAlterado.getLogin())){
+                throw new ServicoException("A alteração não foi concluida! \n O login escolhido já é utilizado");
+            }
+            else{
+                this.hMapCliente.remove(usuarioLogin);
+                this.hMapCliente.put(usuarioAlterado.getLogin(), (Cliente) usuarioAlterado);
+                this.salvarArquivo(this.nomeDoArquivo);
+            }
+        }
     }
 
     @Override
     public void excluir(Usuario usuario) throws ServicoException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean verification =  this.hMapCliente.remove(usuario.getLogin(), (Cliente) usuario);
+        if(!verification) throw new ServicoException("Esse usuário não existe no registro e não pode ser excluído!");
+        
+        this.salvarArquivo(this.nomeDoArquivo);
     }
     
-            
-//    public Cliente buscarCliente( String loginCliente ) throws ServicoException{
-//       
-//        try{
-//        
-//            return this.hMapCliente.get(loginCliente);
-//        }catch( NullPointerException e){
-//            throw new ServicoException( "Usuario nao existe" );
-//        }
-//        catch( ClassCastException e ){
-//            throw new ServicoException( "O usuario nao eh um cliente");
-//        }
-//            
-//    }
-//
-//    public void salvar(Cliente cliente) throws ServicoException {
-//        
-//    }
-//    
-//    @Override
-//    protected void transformaStringEmHashMap(String conteudoArquivo){
-//    
-//        hMapCliente.clear();
-//        
-//        Cliente cliente = new Cliente();
-//        
-//        for(String linhaDoArquivo: conteudoArquivo.split("\n") ){
-//
-//            cliente.setLogin( linhaDoArquivo.split(";")[1].split(":")[1] );
-//            cliente.setSenha( linhaDoArquivo.split(";")[2].split(":")[1] );
-//            cliente.setNome( linhaDoArquivo.split(";")[3].split(":")[1] );
-//            cliente.setTelefone( linhaDoArquivo.split(";")[4].split(":")[1] );
-//            cliente.setIdade( Integer.parseInt(linhaDoArquivo.split(";")[5].split(":")[1] ));
-//            cliente.setGenero( linhaDoArquivo.split(";")[6].split(":")[1] );
-//            cliente.
-//
-//            hMapCliente.put( cliente.getLogin(), cliente);
-//
-//        }
-//    
-//    }    
-//
-//    @Override
-//    protected String autenticar(String login, String senha) {
-//        
-//        Usuario usuarioTemporario = hMapCliente.get(login);
-//        
-//        if(  usuarioTemporario == null )
-//            return "Login de usuario nao cadastrado";
-//                
-//        if( !senha.equals( usuarioTemporario.getSenha() ) )
-//            return "Senha de usuario incorreta";
-//                    
-//        return "OK";
-//     
-//    }
-//
-//    @Override
-//    public Usuario buscar(String login) throws NullPointerException {
-//        return hMapCliente.get(login);
-//    }
-//
-//    @Override
-//    public void bloqueioPermanenteDeCliente(Cliente cliente) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
-//
-//    @Override
-//    public void bloqueioTemporarioDeCliente(Cliente cliente) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
-
 }

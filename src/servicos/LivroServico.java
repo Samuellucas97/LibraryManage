@@ -27,7 +27,7 @@ public class LivroServico implements ILivroServico{
      * Construtor padrão
      * @throws dados.ServicoException
      */
-    private LivroServico() throws ServicoException{
+    LivroServico() throws ServicoException{
         
         /// VAZIO
     }
