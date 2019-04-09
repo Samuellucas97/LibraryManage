@@ -34,9 +34,9 @@ public class UsuarioTerminal extends Terminal {
 
     public UsuarioTerminal() {
         try{
-            this.clienteServico = UsuarioServicoFactory.getUsuarioDAO("ClienteServico");
-            this.operadorServico = UsuarioServicoFactory.getUsuarioDAO("OperadorServico");
-            this.administradorServico = UsuarioServicoFactory.getUsuarioDAO("AdministradorServico");
+            this.clienteServico = UsuarioServicoFactory.getUsuarioServico("ClienteServico");
+//            this.operadorServico = UsuarioServicoFactory.getUsuarioServico("OperadorServico");
+//            this.administradorServico = UsuarioServicoFactory.getUsuarioServico("AdministradorServico");
             this.livroServico = LivroServico.getInstance();
 
         }
@@ -129,7 +129,13 @@ public class UsuarioTerminal extends Terminal {
             System.out.print("\n Digite sua senha: ");
             System.out.println("");
             senha = entradaUsuario.next();
-            return login(login, senha);
+            if(this.usuario == null){
+                return null;
+            }
+            else{
+                return login(login, senha);
+
+            }
 
             
         }

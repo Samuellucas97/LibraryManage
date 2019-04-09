@@ -30,7 +30,10 @@ public class Main {
                 Object obj = estados.getEstado().tratamentoEscolha(escolha);
                 switch(escolha){
                     case ("1"):
-                        if(obj.getClass().isInstance(new ClienteTerminal())){
+                        if(obj == null) {
+                            break;
+                        }
+                        else if(obj.getClass().isInstance(new ClienteTerminal())){
                             usr = ((UsuarioTerminal)(estados.getEstado())).getUsuario();
                             estados.setEstado((ClienteTerminal) obj);
                         }
@@ -48,12 +51,13 @@ public class Main {
                         }
                         break;
                         
-                    case("2"):
+                    case("2"):  
+                        if(obj == null) break;
                         List<Livro> livros = (List<Livro>)obj;
                         
                         System.out.println("Lista de livros: \n \n");
                         
-                        if(livros.isEmpty()){
+                        if(livros == null || livros.isEmpty()){
                             System.out.println("Não existem livros correspondendo a sua busca!");
                         }
                         else{

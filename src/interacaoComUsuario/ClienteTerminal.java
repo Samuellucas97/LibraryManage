@@ -27,7 +27,7 @@ public class ClienteTerminal extends Terminal{
     public ClienteTerminal() {
         try{
             this.livroServico = LivroServico.getInstance();      
-            this.clienteServico = UsuarioServicoFactory.getUsuarioDAO("ClienteServico");
+            this.clienteServico = UsuarioServicoFactory.getUsuarioServico("ClienteServico");
         }
         catch (ServicoException ex) {
             System.err.println(ex.getMessage());
