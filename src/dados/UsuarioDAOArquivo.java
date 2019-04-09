@@ -5,16 +5,6 @@
  */
 package dados;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.HashMap;
-import servicos.Administrador;
-import servicos.Cliente;
-import servicos.Usuario;
-
 /**
  * Representa um 
  * @author  Samuel Lucas de Moura Ferino

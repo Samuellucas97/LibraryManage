@@ -10,13 +10,8 @@ package dados;
  *
  * @author SamDan
  */
-public abstract class FuncionarioDAOArquivo extends UsuarioDAOArquivo implements FuncionarioDAO {
+public abstract class FuncionarioDAOArquivo extends UsuarioDAOArquivo{
 
-    @Override
-    protected abstract void transformaStringEmHashMap(String conteudoArquivo);
-
-    @Override
-    protected abstract String autenticar(String login, String senha);
 
 
 

@@ -5,33 +5,127 @@
  */
 package dados;
 
-import servicos.Funcionario;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import servicos.Operador;
 import servicos.Usuario;
 
 /**
  *
  * @author wellitongb
  */
-public class OperadorDAOArquivo extends FuncionarioDAOArquivo implements OperadorDAO{
+public class OperadorDAOArquivo extends UsuarioDAOArquivo {
+    
+    private final String nomeDoArquivo = "Operadores";
+    private HashMap<String, Operador> hMapOperador;
+
+   @Override
+    protected void lerArquivo(String nomeDoArquivo) throws ServicoException {
+        this.hMapOperador = (HashMap<String, Operador>) Serializator.unserialize(this.hMapOperador,nomeDoArquivo);
+    }
 
     @Override
-    protected void transformaStringEmHashMap(String conteudoArquivo) {
+    protected boolean salvarArquivo(String nomeArquivo) throws ServicoException {
+        Serializator.serialize(this.hMapOperador, nomeArquivo);
+        return true;
+    }
+
+    @Override
+    public Usuario autenticacao(String login, String senha) throws ServicoException {
+        if(this.hMapOperador.containsKey(login)){
+            Operador operador = this.hMapOperador.get(login);
+            if(operador.getSenha().equals(senha)) return operador;
+            else{
+                throw new ServicoException("Senha inválida! Tente novamente.");
+            }
+        }
+        else{
+            throw new ServicoException("Login inválido! Tente novamente.");
+        }
+    }
+
+    @Override
+    public Usuario consultar(String login) throws ServicoException {
+        if(this.hMapOperador.containsKey(login)) return this.hMapOperador.get(login);
+        else throw new ServicoException("Operador não encontrado!");
+    }
+
+    @Override
+    public List<Usuario> consultaUsuarios(List<String> params, List<String> keys) throws ServicoException {
+        List<Usuario> operadores = new ArrayList<>();
+        List<List<Usuario> > listOperadores = new ArrayList<>();
+        
+        if(params.size() != keys.size()) throw new ServicoException("Quantidade de chaves não confere com a quantidade de parâmetros!");
+        
+        int i = 0;
+        for(String param : params) listOperadores.add(this.consultaUsuarios(param, keys.get(i++)));
+                
+        Collections.sort(listOperadores, (o1, o2) -> {
+            if(o1.size() > o2.size()) return -1;
+            else if (o1.size() < o2.size()) return 1; 
+            return 0;
+        });
+        
+        for(Iterator<List<Usuario>> iterator = listOperadores.iterator(); iterator.hasNext();) {
+            List<Usuario> next = iterator.next();
+            if(operadores.isEmpty()) operadores.addAll(next);
+            else{
+                List<Usuario> auxOperadores = new ArrayList<>();
+                auxOperadores.addAll(operadores);
+                auxOperadores.removeAll(next);
+                operadores.removeAll(auxOperadores);
+            }
+            if(operadores.isEmpty()) break;
+        }
+        
+        if(operadores.isEmpty()) throw new ServicoException("Nenhum cliente encontrado!");
+        
+        return operadores;
+    }
+
+    @Override
+    public List<Usuario> consultaUsuarios(String param, String key) throws ServicoException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    protected String autenticar(String login, String senha) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void registrar(Usuario usuario) throws ServicoException {
+        if(!this.hMapOperador.containsKey(usuario.getLogin())){
+            this.hMapOperador.put(usuario.getLogin(),(Operador) usuario);
+            this.salvarArquivo(this.nomeDoArquivo);
+        }              
+        else throw new ServicoException("Cliente com esse login já registrado!");
     }
 
     @Override
-    public Usuario buscar(String login) throws NullPointerException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void alterar(String usuarioLogin, Usuario usuarioAlterado) throws ServicoException {
+         if(usuarioLogin.equals(usuarioAlterado.getLogin())){
+            this.hMapOperador.remove(usuarioLogin);
+            this.hMapOperador.put(usuarioAlterado.getLogin(), (Operador) usuarioAlterado);
+            this.salvarArquivo(this.nomeDoArquivo);
+        }
+        else{
+            if(this.hMapOperador.containsKey(usuarioAlterado.getLogin())){
+                throw new ServicoException("A alteração não foi concluida! \n O login escolhido já é utilizado");
+            }
+            else{
+                this.hMapOperador.remove(usuarioLogin);
+                this.hMapOperador.put(usuarioAlterado.getLogin(), (Operador) usuarioAlterado);
+                this.salvarArquivo(this.nomeDoArquivo);
+            }
+        }
     }
 
     @Override
-    public void salvar(Funcionario funcionario) throws ServicoException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void excluir(Usuario usuario) throws ServicoException {
+        boolean verification =  this.hMapOperador.remove(usuario.getLogin(), (Operador) usuario);
+        if(!verification) throw new ServicoException("Esse usuário não existe no registro e não pode ser excluído!");
+        
+        this.salvarArquivo(this.nomeDoArquivo);
     }
+ 
     
 }
