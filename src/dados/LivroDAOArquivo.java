@@ -8,11 +8,8 @@ package dados;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import servicos.Livro;
 
 /**
@@ -38,12 +35,12 @@ public class LivroDAOArquivo implements LivroDAO{
     }
     
     private void limparRegistro(){
-        this.hMapLivro.clear();
+        LivroDAOArquivo.hMapLivro.clear();
     }
     
     @Override
     public Livro consultaLivro(String idLivro) throws ServicoException{
-        Livro livro = this.hMapLivro.get(idLivro);
+        Livro livro = LivroDAOArquivo.hMapLivro.get(idLivro);
         
         if(livro == null) throw new ServicoException("Livro não encotrado!");
         
@@ -66,8 +63,7 @@ public class LivroDAOArquivo implements LivroDAO{
             return 0;
         });
         
-        for(Iterator<List<Livro>> iterator = listLivros.iterator(); iterator.hasNext();) {
-            List<Livro> next = iterator.next();
+        for(List<Livro> next : listLivros) {
             if(livros.isEmpty()) livros.addAll(next);
             else{
                 List<Livro> auxLivros = new ArrayList<>();
@@ -87,7 +83,7 @@ public class LivroDAOArquivo implements LivroDAO{
     public List<Livro> consultaLivros(String param, String key) throws ServicoException{
         List<Livro> livros = new ArrayList<>();
         
-        for (Map.Entry<String, Livro> livro : this.hMapLivro.entrySet()) {
+        for (Map.Entry<String, Livro> livro : LivroDAOArquivo.hMapLivro.entrySet()) {
             Livro value = livro.getValue();
             
             switch(param){
@@ -102,9 +98,9 @@ public class LivroDAOArquivo implements LivroDAO{
                 case "Autor":
                     if(value.getAutor().toLowerCase().contains(key.toLowerCase())) livros.add(value);
                     break;
-                case "CidadeDePublicacao":
-                    if(value.getCidadeDePublicacao().toLowerCase().contains(key.toLowerCase())) livros.add(value);
-                    break;
+//                case "CidadeDePublicacao":
+//                    if(value.getCidadeDePublicacao().toLowerCase().contains(key.toLowerCase())) livros.add(value);
+//                    break;
                 case "DataDeLancamento":
                     if(value.getDataDeLancamento().toLowerCase().contains(key.toLowerCase())) livros.add(value);
                     break;
@@ -134,7 +130,7 @@ public class LivroDAOArquivo implements LivroDAO{
     
     @Override
     public void adicionarQuantidadeLivro(String idLivro, int quantidade) throws ServicoException{
-        Livro livro = this.hMapLivro.get(idLivro);
+        Livro livro = LivroDAOArquivo.hMapLivro.get(idLivro);
         
         if(livro == null) throw new ServicoException("Livro não encotrado!");
         
@@ -151,7 +147,7 @@ public class LivroDAOArquivo implements LivroDAO{
     
     @Override
     public void removerQuantidadeLivro(String idLivro, int quantidade) throws ServicoException{
-        Livro livro = this.hMapLivro.get(idLivro);
+        Livro livro = LivroDAOArquivo.hMapLivro.get(idLivro);
         
         if(livro == null) throw new ServicoException("Livro não encotrado!");
         
@@ -170,8 +166,8 @@ public class LivroDAOArquivo implements LivroDAO{
     
     @Override
     public void registrarLivro(Livro livro) throws ServicoException {
-        if(!this.hMapLivro.containsKey(livro.getId())){
-            this.hMapLivro.put(livro.getId(), livro);
+        if(!LivroDAOArquivo.hMapLivro.containsKey(livro.getId())){
+            LivroDAOArquivo.hMapLivro.put(livro.getId(), livro);
             this.salvarArquivo("Livros");
         }              
         else throw new ServicoException("Livro com esse ID já registrado!");
@@ -181,17 +177,17 @@ public class LivroDAOArquivo implements LivroDAO{
     @Override
     public void alterarLivro(String IDlivro, Livro livroAlterado) throws ServicoException{
         if(IDlivro.equals(livroAlterado.getId())){
-            this.hMapLivro.remove(IDlivro);
-            this.hMapLivro.put(livroAlterado.getId(), livroAlterado);
+            LivroDAOArquivo.hMapLivro.remove(IDlivro);
+            LivroDAOArquivo.hMapLivro.put(livroAlterado.getId(), livroAlterado);
             this.salvarArquivo("Livros");
         }
         else{
-            if(this.hMapLivro.containsKey(livroAlterado.getId())){
+            if(LivroDAOArquivo.hMapLivro.containsKey(livroAlterado.getId())){
                 throw new ServicoException("A alteração não foi concluida! \n O ID escolhido já é utilizado");
             }
             else{
-                this.hMapLivro.remove(IDlivro);
-                this.hMapLivro.put(livroAlterado.getId(), livroAlterado);
+                LivroDAOArquivo.hMapLivro.remove(IDlivro);
+                LivroDAOArquivo.hMapLivro.put(livroAlterado.getId(), livroAlterado);
                 this.salvarArquivo("Livros");
             }
         }
@@ -199,18 +195,18 @@ public class LivroDAOArquivo implements LivroDAO{
 
     @Override
     public void excluirLivro(Livro livro) throws ServicoException {
-        boolean verification =  this.hMapLivro.remove(livro.getId(), livro);
+        boolean verification =  LivroDAOArquivo.hMapLivro.remove(livro.getId(), livro);
         if(!verification) throw new ServicoException("Esse livro não existe no catálogo e não pode ser excluído!");
         
         this.salvarArquivo("Livros");
     }
 
     private void lerArquivo(String nomeDoArquivo) throws ServicoException{
-          this.hMapLivro = (HashMap<String, Livro>) Serializator.unserialize(this.hMapLivro, nomeDoArquivo);
+          LivroDAOArquivo.hMapLivro = (HashMap<String, Livro>) Serializator.unserialize(LivroDAOArquivo.hMapLivro, nomeDoArquivo);
     }
     
     private boolean salvarArquivo(String nomeArquivo) throws ServicoException{
-        Serializator.serialize(this.hMapLivro, nomeArquivo);
+        Serializator.serialize(LivroDAOArquivo.hMapLivro, nomeArquivo);
         return true;
     }   
     

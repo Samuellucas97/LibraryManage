@@ -26,14 +26,4 @@ public interface LivroDAO {
     public void alterarLivro(String IDlivro,  Livro livroAlterado) throws ServicoException;
     public void excluirLivro(Livro livro) throws ServicoException;
     
-    //public void alterarLivro() throws ServicoException;
-    
-    //public void bloqueioTemporarioDeLivro(Livro livro) throws ServicoException;
-    //public void bloqueioPermanenteDeLivro(Livro livro) throws ServicoException;
-    
-    //public void emprestimoDeLivro(Livro livro);
-    //public void efetuarDevolucaoDeLivro(Livro livro);
-    
-
-    
 }
