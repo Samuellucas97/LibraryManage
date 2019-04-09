@@ -69,10 +69,12 @@ public class LivroServico implements ILivroServico{
                 String.valueOf(livro.getQuantidadeDeExemplaresEmprestados() + 1));   
     }
 
+    @Override
     public List<Livro> consultaLivros(String param, String key) throws ServicoException {
         return this.livroDAO.consultaLivros(param, key);
     }
 
+    @Override
     public List<Livro> consultaLivros(List<String> params, List<String> keys) throws ServicoException {
         return this.livroDAO.consultaLivros(params, keys);
     }

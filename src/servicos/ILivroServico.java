@@ -23,6 +23,24 @@ public interface ILivroServico {
     public Livro consultaLivro(String idLivro) throws ServicoException;    
     
     /**
+     * Retorna lista de livros consultados através de parâmetro e seu respectivo valor.
+     * @param param Parâmetro de pesquisa
+     * @param key Valor do parâmetro de pesquisa.
+     * @return Lista de livros que corrêspondem ao parâmetro e valor pesquisados.
+     * @throws ServicoException
+     */
+    public List<Livro> consultaLivros(String param, String key) throws ServicoException;
+        
+    /**
+     * Retorna lista de livros consultados através de lista de parâmetros e lista de seus respectivos valores.
+     * @param params lista de parâmetros de pesquisa.
+     * @param keys lista de valoroes do parâmetro de pesquisa.
+     * @return Lista de livros que corrêspondem ao parâmetro e valor pesquisados.
+     * @throws ServicoException
+     */
+    public List<Livro> consultaLivros(List<String> params, List<String> keys) throws ServicoException;
+            
+    /**
      * Registra o livro
      * @param livro Livro a ser registrado
      * @throws ServicoException 
