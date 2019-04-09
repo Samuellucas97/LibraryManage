@@ -6,7 +6,6 @@
 package interacaoComUsuario;
 
 import dados.ServicoException;
-import java.lang.reflect.Array;
 import java.util.List;
 import java.util.Scanner;
 import servicos.ClienteServico;
@@ -14,7 +13,6 @@ import servicos.Usuario;
 import servicos.IUsuarioServico;
 import servicos.Livro;
 import servicos.LivroServico;
-import java.util.Iterator;
 
 
 
@@ -72,9 +70,61 @@ public class ClienteTerminal extends Terminal{
             List<Livro> livrosAvaliados = livroServico.listaLivrosAlugados();
             System.out.print("Você escolheu a opção (1) - Avaliar livro \n");
             System.out.print("Gerando lista de livros que foram alugados por você... \n");
-            for()
+            for (int i = 0; i < livrosAvaliados.size(); i++) {
+                System.out.println("Lívro (" + i + ")");
+                System.out.println("Título: " + livrosAvaliados.get(i).getTitulo());
+                System.out.println("Autor: " + livrosAvaliados.get(i).getAutor());
+            }
+            System.out.println("Escolha o número do livro que você quer que seja avaliado");
             
-            
+            boolean numeric = true;
+            Double num = 0.0;
+            while(true){
+                String livroEscolhido = entradaUsuario.next();
+                
+                try {
+                    num = Double.parseDouble(livroEscolhido);
+                } 
+                catch (NumberFormatException e) {
+                    numeric = false;
+                }
+
+                if(numeric && (num>0) && (num<=livrosAvaliados.size())){
+                    double avaliacao = 0.0;
+                    System.out.println("De uma nota de 0 a 5 para o livro: " + livrosAvaliados.get(num.intValue()).getTitulo());
+                    Double num2 = 0.0;
+                    boolean key2while = true;
+                    while(key2while){
+                        livroEscolhido = entradaUsuario.next();
+                        
+                        try {
+                            num2 = Double.parseDouble(livroEscolhido);
+                        } 
+                        catch (NumberFormatException e) {
+                            numeric = false;
+                        }
+                        if(numeric && (num>=0) && (num<=5)){
+                        avaliacao = num;
+                        key2while = false;
+                        }
+                        else{
+                            System.out.println("Entrada incorreta! Insira um número de 0 a 5 para o livro "
+                                                + livrosAvaliados.get(num.intValue()).getTitulo());
+                        }
+                    }
+                    
+                    return livroServico.avaliarLivro(livrosAvaliados.get(num.intValue()), avaliacao);
+                }
+                else{
+                    System.out.println("Escolha inválida! \n"); 
+                    System.out.println("Escolha o número de um dos livros:");
+                    for (int i = 0; i < livrosAvaliados.size(); i++) {
+                        System.out.println("Lívro (" + i + ")");
+                        System.out.println("Título: " + livrosAvaliados.get(i).getTitulo());
+                        System.out.println("Autor: " + livrosAvaliados.get(i).getAutor());
+                    }
+                }
+            }
 
         }
         else if(escolha.equals("2")){
