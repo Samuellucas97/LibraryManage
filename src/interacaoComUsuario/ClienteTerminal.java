@@ -122,7 +122,7 @@ public class ClienteTerminal extends Terminal{
                         }
                     }
                     
-                    return ((ClienteServico)clienteServico).avaliarLivro(livrosAvaliados.get(num.intValue()), avaliacao.intValue());
+                    return avaliação(livrosAvaliados.get(num.intValue()), avaliacao.intValue());
                 }
                 else{
                     System.out.println("Escolha inválida! \n"); 
@@ -244,5 +244,8 @@ public class ClienteTerminal extends Terminal{
         return null;
     }
         
-
+    private Object avaliação(Livro livro, int nota){
+        return ((ClienteServico)clienteServico).avaliarLivro(livro, nota);
+    }
+                    
 }

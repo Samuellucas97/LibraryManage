@@ -17,8 +17,4 @@ public abstract class Terminal {
         return null;
     }
     
-    public Terminal logout(){
-        return new UsuarioTerminal();
-    }
-    
 }

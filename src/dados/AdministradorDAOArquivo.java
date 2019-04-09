@@ -5,7 +5,12 @@
  */
 package dados;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 import servicos.Administrador;
 import servicos.Funcionario;
 import servicos.Usuario;
@@ -14,59 +19,143 @@ import servicos.Usuario;
  *
  * @author SamDan
  */
-public class AdministradorDAOArquivo extends FuncionarioDAOArquivo implements AdministradorDAO {
+public class AdministradorDAOArquivo extends FuncionarioDAOArquivo{
 
-    
-    private HashMap<String, Administrador> hMapAdministrador = new HashMap<String, Administrador>();
-            
-    
+    private final String nomeDoArquivo = "Administradores";
+    private HashMap<String, Administrador> hMapAdministrador;
+
+   @Override
+    protected void lerArquivo(String nomeDoArquivo) throws ServicoException {
+        this.hMapAdministrador = (HashMap<String, Administrador>) Serializator.unserialize(this.hMapAdministrador,nomeDoArquivo);
+    }
+
     @Override
-    protected void transformaStringEmHashMap(String conteudoArquivo) {
-    hMapAdministrador.clear();
-        
-        Administrador administrador = new Administrador();
-        
-        for(String linhaDoArquivo: conteudoArquivo.split("\n") ){
+    protected boolean salvarArquivo(String nomeArquivo) throws ServicoException {
+        Serializator.serialize(this.hMapAdministrador, nomeArquivo);
+        return true;
+    }
 
-            administrador.setLogin( linhaDoArquivo.split(";")[1].split(":")[1] );
-            administrador.setSenha( linhaDoArquivo.split(";")[2].split(":")[1] );
-            administrador.setNome( linhaDoArquivo.split(";")[3].split(":")[1] );
-            administrador.setTelefone( linhaDoArquivo.split(";")[4].split(":")[1] );
-            administrador.setIdade( Integer.parseInt(linhaDoArquivo.split(";")[5].split(":")[1] ));
-            administrador.setGenero( linhaDoArquivo.split(";")[6].split(":")[1] );
-
-            hMapAdministrador.put( administrador.getLogin(), administrador);
-
+    @Override
+    public Usuario autenticacao(String login, String senha) throws ServicoException {
+        if(this.hMapAdministrador.containsKey(login)){
+            Administrador administrador = this.hMapAdministrador.get(login);
+            if(administrador.getSenha().equals(senha)) return administrador;
+            else{
+                throw new ServicoException("Senha inválida! Tente novamente.");
+            }
+        }
+        else{
+            throw new ServicoException("Login inválido! Tente novamente.");
         }
     }
 
     @Override
-    protected String autenticar(String login, String senha) {
+    public Usuario consultar(String login) throws ServicoException {
+        if(this.hMapAdministrador.containsKey(login)) return this.hMapAdministrador.get(login);
+        else throw new ServicoException("Administrador não encontrado!");
+    }
+
+    @Override
+    public List<Usuario> consultaUsuarios(List<String> params, List<String> keys) throws ServicoException {
+        List<Usuario> administradores = new ArrayList<>();
+        List<List<Usuario> > listAdministradores = new ArrayList<>();
         
-        Funcionario funcionarioTemporario = hMapAdministrador.get(login);
+        if(params.size() != keys.size()) throw new ServicoException("Quantidade de chaves não confere com a quantidade de parâmetros!");
         
-        if(  funcionarioTemporario == null )
-            return "Login de usuario nao cadastrado";
+        int i = 0;
+        for(String param : params) listAdministradores.add(this.consultaUsuarios(param, keys.get(i++)));
                 
-        if( !senha.equals( funcionarioTemporario.getSenha() ) )
-            return "Senha de usuario incorreta";
-                    
-        return "OK";
+        Collections.sort(listAdministradores, (o1, o2) -> {
+            if(o1.size() > o2.size()) return -1;
+            else if (o1.size() < o2.size()) return 1; 
+            return 0;
+        });
         
-    }
-
-    public Usuario buscar(String login) throws NullPointerException {
-        return hMapAdministrador.get(login);
+        for(Iterator<List<Usuario>> iterator = listAdministradores.iterator(); iterator.hasNext();) {
+            List<Usuario> next = iterator.next();
+            if(administradores.isEmpty()) administradores.addAll(next);
+            else{
+                List<Usuario> auxAdministrares = new ArrayList<>();
+                auxAdministrares.addAll(administradores);
+                auxAdministrares.removeAll(next);
+                administradores.removeAll(auxAdministrares);
+            }
+            if(administradores.isEmpty()) break;
+        }
+        
+        if(administradores.isEmpty()) throw new ServicoException("Nenhum administrador encontrado!");
+        
+        return administradores;
     }
 
     @Override
-    public void salvar(Administrador administrador) throws ServicoException {
-        /// TODO
+    public List<Usuario> consultaUsuarios(String param, String key) throws ServicoException {
+        List<Usuario> administradores = new ArrayList<>();
+        
+        for (Map.Entry<String, Administrador> operador : this.hMapAdministrador.entrySet()) {
+            Administrador value = operador.getValue();
+            
+            switch(param){
+                case "Login":
+                    if(value.getLogin().equals(key)) administradores.add(value);                    
+                    break;
+                case "Nome":
+                    if(value.getNome().toLowerCase().contains(key.toLowerCase())) administradores.add(value);
+                    break;
+                case "Idade":
+                    if(String.valueOf(value.getIdade()).equals(key)) administradores.add(value);
+                    break;
+                case "Genero":
+                    if(value.getGenero().toString().toLowerCase().contains(key.toLowerCase())) administradores.add(value);
+                    break;
+                case "Salario":
+                    if(String.valueOf(value.getSalario()).equals(key)) administradores.add(value);
+                    break;
+                default:
+                    
+            }
+        }
+        if(administradores.isEmpty()) throw new ServicoException("Nenhum Operador encontrado!");
+        
+        return administradores;
     }
 
     @Override
-    public void salvar(Funcionario funcionario) throws ServicoException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void registrar(Usuario usuario) throws ServicoException {
+        if(!this.hMapAdministrador.containsKey(usuario.getLogin())){
+            this.hMapAdministrador.put(usuario.getLogin(),(Administrador) usuario);
+            this.salvarArquivo(this.nomeDoArquivo);
+        }              
+        else throw new ServicoException("Administrador com esse login já registrado!");
     }
+
+    @Override
+    public void alterar(String usuarioLogin, Usuario usuarioAlterado) throws ServicoException {
+         if(usuarioLogin.equals(usuarioAlterado.getLogin())){
+            this.hMapAdministrador.remove(usuarioLogin);
+            this.hMapAdministrador.put(usuarioAlterado.getLogin(), (Administrador) usuarioAlterado);
+            this.salvarArquivo(this.nomeDoArquivo);
+        }
+        else{
+            if(this.hMapAdministrador.containsKey(usuarioAlterado.getLogin())){
+                throw new ServicoException("A alteração não foi concluida! \n O login escolhido já é utilizado");
+            }
+            else{
+                this.hMapAdministrador.remove(usuarioLogin);
+                this.hMapAdministrador.put(usuarioAlterado.getLogin(), (Administrador) usuarioAlterado);
+                this.salvarArquivo(this.nomeDoArquivo);
+            }
+        }
+    }
+
+    @Override
+    public void excluir(Usuario usuario) throws ServicoException {
+        boolean verification =  this.hMapAdministrador.remove(usuario.getLogin(), (Administrador) usuario);
+        if(!verification) throw new ServicoException("Esse usuário não existe no registro e não pode ser excluído!");
+        
+        this.salvarArquivo(this.nomeDoArquivo);
+    }
+ 
+    
     
 }

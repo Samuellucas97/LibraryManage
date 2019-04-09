@@ -8,7 +8,6 @@ package servicos;
 import dados.ServicoException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import javafx.util.Pair;
 
 
 /**
@@ -20,20 +19,20 @@ public class Cliente extends Usuario{
     
     private int numeroEmprestimos = 0;
     private int numeroDevolucoes = 0;
-    private ArrayList<Pair<String,String> > listaId_e_DataDeEmprestimoLivros = new ArrayList<  >();
-    private ArrayList<Boolean> ranking = new ArrayList<>();
-    private HashMap<String, ArrayList<Boolean> > hMapRankingLivros = new HashMap< >(); 
+    private HashMap<String,String>  hMapId_DataDeEmprestimoLivros = new HashMap<>();
+    private ArrayList<Boolean> rankingCliente = new ArrayList<>();
+    private HashMap<String, ArrayList<Boolean> > hMapId_RankingLivros = new HashMap<>(); 
     private ArrayList<Livro> livrosAlugados = new ArrayList<>();
             
     public Cliente( String login, String senha){
         
         super(login, senha);
         
-        ranking.add(false); 
-        ranking.add(false);
-        ranking.add(false);
-        ranking.add(false);
-        ranking.add(false);
+        rankingCliente.add(false); 
+        rankingCliente.add(false);
+        rankingCliente.add(false);
+        rankingCliente.add(false);
+        rankingCliente.add(false);
     
     }
 
@@ -41,42 +40,42 @@ public class Cliente extends Usuario{
         
         super();
         
-        this.ranking = new ArrayList<Boolean>();
+        this.rankingCliente = new ArrayList<Boolean>();
         
-        ranking.add(false); 
-        ranking.add(false);
-        ranking.add(false);
-        ranking.add(false);
-        ranking.add(false);
+        rankingCliente.add(false); 
+        rankingCliente.add(false);
+        rankingCliente.add(false);
+        rankingCliente.add(false);
+        rankingCliente.add(false);
     }
     
-    public ArrayList<Boolean> getRanking(){
-        return this.ranking;
+    public ArrayList<Boolean> getRankingCliente(){
+        return this.rankingCliente;
     }
 
     public int getRankingInt(){
         int cont = 0;
-        for(boolean nivel : this.getRanking()){
+        for(boolean nivel : this.getRankingCliente()){
             if(nivel) cont++;
             else break;
         }
         return cont;
     }
     
-    public void setRanking( ArrayList<Boolean> ranking ){
-        this.ranking.clear();
-        this.ranking = ranking;
+    public void setRankingCliente( ArrayList<Boolean> rankingCliente ){
+        this.rankingCliente.clear();
+        this.rankingCliente = rankingCliente;
     }
     
     public void setRankingInt( int valor) throws ServicoException{
         if(valor >= 0 && valor <=5){
-            this.ranking.set(0, false);
-            this.ranking.set(1, false);
-            this.ranking.set(2, false);
-            this.ranking.set(3, false);
-            this.ranking.set(4, false);
+            this.rankingCliente.set(0, false);
+            this.rankingCliente.set(1, false);
+            this.rankingCliente.set(2, false);
+            this.rankingCliente.set(3, false);
+            this.rankingCliente.set(4, false);
             for(int i = 0; i < valor; i++){
-                this.ranking.set(i, true);
+                this.rankingCliente.set(i, true);
             }
         }
         else throw new ServicoException("Valor do ranking inválido!");

@@ -16,14 +16,12 @@ public class Funcionario extends Usuario{
     
     private HashMap<String, ArrayList<Boolean> > hMapRankingUsuario =  new HashMap<String, ArrayList<Boolean> >();
     
-    private String id;
     private float salario;
 
     public Funcionario( ){
     
         super();
         
-        this.id = new String();
         this.salario =  0;
     
     }
@@ -32,18 +30,10 @@ public class Funcionario extends Usuario{
     
         super(login, senha);
         
-        this.id = new String();
         this.salario =  0;
     
     }
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
+   
     public float getSalario() {
         return salario;
     }

@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import servicos.Cliente;
 import servicos.Usuario;
 
@@ -93,7 +94,42 @@ public class ClienteDAOArquivo extends UsuarioDAOArquivo{
 
     @Override
     public List<Usuario> consultaUsuarios(String param, String key) throws ServicoException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Usuario> clientes = new ArrayList<>();
+        
+        for (Map.Entry<String, Cliente> livro : this.hMapCliente.entrySet()) {
+            Cliente value = livro.getValue();
+            
+            switch(param){
+                case "Login":
+                    if(value.getLogin().equals(key)) clientes.add(value);                    
+                    break;
+                case "Nome":
+                    if(value.getNome().toLowerCase().contains(key.toLowerCase())) clientes.add(value);
+                    break;
+                case "Idade":
+                    if(String.valueOf(value.getIdade()).equals(key)) clientes.add(value);
+                    break;
+                case "Genero":
+                    if(value.getGenero().toString().toLowerCase().contains(key.toLowerCase())) clientes.add(value);
+                    break;
+                case "NumeroEmprestimos":
+                    if(String.valueOf(value.getNumeroEmprestimos()).equals(key)) clientes.add(value);
+                    break;
+                case "NumeroDevolucoes":
+                    if(String.valueOf(value.getNumeroDevolucoes()).equals(key)) clientes.add(value);
+                    break;
+                case "RankingCliente": 
+                    if(String.valueOf(value.getRankingInt()).equals(key)) clientes.add(value);
+                    break;
+                default:
+                    
+            }
+            
+        }
+                
+        if(clientes.isEmpty()) throw new ServicoException("Nenhum cliente encontrado!");
+        
+        return clientes;
     }
 
     @Override
