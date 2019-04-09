@@ -15,7 +15,7 @@ import servicos.IUsuarioServico;
 //Classe OperadorTerminal
 public class OperadorTerminal extends Terminal{
     
-    private final IUsuarioServico operadorServico;
+    private IUsuarioServico operadorServico;
     private Usuario operador;
 
     public OperadorTerminal() {
@@ -34,7 +34,7 @@ public class OperadorTerminal extends Terminal{
     //public bloqueioTemporarioDeLivros(Livro livro){}
     //public bloqueioPermanenteDeLivros(Livro livro){}
     
-    
+    /*
     @Override
     protected void autenticacao(String login, String senha){
         try{
@@ -45,7 +45,7 @@ public class OperadorTerminal extends Terminal{
             System.err.println(ex.getMessage());
         }
         return this.operador;
-    }
+    } */
 
     @Override
     public String apresentacao( ){

@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Scanner;
 import servicos.Administrador;
 import servicos.Cliente;
+import servicos.ILivroServico;
 import servicos.UsuarioServico;
 import servicos.IUsuarioServico;
 import servicos.Livro;
@@ -24,7 +25,7 @@ public class UsuarioTerminal extends Terminal {
     private UsuarioServico operadorServico;
     private UsuarioServico administradorServico;
 
-    private LivroServico livroServico; 
+    private ILivroServico livroServico; 
 
     private Usuario usuario;
     private String login = "";
@@ -67,10 +68,29 @@ public class UsuarioTerminal extends Terminal {
         }
     }
 
-    @Override
     protected void autenticacao(String login, String senha){
+        Usuario usr = null;
+        
         try{
-            this.usuario = this.usuarioServico.autenticacao(login, senha);
+           usr = this.clienteServico.autenticacao(login, senha);
+           if(usr != null){
+               this.usuario = usr;
+           }
+           else{
+                usr = this.operadorServico.autenticacao(login, senha);
+                if(usr != null){
+                    this.usuario = usr;
+                }
+                else{
+                    usr = this.administradorServico.autenticacao(login, senha);
+                    if(usr != null){
+                        this.usuario = usr;
+                    }
+                    else{
+                        System.err.println("Autenticação falhou!");
+                    }
+                }
+           }
            
         }
         catch (ServicoException ex) {
