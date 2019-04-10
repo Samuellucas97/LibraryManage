@@ -12,12 +12,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import servicos.Administrador;
-import servicos.Funcionario;
 import servicos.Usuario;
 
 /**
  *
- * @author SamDan
+ * @author José Welliton Nunes Júnior
  */
 public class AdministradorDAOArquivo extends FuncionarioDAOArquivo{
 
@@ -115,11 +114,60 @@ public class AdministradorDAOArquivo extends FuncionarioDAOArquivo{
                     
             }
         }
-        if(administradores.isEmpty()) throw new ServicoException("Nenhum Operador encontrado!");
+        if(administradores.isEmpty()) throw new ServicoException("Nenhum administrador encontrado!");
         
         return administradores;
     }
-
+    
+    public List<Usuario> consultaFuncionarios(List<String> params, List<String> keys) throws ServicoException {
+        List<Usuario> funcionarios = new ArrayList<>();
+        List<List<Usuario> > listFuncionarios = new ArrayList<>();
+        
+        if(params.size() != keys.size()) throw new 
+        ServicoException("Quantidade de chaves não confere com a quantidade de parâmetros!");
+        
+        int i = 0;
+        for(String param : params) listFuncionarios.add(this.consultaFuncionarios(param, keys.get(i++)));
+                
+        Collections.sort(listFuncionarios, (o1, o2) -> {
+            if(o1.size() > o2.size()) return -1;
+            else if (o1.size() < o2.size()) return 1; 
+            return 0;
+        });
+        
+        for(Iterator<List<Usuario>> iterator = listFuncionarios.iterator(); iterator.hasNext();) {
+            List<Usuario> next = iterator.next();
+            if(funcionarios.isEmpty()) funcionarios.addAll(next);
+            else{
+                List<Usuario> auxFuncionarios = new ArrayList<>();
+                auxFuncionarios.addAll(funcionarios);
+                auxFuncionarios.removeAll(next);
+                funcionarios.removeAll(auxFuncionarios);
+            }
+            if(funcionarios.isEmpty()) break;
+        }
+        
+        if(funcionarios.isEmpty()) throw new ServicoException("Nenhum funcionário encontrado!");
+        
+        return funcionarios;
+    }
+    
+    public List<Usuario> consultaFuncionarios(String param, String key) throws ServicoException {
+        List<Usuario> funcionarios = new ArrayList<>();
+        List<Usuario> operadores;
+        List<Usuario> administradores;
+        
+        administradores = FuncionarioDAOArquivo.getAdministradorDAOArquivo().consultaUsuarios(param, key);
+        operadores = FuncionarioDAOArquivo.getOperadorDAOArquivo().consultaUsuarios(param, key);
+        
+        funcionarios.addAll(operadores);
+        funcionarios.addAll(administradores);
+        
+        if(funcionarios.isEmpty()) throw new ServicoException("Nenhum funcionário encontrado!");
+        
+        return funcionarios;
+    }   
+    
     @Override
     public void registrar(Usuario usuario) throws ServicoException {
         if(!this.hMapAdministrador.containsKey(usuario.getLogin())){

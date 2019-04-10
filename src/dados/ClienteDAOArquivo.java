@@ -16,7 +16,7 @@ import servicos.Usuario;
 
 /**
  *
- * @author SamDan
+ * @author José Welliton Nunes Júnior
  */
 public class ClienteDAOArquivo extends UsuarioDAOArquivo{
     

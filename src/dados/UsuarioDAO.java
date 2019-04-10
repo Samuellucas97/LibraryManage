@@ -11,7 +11,7 @@ import servicos.Usuario;
 /**
  * Interface de manipulação de dados
  * @author Samuel Lucas de Moura Ferino
- *         José Welliton 
+ *         José Welliton Nunes Júnior
  */
 public interface UsuarioDAO {
 

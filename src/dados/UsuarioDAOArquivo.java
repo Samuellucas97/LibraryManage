@@ -6,9 +6,9 @@
 package dados;
 
 /**
- * Representa um 
+ * Classe abstrada de manipulação de dados em arquivo.
  * @author  Samuel Lucas de Moura Ferino
- *          José Wellinton
+ *          José Wellinton Nunes Júnior
  */
 public abstract class UsuarioDAOArquivo implements UsuarioDAO{
 

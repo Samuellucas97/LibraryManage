@@ -10,7 +10,7 @@ import servicos.Livro;
 
 /**
  *
- * @author SamDan
+ * @author José Welliton Nunes Júnior
  */
 public interface LivroDAO {
     

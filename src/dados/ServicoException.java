@@ -7,7 +7,7 @@ package dados;
 
 /**
  *
- * @author SamDan
+ * @author José Welliton Nunes Júnior
  */
 public class ServicoException extends Exception {
     

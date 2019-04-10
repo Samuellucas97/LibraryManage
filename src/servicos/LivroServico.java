@@ -15,39 +15,31 @@ import java.util.List;
 /**
  * Implementa a lógica de negócios relativa a Livro
  * @author Samuel Lucas de Moura Ferino
- * @author José Wellinton 
+ * @author José Wellinton Nunes Júnior
  */
 public class LivroServico implements ILivroServico{
-    
-    
     private static LivroServico instance;
     private static LivroDAO livroDAO;
     
-    /**
-     * Construtor padrão
-     * @throws dados.ServicoException
-     */
-    LivroServico() throws ServicoException{
-        
-        /// VAZIO
+    private LivroServico() throws ServicoException{        
+        LivroServico.livroDAO = LivroDAOArquivo.getInstancia();
     }
     
     public static LivroServico getInstance() throws ServicoException{
         if(LivroServico.instance == null){
-            LivroServico.instance = new LivroServico();
-            livroDAO = LivroDAOArquivo.getInstancia();
+            LivroServico.instance = new LivroServico();            
         }
         return LivroServico.instance; 
     }
     
     @Override
     public Livro consultaLivro(String idLivro) throws ServicoException{
-        return livroDAO.consultaLivro(idLivro);
+        return LivroServico.livroDAO.consultaLivro(idLivro);
     }    
     
     @Override
     public void registrarLivro(Livro livro) throws ServicoException{
-        this.livroDAO.registrarLivro(livro);
+        LivroServico.livroDAO.registrarLivro(livro);
     }
              
     @Override
@@ -63,7 +55,7 @@ public class LivroServico implements ILivroServico{
     
     @Override
     public void excluirLivro(Livro livro) throws ServicoException{
-        this.livroDAO.excluirLivro(livro);
+        LivroServico.livroDAO.excluirLivro(livro);
     }
 
     
@@ -81,12 +73,12 @@ public class LivroServico implements ILivroServico{
 
     @Override
     public List<Livro> consultaLivros(String param, String key) throws ServicoException {
-        return this.livroDAO.consultaLivros(param, key);
+        return LivroServico.livroDAO.consultaLivros(param, key);
     }
 
     @Override
     public List<Livro> consultaLivros(List<String> params, List<String> keys) throws ServicoException {
-        return this.livroDAO.consultaLivros(params, keys);
+        return LivroServico.livroDAO.consultaLivros(params, keys);
     }
 
         
@@ -117,8 +109,7 @@ public class LivroServico implements ILivroServico{
     }
     
     @Override
-    public void alterar(Livro livro, List<String> params, List<String> keys) throws ServicoException{     
-        //String idLivro = livro.getId();
+    public void alterar(Livro livro, List<String> params, List<String> keys) throws ServicoException{
         Livro livroAlterado = this.copia(livro);
         
         if(params.size() != keys.size()) 
@@ -129,7 +120,7 @@ public class LivroServico implements ILivroServico{
             livroAlterado = this.alterarSemSalvar(livroAlterado, param, keys.get(cont++));
         }
         
-        this.livroDAO.alterarLivro(livro.getId(), livroAlterado);
+        LivroServico.livroDAO.alterarLivro(livro.getId(), livroAlterado);
     }
     
     @Override
@@ -216,7 +207,7 @@ public class LivroServico implements ILivroServico{
             default:
                 
         }        
-        this.livroDAO.alterarLivro(livro.getId(), livroAlterado);
+        LivroServico.livroDAO.alterarLivro(livro.getId(), livroAlterado);
     }
     
     private Livro alterarSemSalvar(Livro livro, String param, String key) throws ServicoException{

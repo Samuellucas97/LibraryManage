@@ -16,7 +16,7 @@ import servicos.Usuario;
 
 /**
  *
- * @author wellitongb
+ * @author José Welliton Nunes Júnior
  */
 public class OperadorDAOArquivo extends UsuarioDAOArquivo {
     

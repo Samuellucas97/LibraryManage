@@ -14,17 +14,6 @@ import dados.ServicoException;
  */
 public abstract class UsuarioServico implements IUsuarioServico {
  
-   // private final UsuarioDAO usuarioDAO; Há a necessidade?
-
-    /**
-     * Construtor padrão
-     * @throws dados.ServicoException
-     */    
-    public UsuarioServico() throws ServicoException {
-   ///     this.usuarioDAO = UsuarioDAOFactory.getUsuarioDAO("UsuarioDAOArquivo");
-        /// VAZIO
-    }
-    
     /**
      * Autentica o usuário em detrimento do login e da senha
      * @param login Login do usuário

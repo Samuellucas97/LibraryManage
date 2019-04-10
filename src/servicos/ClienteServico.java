@@ -13,36 +13,32 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
+ * Representa um funcionário
+ * @author  Samuel Lucas de Moura Ferino
+ * @author  José Wellinton Nunes Júnior
  * 
- * @author SamDan
  */
 public class ClienteServico implements IUsuarioServico{
  
-    private ClienteDAOArquivo clienteDAOArquivo;
-    private ILivroServico livroServico;
+    private static ClienteDAOArquivo clienteDAOArquivo;
+    private static ILivroServico livroServico;
     
     /**
      * Construtor padrão
+     * @throws dados.ServicoException
      */
-    public ClienteServico(){ 
-        try{
-            this.livroServico = LivroServico.getInstance();      
-            this.clienteDAOArquivo = (ClienteDAOArquivo) UsuarioDAOFactory.getUsuarioDAO("ClienteDAOArquivo");
-        }
-        catch (ServicoException ex) {
-            System.err.println(ex.getMessage());
-        }
-         
-        
-        /// VAZIO
+    public ClienteServico() throws ServicoException{ 
+            ClienteServico.livroServico = LivroServico.getInstance();      
+            ClienteServico.clienteDAOArquivo = (ClienteDAOArquivo) UsuarioDAOFactory.getUsuarioDAO("ClienteDAOArquivo");
     }
     
     /**
      * Insere ranking no livro
-     * @param livro Livro a ser inserido o ranking
+     * @param idLivro identificador do livro;
      * @return 
      */
-    private void inserirRankingLivro( Livro livro ){
+    private void inserirRankingLivro(String idLivro, Cliente cliente){
+        
         /// Dúvida: é para inserir esse livro no atributo ranking da classe Cliente?
         ///         E se for, eu o adiciono com qual ranking
                 
