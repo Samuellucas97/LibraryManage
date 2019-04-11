@@ -37,7 +37,7 @@ public abstract class UsuarioServico implements IUsuarioServico {
      * @return 
      */
     @Override
-    public abstract List<Object> consultaLista(Object objeto);
+    public abstract Object consultaLista(Object objeto);
     /**
      * Registra objeto
      * @param   objeto  Objeto a ser registrado

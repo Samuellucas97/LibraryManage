@@ -30,20 +30,35 @@ public interface IUsuarioServico {
      * Realiza consulta
      * @param   objeto  Objeto a ser consultado
      * @return 
+     * @throws dados.ServicoException 
      */
     public Object consulta(Object objeto) throws ServicoException;
     
     /**
      * Realiza consulta de listas
      * @param   objeto  Objeto a ser consultado
+     * @param params
+     * @param keys
      * @return 
+     * @throws dados.ServicoException 
      */
-    public List<Object> consultaLista(Object objeto, List<String> params, List<String> keys) throws ServicoException;
+    public Object consultaLista(Object objeto, List<String> params, List<String> keys) throws ServicoException;
+    
+    /**
+     * Realiza consulta de listas
+     * @param   objeto  Objeto a ser consultado
+     * @param param
+     * @param key
+     * @return 
+     * @throws dados.ServicoException 
+     */
+    public Object consultaLista(Object objeto, String param, String key) throws ServicoException;
     
     
     /**
      * Registra objeto
      * @param   objeto  Objeto a ser registrado
+     * @throws dados.ServicoException
      */
     public void registrar(Object objeto) throws ServicoException;
 
@@ -51,8 +66,11 @@ public interface IUsuarioServico {
      * Altera o objeto
      * @param id    Identificação do objeto
      * @param objeto    Objeto a ser alterado
+     * @param param
+     * @param key
+     * @throws dados.ServicoException
      */
-    public void alterar(String id, Object objeto) throws ServicoException;
+    public void alterar(String id, Object objeto,String param, String key) throws ServicoException;
     
     /**
      * Excluir o objeto

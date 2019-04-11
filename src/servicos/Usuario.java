@@ -5,6 +5,8 @@
  */
 package servicos;
 
+import dados.ServicoException;
+
 /**
  * Representa um usuário
  * @author  Samuel Lucas de Moura Ferino
@@ -86,7 +88,8 @@ public class Usuario {
         return idade;
     }
 
-    public void setIdade(int idade) {
+    public void setIdade(int idade) throws ServicoException {
+        if(idade < 0) throw new ServicoException("Valor da idade inválida!");
         this.idade = idade;
     }
 
