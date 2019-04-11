@@ -41,11 +41,15 @@ public class OperadorServico extends FuncionarioServico{
     }
     /**
      * Efetua o empréstimo de um livro
+     * @param cliente
      * @param livro Livro a ser emprestado
      * @throws ServicoException 
      */
-    public void emprestimoDeLivro(Livro livro) throws ServicoException{
+    public void emprestimoDeLivro(Cliente cliente, Livro livro) throws ServicoException{
+        List<Livro> livrosAlugados = cliente.getLivrosAlugados();
+        if(!livrosAlugados.contains(livro)) livrosAlugados.add(livro);
         OperadorServico.livroServico.efetuarEmprestimoDeLivro(livro);
+        
     }    
 
     @Override
