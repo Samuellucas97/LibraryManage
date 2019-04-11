@@ -32,18 +32,6 @@ public class ClienteTerminal extends Terminal{
         
     }
     
-    /*
-    @Override
-    protected void autenticacao(String login, String senha){
-        try{
-            this.cliente = this.clienteServico.autenticacao(login, senha);
-           
-        }
-        catch (ServicoException ex) {
-            System.err.println(ex.getMessage());
-        }
-    }*/
-
     @Override
     public String apresentacao( ){
         Scanner entradaUsuario = new Scanner(System.in);
@@ -51,7 +39,7 @@ public class ClienteTerminal extends Terminal{
                         + "Digite o número de uma das opções: \n"
                         + "(1)Avaliar livro \n"
                         + "(2)Buscar livro \n"
-                        + "(3)Realizar logout \n");
+                        + "(3)Realizar logout");
         while(true){
             String entradaNumero = entradaUsuario.next();
             if(entradaNumero.equals("1") 
@@ -71,23 +59,140 @@ public class ClienteTerminal extends Terminal{
 
     @Override
     public Object tratamentoEscolha(String escolha) {
-        Scanner entradaUsuario = new Scanner(System.in);
         if(escolha.equals("1")){
-            List<Livro> livrosAvaliados = ((ClienteServico) clienteServico).listaLivrosAlugados();
-            System.out.print("Você escolheu a opção (1) - Avaliar livro \n");
-            System.out.print("Gerando lista de livros que foram alugados por você... \n");
+            return telaAvaliação();
+        }
+        else if(escolha.equals("2")){
+            return telaBuscaLivro();
+        }
+        
+        else if(escolha.equals("3")){
+        System.out.println("Você escolheu a opção (3) - Realizar logout");
+        System.out.println("REALIZANDO LOGOUT...");
+
+        return new UsuarioTerminal();
+        
+        }
+        
+        return null;   
+    }
+    
+    private List<Livro> efetuarBusca(String param, String key){
+        try {
+            return (List<Livro>) clienteServico.consultaLista(new Livro(), param, key);
+        } 
+        catch (ServicoException ex) {
+            System.err.println(ex.getMessage());
+        }
+        
+        return null;
+    }
+
+    private List<Livro> efetuarBusca(List<String> params, List<String> keys){
+        try{
+            return (List<Livro>) this.clienteServico.consultaLista(new Livro(), params, keys);
+
+        }
+        catch (ServicoException ex) {
+            System.err.println(ex.getMessage());
+        }
+        
+        return null;
+    }
+        
+    private void avaliação(String livro, int nota, Cliente cliente) throws ServicoException{
+        ((ClienteServico)clienteServico).inserirRankingLivro(livro, nota, cliente);
+    }
+    
+    private Object telaBuscaLivro(){
+        String op;
+        String key;
+        System.out.println("Você escolheu a opção (2) - Buscar livro");
+        System.out.println("As opções de busca são:");
+        System.out.println("(1) Buscar por Título");
+        System.out.println("(2) Buscar por Autor");
+        System.out.println("(3) Buscar por Assunto");
+        System.out.println("(4) Buscar por Data de Lançamento");
+        System.out.println("(5) Buscar por Edição");
+        System.out.println("(6) Buscar por Editora");
+        System.out.println("(7) Buscar por ID do livro");
+
+        while(true){
+            Scanner entradaUsuario = new Scanner(System.in);
+            op = entradaUsuario.next();
+            switch (op) {
+                case "1":
+                    System.out.print("Digite o título do livro: ");
+                    key = entradaUsuario.next();
+
+                    return efetuarBusca("Titulo" , key);
+                case "2":
+                    System.out.print("Digite o nome do autor do livro: ");
+                    key = entradaUsuario.next();
+
+                    return efetuarBusca("Autor" , key);
+                case "3":
+                    System.out.print("Digite o assunto do livro: ");
+                    key = entradaUsuario.next();
+
+                    return efetuarBusca("Assunto" , key);
+                case "4":
+                    System.out.print("Digite a data de lançamento do livro: ");
+                    key = entradaUsuario.next();
+
+                    return efetuarBusca("DataDeLancamento" , key);
+                case "5":
+                    System.out.print("Digite a edição do livro: ");
+                    key = entradaUsuario.next();
+
+                    return efetuarBusca("Edicao" , key);
+                case "6":
+                    System.out.print("Digite o nome da editora: ");
+                    key = entradaUsuario.next();
+
+                    return efetuarBusca("Editora" , key);
+                case "7":
+                    System.out.print("Digite o ID do livro: ");
+                    key = entradaUsuario.next();
+
+                    return efetuarBusca("ID" , key);
+                default:
+                    System.out.println("Escolha inválida! \n");
+                    System.out.println("As opções de busca são:");
+                    System.out.println("(1) Buscar por Título");
+                    System.out.println("(2) Buscar por Autor");
+                    System.out.println("(3) Buscar por Assunto");
+                    System.out.println("(4) Buscar por Data de Lançamento");
+                    System.out.println("(5) Buscar por Edição");
+                    System.out.println("(6) Buscar por Editora");
+                    System.out.println("(7) Buscar por ID do livro");
+                    break;
+            }
+        }
+    
+    }
+    
+    private Object telaAvaliação(){
+        Scanner entradaUsuario = new Scanner(System.in);
+        List<Livro> livrosAvaliados = ((ClienteServico) clienteServico).listaLivrosAlugados((Cliente) cliente);
+        System.out.print("Você escolheu a opção (1) - Avaliar livro \n");
+        System.out.print("Gerando lista de livros que foram alugados por você... \n");
+        if(livrosAvaliados.isEmpty()){
+            return "Lista de livros pegos emprestado vazia!";
+        }
+        else{
             for (int i = 0; i < livrosAvaliados.size(); i++) {
-                System.out.println("Lívro (" + i + ")");
-                System.out.println("Título: " + livrosAvaliados.get(i).getTitulo());
-                System.out.println("Autor: " + livrosAvaliados.get(i).getAutor());
+            System.out.println("Lívro (" + i + ")");
+            System.out.println("Título: " + livrosAvaliados.get(i).getTitulo());
+            System.out.println("Autor: " + livrosAvaliados.get(i).getAutor());
             }
             System.out.println("Escolha o número do livro que você quer que seja avaliado");
-            
+
             boolean numeric = true;
             Double num = 0.0;
             while(true){
                 String livroEscolhido = entradaUsuario.next();
-                
+
                 try {
                     num = Double.parseDouble(livroEscolhido);
                 } 
@@ -102,7 +207,7 @@ public class ClienteTerminal extends Terminal{
                     boolean key2while = true;
                     while(key2while){
                         livroEscolhido = entradaUsuario.next();
-                        
+
                         try {
                             num2 = Double.parseDouble(livroEscolhido);
                         } 
@@ -136,118 +241,15 @@ public class ClienteTerminal extends Terminal{
                     }
                 }
             }
-
-        }
-        else if(escolha.equals("2")){
-            String op;
-            String key;
-            System.out.println("Você escolheu a opção (2) - Buscar livro");
-            System.out.println("As opções de busca são:");
-            System.out.println("(1) Buscar por Título");
-            System.out.println("(2) Buscar por Autor");
-            System.out.println("(3) Buscar por Assunto");
-            System.out.println("(4) Buscar por Data de Lançamento");
-            System.out.println("(5) Buscar por Edição");
-            System.out.println("(6) Buscar por Editora");
-            System.out.println("(7) Buscar por ID do livro");
-
-
-            while(true){
-                op = entradaUsuario.next();
-                if(op.equals("1")){
-                    System.out.print("Digite o título do livro: ");
-                    key = entradaUsuario.next();
-
-                    return efetuarBusca("Titulo" , key);
-                }
-                else if(op.equals("2")){
-                    System.out.print("Digite o nome do autor do livro: ");
-                    key = entradaUsuario.next();
-
-                    return efetuarBusca("Autor" , key);
-                }
-                else if(op.equals("3")){
-                    System.out.print("Digite o assunto do livro: ");
-                    key = entradaUsuario.next();
-
-                    return efetuarBusca("Assunto" , key);
-                }
-                else if(op.equals("4")){
-                    System.out.print("Digite a data de lançamento do livro: ");
-                    key = entradaUsuario.next();
-
-                    return efetuarBusca("DataDeLancamento" , key);
-                }
-                else if(op.equals("5")){
-                    System.out.print("Digite a edição do livro: ");
-                    key = entradaUsuario.next();
-
-                    return efetuarBusca("Edicao" , key);
-                }
-                else if(op.equals("6")){
-                    System.out.print("Digite o nome da editora: ");
-                    key = entradaUsuario.next();
-
-                    return efetuarBusca("Editora" , key);
-                }
-                else if(op.equals("7")){
-                    System.out.print("Digite o ID do livro: ");
-                    key = entradaUsuario.next();
-
-                    return efetuarBusca("ID" , key);
-                }
-                else{
-                    System.out.println("Escolha inválida! \n"); 
-                    System.out.println("As opções de busca são:");
-                    System.out.println("(1) Buscar por Título");
-                    System.out.println("(2) Buscar por Autor");
-                    System.out.println("(3) Buscar por Assunto");
-                    System.out.println("(4) Buscar por Data de Lançamento");
-                    System.out.println("(5) Buscar por Edição");
-                    System.out.println("(6) Buscar por Editora");
-                    System.out.println("(7) Buscar por ID do livro");
-                }
-            }
-            
-             
-
         }
         
-        else if(escolha.equals("3")){
-        System.out.println("Você escolheu a opção (3) - Realizar logout");
-        System.out.println("REALIZANDO LOGOUT...");
 
-        return new UsuarioTerminal();
-        
-        }
-        
-        return null;   
     }
-    private List<Livro> efetuarBusca(String param, String key){
-        try {
-            return (List<Livro>) clienteServico.consultaLista(new Livro(), param, key);
-        } 
-        catch (ServicoException ex) {
-            System.err.println(ex.getMessage());
-        }
-        
-        return null;
+    public Cliente getCliente(){
+        return (Cliente)cliente;
     }
-
-    private List<Livro> efetuarBusca(List<String> params, List<String> keys){
-        try{
-            return (List<Livro>) this.clienteServico.consultaLista(new Livro(), params, keys);
-
-        }
-        catch (ServicoException ex) {
-            System.err.println(ex.getMessage());
-        }
-        
-        return null;
-    }
-        
-    private void avaliação(String livro, int nota, Cliente cliente) throws ServicoException{
-        ((ClienteServico)clienteServico).inserirRankingLivro(livro, nota, cliente);
+    public void SetCliente(Cliente clienteNovo){
+        this.cliente = clienteNovo;
     }
                     
 }

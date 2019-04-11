@@ -9,6 +9,7 @@ package interacaoComUsuario;
 //Imports
 import dados.ServicoException;
 import java.util.Scanner;
+import servicos.Administrador;
 import servicos.AdministradorServico;
 import servicos.Usuario;
 import servicos.IUsuarioServico;
@@ -150,6 +151,11 @@ public class AdministradorTerminal extends Terminal{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
-    
+    public Administrador getAdministrador(){
+        return (Administrador)administrador;
+    }
+    public void SetAdministrador(Administrador administradorNovo){
+        this.administrador = administradorNovo;
+    }
 
 }
