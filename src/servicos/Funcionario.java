@@ -5,16 +5,18 @@
  */
 package servicos;
 
+import dados.ServicoException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
  *
- * @author SamDante
+ * @author  Samuel Lucas de Moura Ferino
+ * @author  José Wellinton Nunes Júnior
  */
 public class Funcionario extends Usuario{
     
-    private HashMap<String, ArrayList<Boolean> > hMapRankingUsuario =  new HashMap<String, ArrayList<Boolean> >();
+    private HashMap<String, ArrayList<Boolean> > hMapRankingUsuario =  new HashMap<>();
     
     private float salario;
 
@@ -38,8 +40,17 @@ public class Funcionario extends Usuario{
         return salario;
     }
 
-    public void setSalario(float salario) {
+    public void setSalario(float salario) throws ServicoException {
+        if(salario < 0) throw new ServicoException("Valor do salario inválido!");
         this.salario = salario;
+    }
+    
+    public void setHMapRankingUsuario(HashMap<String, ArrayList<Boolean> > hMapRankingUsuario){
+        this.hMapRankingUsuario = hMapRankingUsuario;
+    }
+    
+    public HashMap<String, ArrayList<Boolean> > getHMapRankingUsuario(){
+        return this.hMapRankingUsuario;
     }
     
 }

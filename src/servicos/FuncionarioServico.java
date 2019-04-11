@@ -6,6 +6,7 @@
 package servicos;
 
 import dados.ServicoException;
+import java.util.List;
 
 /**
  * Representa um funcionário
@@ -15,16 +16,31 @@ import dados.ServicoException;
  */
 public abstract class FuncionarioServico implements IUsuarioServico{
     
-    private final IClienteServico clienteServico = new ClienteServico();
-    private final ILivroServico livroServico;
+    private static ClienteServico clienteServico;
+    private static LivroServico livroServico;
     
-    /**
-     * Construtor padrão
-     * @throws dados.ServicoException
-     */
-    public FuncionarioServico() throws ServicoException{
-        this.livroServico = new LivroServico();
+//    private FuncionarioServico(){
+//        
+//    }
+    
+    protected static void Inicializar() throws ServicoException{
+        FuncionarioServico.getClienteServico();
+        FuncionarioServico.getLivroServico();
     }
+    
+    public static ClienteServico getClienteServico() throws ServicoException{
+        if(FuncionarioServico.clienteServico == null) 
+            FuncionarioServico.clienteServico = (ClienteServico) 
+            UsuarioServicoFactory.getUsuarioServico("ClienteServico");
+        return FuncionarioServico.clienteServico;
+    }
+    
+    public static LivroServico getLivroServico() throws ServicoException{
+        if(FuncionarioServico.livroServico == null) 
+            FuncionarioServico.livroServico = LivroServico.getInstance();
+        return FuncionarioServico.livroServico;
+    }
+    
     
     /**
      * Consulta cliente
@@ -33,7 +49,17 @@ public abstract class FuncionarioServico implements IUsuarioServico{
      * @throws ServicoException 
      */
     public Cliente consultarCliente( String loginCliente ) throws ServicoException{
-       return this.clienteServico.consultarCliente(loginCliente);
+       return FuncionarioServico.clienteServico.consultarCliente(loginCliente);
+    }
+    
+    public List<Cliente> consultaClienteLista(Cliente cliente, List<String> params, List<String> keys) 
+            throws ServicoException{
+        return (List<Cliente>) FuncionarioServico.clienteServico.consultaLista(cliente, params, keys);
+    }
+    
+    public List<Cliente> consultaClienteLista(Cliente cliente, String param, String key) 
+            throws ServicoException{
+        return (List<Cliente>) FuncionarioServico.clienteServico.consultaLista(cliente, param, key);
     }
     
     /**
@@ -44,6 +70,7 @@ public abstract class FuncionarioServico implements IUsuarioServico{
      * @param telefone  Telefone do cliente
      * @param idade Idade do cliente
      * @param genero    Gênero do cliente
+     * @param estado    Estado da conta do cliente
      * @throws ServicoException 
      */
     public void registrarCliente(   String login, 
@@ -51,35 +78,18 @@ public abstract class FuncionarioServico implements IUsuarioServico{
                                     String nome,
                                     String telefone,
                                     int idade,
-                                    String genero ) throws ServicoException{
+                                    Usuario.Genero genero,
+                                    Usuario.EstadoUsuario estado) throws ServicoException{
    
         
-        this.clienteServico.salvar( login, 
+        FuncionarioServico.clienteServico.salvar( login, 
                                     senha,
                                     nome,
                                     telefone,
                                     idade,
-                                    genero );
-        
+                                    genero,
+                                    estado);
     
-    }
-    
-    /**
-     * Bloqueia permanentemente o livro
-     * @param livro Livro a ser bloqueado permanentemente
-     * @throws ServicoException 
-     */
-    public void bloqueioPermanenteDeLivro(Livro livro) throws ServicoException{
-        this.livroServico.bloqueioPermanenteDeLivro(livro);
-    }
-    
-    /**
-     * Bloqueia temporário de livro
-     * @param livro Livro a ser bloqueado
-     * @throws ServicoException 
-     */
-    public void bloqueioTemporarioDeLivro(Livro livro) throws ServicoException{
-        this.livroServico.bloqueioTemporarioDeLivro(livro);
     }
     
     /**
@@ -88,7 +98,7 @@ public abstract class FuncionarioServico implements IUsuarioServico{
      * @throws ServicoException 
      */
     public void bloqueioPermanenteDeCliente(Cliente cliente) throws ServicoException{
-        this.clienteServico.bloqueioPermanenteDeCliente(cliente);
+        FuncionarioServico.clienteServico.bloqueioPermanenteDeCliente(cliente);
     }
     
     /**
@@ -97,7 +107,58 @@ public abstract class FuncionarioServico implements IUsuarioServico{
      * @throws ServicoException 
      */
     public void bloqueioTemporarioDeCliente(Cliente cliente) throws ServicoException{
-        this.clienteServico.bloqueioTemporarioDeCliente(cliente);
+        FuncionarioServico.clienteServico.bloqueioTemporarioDeCliente(cliente);
+    }
+    
+    /**
+     * Bloqueio temporário de cliente
+     * @param cliente   Cliente a ser bloqueado
+     * @throws ServicoException 
+     */
+    public void desBloqueioDeCliente(Cliente cliente) throws ServicoException{
+        FuncionarioServico.clienteServico.desbloqueioDeCliente(cliente);
+    }
+    
+    
+    /**
+     * Bloqueia permanentemente o livro
+     * @param livro Livro a ser bloqueado permanentemente
+     * @throws ServicoException 
+     */
+    public void bloqueioPermanenteDeLivro(Livro livro) throws ServicoException{
+        FuncionarioServico.livroServico.efetuarBloqueioPermanenteDeLivro(livro);
+    }
+    
+    /**
+     * Bloqueia temporário de livro
+     * @param livro Livro a ser bloqueado
+     * @throws ServicoException 
+     */
+    public void bloqueioTemporarioDeLivro(Livro livro) throws ServicoException{
+        FuncionarioServico.livroServico.efetuarBloqueioTemporarioDeLivro(livro);
+    }
+    
+    /**
+     * Desbloqueia o livro
+     * @param livro Livro a ser desbloqueado
+     * @throws ServicoException 
+     */
+    public void desBloqueioDeLivro(Livro livro) throws ServicoException{
+        FuncionarioServico.livroServico.efetuarDesbloqueioDeLivro(livro);
+    }
+    
+    public Livro consultarLivro( String idLivro ) throws ServicoException{
+       return FuncionarioServico.livroServico.consultaLivro(idLivro);
+    }
+    
+    public List<Livro> consultaLivroLista(List<String> params, List<String> keys) 
+            throws ServicoException{
+        return FuncionarioServico.livroServico.consultaLivros(params, keys);
+    }
+    
+    public List<Livro> consultaLivroLista(String param, String key) 
+            throws ServicoException{
+        return FuncionarioServico.livroServico.consultaLivros(param, key);
     }
     
     /**
@@ -106,23 +167,36 @@ public abstract class FuncionarioServico implements IUsuarioServico{
      * @throws ServicoException 
      */
     public void registrarLivro(Livro livro) throws ServicoException{
-        this.livroServico.registrarLivro(livro);
+        FuncionarioServico.livroServico.registrarLivro(livro);
+    }
+    
+    public void alterarLivro(Livro livro, String param, String key) throws ServicoException{
+        FuncionarioServico.livroServico.alterar(livro, param, key);
+    }
+    
+    public void alterarLivro(Livro livro, List<String> params, List<String> keys) throws ServicoException{
+        FuncionarioServico.livroServico.alterar(livro, params, keys);
     }
 
     @Override
     public abstract Usuario autenticacao(String login, String senha) throws ServicoException;
     
     @Override
-    public abstract void consulta(Object objeto);
-
-    @Override
-    public abstract void registrar(Object objeto);
+    public abstract Object consulta(Object objeto) throws ServicoException;
     
     @Override
-    public abstract void alterar(String id, Object objeto);
+    public abstract Object consultaLista(Object objeto, List<String> params, List<String> keys) throws ServicoException;
+    
+    @Override
+    public abstract Object consultaLista(Object objeto, String param, String key) throws ServicoException;
+    
+    @Override
+    public abstract void registrar(Object objeto) throws ServicoException;
+    
+    @Override
+    public abstract void alterar(String id, Object objeto,String param, String key) throws ServicoException;
+    
+    @Override
+    public abstract void excluir(Object objeto) throws ServicoException;
         
-    @Override
-    public abstract void excluir(Object objeto);
-    
-    
 }

@@ -75,6 +75,7 @@ public interface IUsuarioServico {
     /**
      * Excluir o objeto
      * @param objeto    Objeto a ser excluído 
+     * @throws dados.ServicoException 
      */
     public void excluir(Object objeto) throws ServicoException;
 

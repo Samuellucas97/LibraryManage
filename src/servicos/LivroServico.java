@@ -78,14 +78,32 @@ public class LivroServico implements ILivroServico{
     
     @Override
     public void efetuarDevolucaoDeLivro(Livro livro) throws ServicoException  {    
-        this.alterar(livro, "QuantidadeDeExemplaresEmprestados", 
-                String.valueOf(livro.getQuantidadeDeExemplaresEmprestados() - 1));
+        try{
+            this.alterar(livro, "QuantidadeDeExemplaresEmprestados", 
+                    String.valueOf(livro.getQuantidadeDeExemplaresEmprestados() - 1));
+        }
+        catch(ServicoException ex){
+            if(ex.getMessage().equals("Quantidade inválida de livros emprestados!")){
+                throw new ServicoException("Impossibilitado de efetuar a devolução!");
+            }
+            else
+                throw new ServicoException(ex.getMessage());
+        }
     }
     
     @Override
-    public void efetuarEmprestimoDeLivro(Livro livro) throws ServicoException {        
-        this.alterar(livro, "QuantidadeDeExemplaresEmprestados", 
-                String.valueOf(livro.getQuantidadeDeExemplaresEmprestados() + 1));   
+    public void efetuarEmprestimoDeLivro(Livro livro) throws ServicoException {
+        try{        
+            this.alterar(livro, "QuantidadeDeExemplaresEmprestados", 
+                    String.valueOf(livro.getQuantidadeDeExemplaresEmprestados() + 1));
+        }
+        catch(ServicoException ex){
+            if(ex.getMessage().equals("Quantidade inválida de livros emprestados!")){
+                throw new ServicoException("Impossibilitado de efetuar o emprestimo!");
+            }
+            else
+                throw new ServicoException(ex.getMessage());
+        }
     }
 
     @Override
@@ -222,7 +240,7 @@ public class LivroServico implements ILivroServico{
                 }
                 break;
             default:
-                
+                throw new ServicoException("O parâmetro" + key +  " é invalido!");
         }        
         LivroServico.livroDAO.alterarLivro(livro.getId(), livroAlterado);
     }

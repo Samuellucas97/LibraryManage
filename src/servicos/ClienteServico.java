@@ -71,6 +71,7 @@ public class ClienteServico implements IUsuarioServico{
      * @param telefone  Telefone do cliente
      * @param idade Idade do cliente
      * @param genero    Gênero do cliente    
+     * @param estado    
      * @throws ServicoException 
      */
     public void salvar( String login, 
@@ -78,7 +79,8 @@ public class ClienteServico implements IUsuarioServico{
                         String nome,
                         String telefone,
                         int idade,
-                        Usuario.Genero genero ) throws ServicoException{
+                        Usuario.Genero genero,
+                        Usuario.EstadoUsuario estado) throws ServicoException{
     
         Cliente cliente = new Cliente();
         
@@ -88,8 +90,10 @@ public class ClienteServico implements IUsuarioServico{
         cliente.setTelefone(telefone);
         cliente.setIdade(idade);
         cliente.setGenero(genero);
+        cliente.setEstadoUsuario(estado);
         
-        ClienteServico.clienteDAOArquivo.registrar(cliente );            
+        
+        ClienteServico.clienteDAOArquivo.registrar(cliente);            
     }
     
     /**
@@ -258,7 +262,7 @@ public class ClienteServico implements IUsuarioServico{
                     }
                     break;
                 default:
-                    
+                    throw new ServicoException("O parâmetro" + key +  " é invalido!");
             }            
             ClienteServico.clienteDAOArquivo.alterar(id ,clienteAlterado);
         }
