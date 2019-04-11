@@ -1,7 +1,10 @@
 package interacaoComUsuario;
 
+import dados.ServicoException;
 import java.util.List;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import servicos.Administrador;
 import servicos.Cliente;
 import servicos.Livro;
@@ -47,16 +50,21 @@ public class Main {
 
                             estados.setEstado((OperadorTerminal) obj);
                         }
-                        else if(obj.getClass().isInstance(new AdministradorTerminal())){
-                            usr = ((UsuarioTerminal)(estados.getEstado())).getUsuario();
-                            ((AdministradorTerminal) obj).SetAdministrador((Administrador) usr);
+                        else 
+                            try {
+                                if(obj.getClass().isInstance(new AdministradorTerminal())){
+                                    usr = ((UsuarioTerminal)(estados.getEstado())).getUsuario();
+                                    ((AdministradorTerminal) obj).SetAdministrador((Administrador) usr);
 
-                            estados.setEstado((AdministradorTerminal) obj);
-                        }
-                        else{
-                            usr = null;
-                            estados.setEstado((UsuarioTerminal) obj);
-                        }
+                                    estados.setEstado((AdministradorTerminal) obj);
+                                }
+                                else{
+                                    usr = null;
+                                    estados.setEstado((UsuarioTerminal) obj);
+                                }
+                            } catch (ServicoException ex) {
+                                            System.err.println(ex.getMessage());
+                            }
                         break;
                         
                     case("2"):  

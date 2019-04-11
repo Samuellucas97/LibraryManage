@@ -26,17 +26,24 @@ public class TestandoClasseDados {
         Cliente cliente;
         ClienteDAOArquivo clienteDAOArquivo;
         ClienteServico clienteServico;
-        
+        List<Livro> livrosAlugados;
         
         try {
+              livroDAO = LivroDAOArquivo.getInstancia();
               clienteDAOArquivo = (ClienteDAOArquivo) UsuarioDAOFactory.getIUsuarioDAO("ClienteDAOArquivo");
               clienteServico = (ClienteServico) UsuarioServicoFactory.getUsuarioServico("ClienteServico");
               cliente = new Cliente("wellitongb", "123456","José Welliton Nunes Júnior", "99999-9999", 24);
               clienteServico.registrar(cliente);
+              livrosAlugados = cliente.getLivrosAlugados();
+              livrosAlugados.add(livroDAO.consultaLivro("978-85-457-0367-0")) ;
               cliente = new Cliente("samuellucas97", "123456","Samuel Lucas de Moura Ferino", "99999-9999", 21);
               clienteServico.registrar(cliente);
+              livrosAlugados = cliente.getLivrosAlugados();
+              livrosAlugados.add(livroDAO.consultaLivro("978-85-457-0367-1")) ;
               cliente = new Cliente("mindundersiege", "123456","Thiago da Costa Monteiro", "99999-9999", 21);
               clienteServico.registrar(cliente);
+              livrosAlugados = cliente.getLivrosAlugados();
+              livrosAlugados.add(livroDAO.consultaLivro("978-85-457-0367-4"));
 //            livroDAO = LivroDAOArquivo.getInstancia();
 //            assunto.add("Suspense");
 //            assunto.add("Ficção");

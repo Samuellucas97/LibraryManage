@@ -8,6 +8,7 @@ package interacaoComUsuario;
 
 //Imports
 import dados.ServicoException;
+import dados.UsuarioDAOFactory;
 import java.util.Scanner;
 import servicos.Administrador;
 import servicos.AdministradorServico;
@@ -17,11 +18,11 @@ import servicos.IUsuarioServico;
 //Classe AdministradorTerminal
 public class AdministradorTerminal extends Terminal{
     //--ATRIBUTOS--//
-    private IUsuarioServico administradorServico;
+    private AdministradorServico administradorServico;
     private Usuario administrador;
 
-    public AdministradorTerminal() {
-        this.administradorServico = (IUsuarioServico) new AdministradorServico();
+    public AdministradorTerminal() throws ServicoException {
+        this.administradorServico = (AdministradorServico) UsuarioDAOFactory.getIUsuarioDAO("AdministradorServico");
     }  
     
     //--METODOS--//

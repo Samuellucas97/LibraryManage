@@ -18,10 +18,9 @@ public abstract class FuncionarioServico implements IUsuarioServico{
     
     private static ClienteServico clienteServico;
     private static LivroServico livroServico;
+    private static OperadorServico operadorServico;
     
-//    private FuncionarioServico(){
-//        
-//    }
+    
     
     protected static void Inicializar() throws ServicoException{
         FuncionarioServico.getClienteServico();
@@ -33,6 +32,13 @@ public abstract class FuncionarioServico implements IUsuarioServico{
             FuncionarioServico.clienteServico = (ClienteServico) 
             UsuarioServicoFactory.getUsuarioServico("ClienteServico");
         return FuncionarioServico.clienteServico;
+    }
+    
+     public static OperadorServico getOperadorServico() throws ServicoException{
+        if(FuncionarioServico.operadorServico == null) 
+            FuncionarioServico.operadorServico = (OperadorServico) 
+            UsuarioServicoFactory.getUsuarioServico("OperadorServico");
+        return FuncionarioServico.operadorServico;
     }
     
     public static LivroServico getLivroServico() throws ServicoException{

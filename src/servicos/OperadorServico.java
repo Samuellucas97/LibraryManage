@@ -184,7 +184,7 @@ public class OperadorServico extends FuncionarioServico{
         else throw new ServicoException("Objeto passado inválido!");
     }
 
-    private Operador copia(Operador operador) throws ServicoException {
+    public Operador copia(Operador operador) throws ServicoException {
         Operador operadorCopiado = new Operador();
 
         operadorCopiado.setLogin(operador.getLogin());        

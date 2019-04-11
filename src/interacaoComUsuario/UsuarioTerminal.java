@@ -7,6 +7,8 @@ package interacaoComUsuario;
 import dados.ServicoException;
 import java.util.List;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import servicos.Administrador;
 import servicos.Cliente;
 import servicos.ILivroServico;
@@ -48,6 +50,7 @@ public class UsuarioTerminal extends Terminal {
     @Override
     public String apresentacao( ){
         Scanner entradaUsuario = new Scanner(System.in);
+        System.out.flush();
         System.out.println("Bem vindo(a) ao LibraryManage! \n"
                         + "Digite o número de uma das opções: \n"
                         + "(1)Realizar login \n"
@@ -67,38 +70,32 @@ public class UsuarioTerminal extends Terminal {
         }
     }
 
-    protected void autenticacao(String login, String senha){
-        Usuario usr = null;
+    protected void autenticacao(String login, String senha) throws ServicoException{
+        Usuario usr = null;        
         
-        try{
-           usr = this.clienteServico.autenticacao(login, senha);
-           if(usr != null){
-               this.usuario = usr;
-           }
-           else{
-                usr = this.operadorServico.autenticacao(login, senha);
-                if(usr != null){
-                    this.usuario = usr;
-                }
-                else{
-                    usr = this.administradorServico.autenticacao(login, senha);
-                    if(usr != null){
-                        this.usuario = usr;
-                    }
-                    else{
-                        System.err.println("Autenticação falhou!");
-                    }
-                }
-           }
-           
+        usr = this.clienteServico.autenticacao(login, senha);
+        if(usr != null){
+            this.usuario = usr;
         }
-        catch (ServicoException ex) {
-            System.err.println(ex.getMessage());
-        }
+        else{
+             usr = this.operadorServico.autenticacao(login, senha);
+             if(usr != null){
+                 this.usuario = usr;
+             }
+             else{
+                 usr = this.administradorServico.autenticacao(login, senha);
+                 if(usr != null){
+                     this.usuario = usr;
+                 }
+                 else{
+                     System.err.println("Autenticação falhou!");
+                 }
+             }
+        }        
     }   
 
    @Override
-    public Terminal login(String login, String senha){
+    public Terminal login(String login, String senha) throws ServicoException{
              
         autenticacao(login, senha);
         
@@ -122,9 +119,13 @@ public class UsuarioTerminal extends Terminal {
     public Object tratamentoEscolha(String escolha) {
         
         if(escolha.equals("1")){
-            return telaLogin();
-
-            
+            try {
+                return telaLogin();
+            } catch (ServicoException ex) {
+                System.err.flush();
+                System.err.println("\n" + ex.getMessage() + "\n");
+                return null;
+            }
         }
         if(escolha.equals("2")){
             return telaBuscaLivro();     
@@ -230,7 +231,7 @@ public class UsuarioTerminal extends Terminal {
         }
     
     }
-    private Object telaLogin(){
+    private Object telaLogin() throws ServicoException{
         Scanner entradaUsuario = new Scanner(System.in);
             System.out.print("Você escolheu a opção (1) - Realizar login \n"
                     + "Digite o seu login: ");
