@@ -61,6 +61,8 @@ public interface ILivroServico {
      */
     public void efetuarBloqueioPermanenteDeLivro(Livro livro) throws ServicoException;
     
+    public void efetuarDesbloqueioDeLivro(Livro livro) throws ServicoException;
+    
     /**
      * Exclui o livro
      * @param livro Livro a ser excluído

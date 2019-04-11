@@ -19,12 +19,19 @@ public class Usuario {
         FEMININO;
     }
     
+    public enum EstadoUsuario{
+        DISPONIVEL,
+        BLOQUEADO_TEMPORARIAMENTE,
+        BLOQUEADO_PERMANENTEMENTE;
+    }
+    
     protected String login;
     protected String senha;
     protected String nome;
     protected String telefone;
     protected int idade;
     protected Genero genero;
+    protected EstadoUsuario estadoUsuario;
     
     /**
      * Construtor padrão
@@ -35,6 +42,7 @@ public class Usuario {
         this.nome  = new String();
         this.telefone = new String();
         this.idade = 0;
+        this.estadoUsuario = EstadoUsuario.DISPONIVEL;
     }
 
     /**
@@ -94,11 +102,19 @@ public class Usuario {
     }
 
     public Genero getGenero() {
-        return genero;
+        return this.genero;
     }
     
 
     public void setGenero(Genero genero) {
         this.genero = genero;
+    }
+    
+    public EstadoUsuario getEstadoUsuario() {
+        return this.estadoUsuario;
+    }    
+
+    public void setEstadoUsuario(EstadoUsuario estado) {
+        this.estadoUsuario = estado;
     }
 }

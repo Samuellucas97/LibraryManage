@@ -116,6 +116,15 @@ public class ClienteServico implements IUsuarioServico{
     public void bloqueioTemporarioDeCliente(Cliente cliente) throws ServicoException {
         this.alterar(cliente.getLogin(),cliente, "EstadoCliente", "BLOQUEADO_TEMPORARIAMENTE");
     }
+    
+    /**
+     * Bloqueia cliente temporariamente
+     * @param cliente Cliente a ser bloqueado temporariamente
+     * @throws dados.ServicoException
+     */
+    public void desbloqueioDeCliente(Cliente cliente) throws ServicoException {
+        this.alterar(cliente.getLogin(),cliente, "EstadoCliente", "DISPONIVEL");
+    }
 
     public void avaliarLivro(int notaLivro) throws ServicoException {
         
@@ -134,8 +143,6 @@ public class ClienteServico implements IUsuarioServico{
     }
     
     public Cliente copia(Cliente cliente) throws ServicoException{
-        ArrayList<String> listAssunto;
-        String[] assuntos;
         Cliente clienteCopiado = new Cliente();
 
         clienteCopiado.setLogin(cliente.getLogin());        
@@ -143,21 +150,14 @@ public class ClienteServico implements IUsuarioServico{
         clienteCopiado.setNome(cliente.getNome());
         clienteCopiado.setSenha(cliente.getSenha());
         clienteCopiado.setTelefone(cliente.getTelefone());
+        clienteCopiado.setGenero(cliente.getGenero());
         clienteCopiado.setNumeroDevolucoes(cliente.getNumeroDevolucoes());
         clienteCopiado.setNumeroEmprestimos(cliente.getNumeroEmprestimos());
         clienteCopiado.setRankingCliente(cliente.getRankingCliente());
-        clienteCopiado.set(cliente.getHMapId_DataDeEmprestimoLivros());
+        clienteCopiado.setHMapId_DataDeEmprestimoLivros(cliente.getHMapId_DataDeEmprestimoLivros());
+        clienteCopiado.setHMapId_RankingLivros(cliente.getHMapId_RankingLivros());
+        clienteCopiado.setLivrosAlugados(cliente.getLivrosAlugados());      
         
-        listAssunto = new ArrayList<>();
-        assuntos = (String[]) cliente.getAssunto().toArray();
-        listAssunto.addAll(Arrays.asList(assuntos));
-        clienteCopiado.setAssunto(listAssunto);
-
-        clienteCopiado.setDataDeLancamento(cliente.getDataDeLancamento());
-        clienteCopiado.setQuantidadeDeTotalDeExemplares(cliente.getQuantidadeDeTotalDeExemplares());
-        clienteCopiado.setQuantidadeDeExemplaresEmprestados(cliente.getQuantidadeDeExemplaresEmprestados());
-        clienteCopiado.setEstadoLivro(cliente.getEstadoLivro());
-
         return clienteCopiado;
     }
 
@@ -428,14 +428,24 @@ public class ClienteServico implements IUsuarioServico{
                         throw new ServicoException("Valor do gênero invalido!");
                     break;
                 case "NumeroEmprestimos":
-                    clienteAlterado.setNumeroEmprestimos(0);
+                    Integer numeroEmprestimos = Integer.getInteger(key);
+                    if(numeroEmprestimos == null) throw new ServicoException("Valor de numero de emprestimos invalido!");
+                    clienteAlterado.setNumeroEmprestimos(numeroEmprestimos);
                     break;
                 case "NumeroDevolucoes":
-                    if(String.valueOf(value.getNumeroDevolucoes()).equals(key)) clientes.add(value);
+                    Integer numeroDevolucoes = Integer.getInteger(key);
+                    if(numeroDevolucoes == null) throw new ServicoException("Valor de numero de devoluções invalido!");
+                    clienteAlterado.setNumeroDevolucoes(numeroDevolucoes);
                     break;
                 case "RankingCliente": 
-                    if(String.valueOf(value.getRankingInt()).equals(key)) clientes.add(value);
+                    Integer rankingCliente = Integer.getInteger(key);
+                    if(rankingCliente == null) throw new ServicoException("Valor do ranking do cliente inválido!");
+                    clienteAlterado.setRankingClienteInt(rankingCliente);
                     break;
+                case "EstadoCliente":
+                    
+                    clienteAlterado.set
+                    
                 default:
                     
             }

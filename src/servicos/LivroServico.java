@@ -54,6 +54,23 @@ public class LivroServico implements ILivroServico{
     }
     
     @Override
+    public void efetuarDesbloqueioDeLivro(Livro livro) throws ServicoException{
+        try{
+            this.alterar(livro, "EstadoLivro", "DISPONIVEL");
+        }
+        catch(ServicoException ex){
+            if(ex.getMessage().equals("Estado do livro não permitido!")) 
+                try{
+                    this.alterar(livro, "EstadoLivro", "DISPONIVEL");
+                }
+            catch(ServicoException ex2){
+                if(ex2.getMessage().equals("Estado do livro não permitido!"))
+                    throw new ServicoException("Livro indisponivel para desbloqueio!");
+            }
+        }
+    }
+    
+    @Override
     public void excluirLivro(Livro livro) throws ServicoException{
         LivroServico.livroDAO.excluirLivro(livro);
     }

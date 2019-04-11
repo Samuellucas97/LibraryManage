@@ -67,8 +67,9 @@ public class Cliente extends Usuario{
         this.rankingCliente = rankingCliente;
     }
     
-    public void setRankingClienteInt( int valor) throws ServicoException{
-        if(valor >= 0 && valor <=5){
+    public void setRankingClienteInt( int valor) throws ServicoException{        
+        if(valor < 0 || valor >5) throw new ServicoException("Valor do ranking do cliente inválido!");
+        else {
             this.rankingCliente.set(0, false);
             this.rankingCliente.set(1, false);
             this.rankingCliente.set(2, false);
@@ -78,7 +79,16 @@ public class Cliente extends Usuario{
                 this.rankingCliente.set(i, true);
             }
         }
-        else throw new ServicoException("Valor do ranking inválido!");
+    }
+    
+    public void setHMapId_RankingLivros(HashMap<String, ArrayList<Boolean> > 
+            hMapId_DataDeEmprestimoLivros){
+        this.hMapId_RankingLivros = hMapId_DataDeEmprestimoLivros;
+    }
+    
+    public void setHMapId_DataDeEmprestimoLivros(HashMap<String, String> 
+           hMapId_DataDeEmprestimoLivros){
+        this.hMapId_DataDeEmprestimoLivros = hMapId_DataDeEmprestimoLivros;
     }
     
     public HashMap<String, ArrayList<Boolean> > getHMapId_RankingLivros(){
@@ -94,7 +104,8 @@ public class Cliente extends Usuario{
         return this.numeroEmprestimos;
     }
 
-    public void setNumeroEmprestimos(int numeroEmprestimos) {
+    public void setNumeroEmprestimos(int numeroEmprestimos) throws ServicoException {
+        if(livrosAlugados.size() > numeroEmprestimos) throw new ServicoException("Valor de numero de emprestimos invalido!");
         this.numeroEmprestimos = numeroEmprestimos;
     }
 
@@ -102,13 +113,18 @@ public class Cliente extends Usuario{
         return this.numeroDevolucoes;
     }
 
-    public void setNumeroDevolucoes(int numeroDevolucoes) {
+    public void setNumeroDevolucoes(int numeroDevolucoes) throws ServicoException {
+        if(livrosAlugados.size() > numeroDevolucoes) throw new ServicoException("Valor de numero de devoluções invalido!");
         this.numeroDevolucoes = numeroDevolucoes;
     }
     
     
     public ArrayList<Livro> getLivrosAlugados() {
-        return livrosAlugados;
+        return this.livrosAlugados;
+    }
+    
+    public void setLivrosAlugados(ArrayList<Livro> livrosAlugados) {
+        this.livrosAlugados = livrosAlugados;
     }
     
 }
