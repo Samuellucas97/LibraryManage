@@ -189,27 +189,27 @@ public class ClienteTerminal extends Terminal{
             System.out.println("Escolha o número do livro que você quer que seja avaliado");
 
             boolean numeric = true;
-            Double num = 0.0;
+            Integer num = 0;
             while(true){
                 String livroEscolhido = entradaUsuario.next();
 
                 try {
-                    num = Double.parseDouble(livroEscolhido);
+                    num = Integer.parseInt(livroEscolhido);
                 } 
                 catch (NumberFormatException e) {
                     numeric = false;
                 }
 
-                if(numeric && (num>0) && (num<=livrosAvaliados.size())){
-                    Double avaliacao = 0.0;
-                    System.out.println("De uma nota de 0 a 5 para o livro: " + livrosAvaliados.get(num.intValue()).getTitulo());
-                    Double num2 = 0.0;
+                if(numeric && (num>=0) && (num<livrosAvaliados.size())){
+                    Integer avaliacao = 0;
+                    System.out.println("De uma nota de 0 a 5 para o livro " + livrosAvaliados.get(num).getTitulo() + ":");
+                    Integer num2 = 0;
                     boolean key2while = true;
                     while(key2while){
                         livroEscolhido = entradaUsuario.next();
 
                         try {
-                            num2 = Double.parseDouble(livroEscolhido);
+                            num2 = Integer.parseInt(livroEscolhido);
                         } 
                         catch (NumberFormatException e) {
                             numeric = false;
@@ -220,16 +220,16 @@ public class ClienteTerminal extends Terminal{
                         }
                         else{
                             System.out.println("Entrada incorreta! Insira um número de 0 a 5 para o livro "
-                                                + livrosAvaliados.get(num.intValue()).getTitulo());
+                                                + livrosAvaliados.get(num).getTitulo() + "\n");
                         }
                     }
                     try{
-                        avaliação(livrosAvaliados.get(num.intValue()).getId(), avaliacao.intValue(), (Cliente) cliente);
+                        avaliação(livrosAvaliados.get(num).getId(), avaliacao, (Cliente) cliente);
                     }
                     catch (ServicoException ex) {
                         System.err.println(ex.getMessage());
                     }
-                    return "Livro avaliado com sucesso!";
+                    return "\nLivro avaliado com sucesso!\n";
                 }
                 else{
                     System.out.println("Escolha inválida! \n"); 
