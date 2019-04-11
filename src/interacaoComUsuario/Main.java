@@ -57,7 +57,7 @@ public class Main {
                         
                         System.out.println("Lista de livros: \n \n");
                         
-                        if(livros == null || livros.isEmpty()){
+                        if(livros.isEmpty()){
                             System.out.println("Não existem livros correspondendo a sua busca!");
                         }
                         else{
@@ -93,8 +93,17 @@ public class Main {
                 Object obj = estados.getEstado().tratamentoEscolha(escolha);
                 switch(escolha){
                     case ("1"):
-                        
-                        break;
+                        if(obj == null) {
+                            break;
+                        }
+                        else if(obj == "Livro avaliado com sucesso!"){
+                            System.out.println(obj);
+                            break;
+                        }
+                        else{
+                            //TO DO ERRO
+                            break;
+                        }
 
                     case("2"):
                         List<Livro> livros = (List<Livro>)obj;
