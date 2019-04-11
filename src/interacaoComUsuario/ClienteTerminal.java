@@ -8,25 +8,22 @@ package interacaoComUsuario;
 import dados.ServicoException;
 import java.util.List;
 import java.util.Scanner;
+import servicos.Cliente;
 import servicos.ClienteServico;
-import servicos.ILivroServico;
 import servicos.Usuario;
 import servicos.IUsuarioServico;
 import servicos.Livro;
-import servicos.LivroServico;
 import servicos.UsuarioServicoFactory;
 
 
 
 public class ClienteTerminal extends Terminal{
     
-    private IUsuarioServico clienteServico;
-    private ILivroServico livroServico;  
+    private IUsuarioServico clienteServico;  
     private Usuario cliente;
 
     public ClienteTerminal() {
-        try{
-            this.livroServico = LivroServico.getInstance();      
+        try{    
             this.clienteServico = UsuarioServicoFactory.getUsuarioServico("ClienteServico");
         }
         catch (ServicoException ex) {
@@ -121,8 +118,13 @@ public class ClienteTerminal extends Terminal{
                                                 + livrosAvaliados.get(num.intValue()).getTitulo());
                         }
                     }
-                    
-                    return avaliação(livrosAvaliados.get(num.intValue()), avaliacao.intValue());
+                    try{
+                        avaliação(livrosAvaliados.get(num.intValue()).getId(), avaliacao.intValue(), (Cliente) cliente);
+                    }
+                    catch (ServicoException ex) {
+                        System.err.println(ex.getMessage());
+                    }
+                    return "Livro avaliado com sucesso!";
                 }
                 else{
                     System.out.println("Escolha inválida! \n"); 
@@ -223,7 +225,7 @@ public class ClienteTerminal extends Terminal{
     }
     private List<Livro> efetuarBusca(String param, String key){
         try {
-            return livroServico.consultaLivros(param, key);
+            return (List<Livro>) clienteServico.consultaLista(new Livro(), param, key);
         } 
         catch (ServicoException ex) {
             System.err.println(ex.getMessage());
@@ -234,7 +236,7 @@ public class ClienteTerminal extends Terminal{
 
     private List<Livro> efetuarBusca(List<String> params, List<String> keys){
         try{
-            return this.livroServico.consultaLivros(params, keys);
+            return (List<Livro>) this.clienteServico.consultaLista(new Livro(), params, keys);
 
         }
         catch (ServicoException ex) {
@@ -244,8 +246,8 @@ public class ClienteTerminal extends Terminal{
         return null;
     }
         
-    private Object avaliação(Livro livro, int nota){
-        return ((ClienteServico)clienteServico).avaliarLivro(livro, nota);
+    private void avaliação(String livro, int nota, Cliente cliente) throws ServicoException{
+        ((ClienteServico)clienteServico).inserirRankingLivro(livro, nota, cliente);
     }
                     
 }

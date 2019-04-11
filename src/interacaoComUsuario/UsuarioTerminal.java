@@ -10,7 +10,6 @@ import java.util.Scanner;
 import servicos.Administrador;
 import servicos.Cliente;
 import servicos.ILivroServico;
-import servicos.UsuarioServico;
 import servicos.IUsuarioServico;
 import servicos.Livro;
 import servicos.LivroServico;
