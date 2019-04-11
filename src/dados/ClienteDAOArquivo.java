@@ -97,8 +97,8 @@ public class ClienteDAOArquivo extends UsuarioDAOArquivo{
     public List<Usuario> consultaUsuarios(String param, String key) throws ServicoException {
         List<Usuario> clientes = new ArrayList<>();
         
-        for (Map.Entry<String, Cliente> livro : this.hMapCliente.entrySet()) {
-            Cliente value = livro.getValue();
+        for (Map.Entry<String, Cliente> cliente : this.hMapCliente.entrySet()) {
+            Cliente value = cliente.getValue();
             
             switch(param){
                 case "Login":
@@ -121,6 +121,14 @@ public class ClienteDAOArquivo extends UsuarioDAOArquivo{
                     break;
                 case "RankingCliente": 
                     if(String.valueOf(value.getRankingInt()).equals(key)) clientes.add(value);
+                    break;
+                case "LivrosAlugados":
+                    for(Livro livro: value.getLivrosAlugados()){
+                        if(livro.getTitulo().toLowerCase().contains(key.toLowerCase())){
+                            clientes.add(value);
+                            break;
+                        }
+                    }                    
                     break;
                 default:
                     
