@@ -14,7 +14,7 @@ import java.util.HashMap;
  *
  * @author SamDan
  */
-public class Cliente extends Usuario{
+public class Cliente extends Usuario implements java.io.Serializable{
     
     
     private int numeroEmprestimos = 0;
@@ -23,6 +23,18 @@ public class Cliente extends Usuario{
     private HashMap<String, ArrayList<Boolean> > hMapId_RankingLivros = new HashMap<>(); 
     private ArrayList<Livro> livrosAlugados = new ArrayList<>();
     private ArrayList<Boolean> rankingCliente = new ArrayList<>();        
+    
+    public Cliente( String login, String senha, String nome, String telefone, int idade){
+        
+        super(login, senha,nome, telefone, idade);
+        
+        rankingCliente.add(false); 
+        rankingCliente.add(false);
+        rankingCliente.add(false);
+        rankingCliente.add(false);
+        rankingCliente.add(false);
+    
+    }
     
     public Cliente( String login, String senha){
         

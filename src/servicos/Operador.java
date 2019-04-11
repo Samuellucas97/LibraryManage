@@ -10,7 +10,7 @@ package servicos;
  * @author  Samuel Lucas de Moura Ferino
  * @author  José Wellinton Nunes Júnior
  */
-public class Operador extends Funcionario{
+public class Operador extends Funcionario implements java.io.Serializable{
     
     public Operador(){
         super();

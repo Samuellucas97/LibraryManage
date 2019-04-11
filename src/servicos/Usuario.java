@@ -12,7 +12,7 @@ import dados.ServicoException;
  * @author  Samuel Lucas de Moura Ferino
  * @author  José Wellinton
  */
-public class Usuario {
+public class Usuario implements java.io.Serializable{
 
     public enum Genero{
         MASCULINO,
@@ -58,6 +58,16 @@ public class Usuario {
         this.nome  = new String();
         this.telefone = new String();
         this.idade = 0;
+    }
+    
+    public Usuario(String login, String senha, String nome, String telefone, int idade){
+        
+        this.login = login;
+        this.senha = senha;
+    
+        this.nome  = nome;
+        this.telefone = telefone;
+        this.idade = idade;
     }
     
     public String getLogin() {

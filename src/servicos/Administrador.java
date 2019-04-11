@@ -10,7 +10,7 @@ package servicos;
  * @author Samuel Lucas de Moura Ferino
  * @author José Wellinton
  */
-public class Administrador extends Funcionario{
+public class Administrador extends Funcionario implements java.io.Serializable{
     
     /**
      * Construtor padrão

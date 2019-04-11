@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Representa um funcionário
  * @author  Samuel Lucas de Moura Ferino
- * @author  José Wellinton 
+ * @author  José Wellinton Nunes Júnior
  * @author  Thiago da Costa Monteiro
  */
 public abstract class FuncionarioServico implements IUsuarioServico{

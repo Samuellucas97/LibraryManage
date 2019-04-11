@@ -146,7 +146,7 @@ public class ClienteDAOArquivo extends UsuarioDAOArquivo{
         if(!this.hMapCliente.containsKey(usuario.getLogin())){
             this.hMapCliente.put(usuario.getLogin(),(Cliente) usuario);
             this.salvarArquivo(this.nomeDoArquivo);
-        }              
+        }
         else throw new ServicoException("Cliente com esse login já registrado!");
     }
 
