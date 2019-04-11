@@ -6,6 +6,7 @@
 package servicos;
 
 import dados.ServicoException;
+import java.util.List;
 
 /**
  * Implementa as regras de negócio da interface IUsuarioServico
@@ -28,8 +29,15 @@ public abstract class UsuarioServico implements IUsuarioServico {
      * @param   objeto  Objeto a ser consultado
      */
     @Override
-    public abstract void consulta(Object objeto);
+    public abstract Object consulta(Object objeto);
     
+    /**
+     * Realiza consulta
+     * @param   objeto  Objeto a ser consultado
+     * @return 
+     */
+    @Override
+    public abstract List<Object> consultaLista(Object objeto);
     /**
      * Registra objeto
      * @param   objeto  Objeto a ser registrado

@@ -10,6 +10,7 @@ import dados.ServicoException;
 import dados.UsuarioDAOFactory;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -29,19 +30,33 @@ public class ClienteServico implements IUsuarioServico{
      */
     public ClienteServico() throws ServicoException{ 
             ClienteServico.livroServico = LivroServico.getInstance();      
-            ClienteServico.clienteDAOArquivo = (ClienteDAOArquivo) UsuarioDAOFactory.getUsuarioDAO("ClienteDAOArquivo");
+            ClienteServico.clienteDAOArquivo = (ClienteDAOArquivo) UsuarioDAOFactory.getIUsuarioDAO("ClienteDAOArquivo");
     }
     
     /**
      * Insere ranking no livro
      * @param idLivro identificador do livro;
-     * @return 
+     * @param ranking
+     * @param cliente 
+     * @throws dados.ServicoException 
      */
-    private void inserirRankingLivro(String idLivro, Cliente cliente){
+    public void inserirRankingLivro(String idLivro, int ranking, Cliente cliente) throws ServicoException{
+        if(ranking < 0 || ranking > 5) 
+            throw new ServicoException("Ranking para livro inválido!");
         
-        /// Dúvida: é para inserir esse livro no atributo ranking da classe Cliente?
-        ///         E se for, eu o adiciono com qual ranking
+        Cliente clienteAlterado = this.copia(cliente);
+        HashMap<String, ArrayList<Boolean> > rankingLivros = clienteAlterado.getHMapId_RankingLivros();
+        
+        if(!rankingLivros.containsKey(idLivro)) 
+            throw new ServicoException("Livro não registrado no catalogo de emprestimos!");
+
+        ArrayList<Boolean> rankingLivro = rankingLivros.get(idLivro);
+        
+        for(int i = 0; i < ranking; i++){
+            rankingLivro.set(i, true);
+        }
                 
+        ClienteServico.clienteDAOArquivo.alterar(cliente.getLogin(), clienteAlterado);                       
     }
     
     /**
@@ -59,7 +74,7 @@ public class ClienteServico implements IUsuarioServico{
                         String nome,
                         String telefone,
                         int idade,
-                        String genero ) throws ServicoException{
+                        Usuario.Genero genero ) throws ServicoException{
     
         Cliente cliente = new Cliente();
         
@@ -70,8 +85,7 @@ public class ClienteServico implements IUsuarioServico{
         cliente.setIdade(idade);
         cliente.setGenero(genero);
         
-        this.clienteDAOArquivo.registrar(cliente );
-            
+        ClienteServico.clienteDAOArquivo.registrar(cliente );            
     }
     
     /**
@@ -332,25 +346,53 @@ private Livro alterarSemSalvar(Livro livro, String param, String key) throws Ser
     public Usuario autenticacao(String login, String senha) throws ServicoException {
         return this.clienteDAOArquivo.autenticacao(login, senha);
     }
-
+    
+    
     @Override
-    public void consulta(Object objeto) {
+    public List<Object> consultaLista(Object objeto, List<String> params, List<String> keys) throws ServicoException{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void registrar(Object objeto) {
+    public Object consulta(Object objeto) throws ServicoException{
+        if(objeto instanceof Livro){
+            Livro livro = (Livro) objeto;
+            return this.consultaLivro(livro.getId());
+        }
+        if(objeto instanceof Cliente){
+            Cliente cliente = (Cliente) objeto;
+            
+        }
+        else throw new ServicoException("Objeto passado inválido!"); 
+
+        return null;
+    }
+
+    @Override
+    public void registrar(Object objeto) throws ServicoException{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void alterar(String id, Object objeto) {
+    public void alterar(String id, Object objeto) throws ServicoException{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void excluir(Object objeto) {
+    public void excluir(Object objeto) throws ServicoException{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public Livro consultaLivro(String idLivro) throws ServicoException{
+        return ClienteServico.clienteDAOArquivo.consultaLivro(idLivro);
+    }
+       
+    public List<Livro> consultaLivros(List<String> params, List<String> keys) throws ServicoException{
+        return ClienteServico.clienteDAOArquivo.consultaLivros(params, keys);
+    }
+    
+    public List<Livro> consultaLivros(String param, String key) throws ServicoException{
+        return ClienteServico.clienteDAOArquivo.consultaLivros(param, key);        
     }
     
 }

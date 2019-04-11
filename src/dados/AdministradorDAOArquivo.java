@@ -12,6 +12,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import servicos.Administrador;
+import servicos.Livro;
 import servicos.Usuario;
 
 /**
@@ -202,8 +203,38 @@ public class AdministradorDAOArquivo extends FuncionarioDAOArquivo{
         if(!verification) throw new ServicoException("Esse usuário não existe no registro e não pode ser excluído!");
         
         this.salvarArquivo(this.nomeDoArquivo);
+    }    
+    
+    public Usuario consultarOperador(String login) throws ServicoException {
+        return FuncionarioDAOArquivo.getOperadorDAOArquivo().consultar(login);
+    }
+    
+    public List<Usuario> consultaOperadores(List<String> params, List<String> keys) throws ServicoException {
+        return FuncionarioDAOArquivo.getOperadorDAOArquivo().consultaUsuarios(params, keys);
+    }
+    
+    public List<Usuario> consultaOperadores(String param, String key) throws ServicoException {
+        return FuncionarioDAOArquivo.getOperadorDAOArquivo().consultaUsuarios(param, key);
+    }        
+
+    public void registrarOperador(Usuario usuario) throws ServicoException {
+        FuncionarioDAOArquivo.getOperadorDAOArquivo().registrar(usuario);
+    }
+    
+    public void alterarOperador(String usuarioLogin, Usuario usuarioAlterado) throws ServicoException {
+         FuncionarioDAOArquivo.getOperadorDAOArquivo().alterar(usuarioLogin, usuarioAlterado);
+    }
+    
+    public void excluirOperador(Usuario usuario) throws ServicoException {
+        FuncionarioDAOArquivo.getOperadorDAOArquivo().excluir(usuario);
     }
  
+    public void excluirLivro(Livro livro) throws ServicoException {
+        FuncionarioDAOArquivo.getLivroDAOArquivo().excluirLivro(livro);
+    }
     
+    public void excluirCliente(Usuario usuario) throws ServicoException {
+        FuncionarioDAOArquivo.getClienteDAOArquivo().excluir(usuario);
+    }
     
 }

@@ -19,11 +19,11 @@ public class Cliente extends Usuario{
     
     private int numeroEmprestimos = 0;
     private int numeroDevolucoes = 0;
-    private HashMap<String,String>  hMapId_DataDeEmprestimoLivros = new HashMap<>();
-    private ArrayList<Boolean> rankingCliente = new ArrayList<>();
+    private HashMap<String,String>  hMapId_DataDeEmprestimoLivros = new HashMap<>();    
     private HashMap<String, ArrayList<Boolean> > hMapId_RankingLivros = new HashMap<>(); 
     private ArrayList<Livro> livrosAlugados = new ArrayList<>();
-            
+    private ArrayList<Boolean> rankingCliente = new ArrayList<>();        
+    
     public Cliente( String login, String senha){
         
         super(login, senha);
@@ -67,7 +67,7 @@ public class Cliente extends Usuario{
         this.rankingCliente = rankingCliente;
     }
     
-    public void setRankingInt( int valor) throws ServicoException{
+    public void setRankingClienteInt( int valor) throws ServicoException{
         if(valor >= 0 && valor <=5){
             this.rankingCliente.set(0, false);
             this.rankingCliente.set(1, false);
@@ -80,6 +80,15 @@ public class Cliente extends Usuario{
         }
         else throw new ServicoException("Valor do ranking inválido!");
     }
+    
+    public HashMap<String, ArrayList<Boolean> > getHMapId_RankingLivros(){
+        return this.hMapId_RankingLivros;
+    }
+    
+    public HashMap<String, String> getHMapId_DataDeEmprestimoLivros(){
+        return this.hMapId_DataDeEmprestimoLivros;
+    }
+     
 
     public int getNumeroEmprestimos() {
         return this.numeroEmprestimos;
@@ -100,10 +109,6 @@ public class Cliente extends Usuario{
     
     public ArrayList<Livro> getLivrosAlugados() {
         return livrosAlugados;
-    }
-
-    public void setLivrosAlugados(ArrayList<Livro> livrosAlugados) {
-        this.livrosAlugados = livrosAlugados;
     }
     
 }

@@ -12,7 +12,7 @@ import servicos.Livro;
  *
  * @author José Welliton Nunes Júnior
  */
-public interface LivroDAO {
+public interface ILivroDAO {
     
     public Livro consultaLivro(String idLivro) throws ServicoException;
     

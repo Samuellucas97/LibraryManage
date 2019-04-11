@@ -10,7 +10,7 @@ package dados;
  * @author  Samuel Lucas de Moura Ferino
  *          José Wellinton Nunes Júnior
  */
-public abstract class UsuarioDAOArquivo implements UsuarioDAO{
+public abstract class UsuarioDAOArquivo implements IUsuarioDAO{
 
     protected abstract void lerArquivo(String nomeDoArquivo) throws ServicoException;
     

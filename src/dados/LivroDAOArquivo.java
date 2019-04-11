@@ -16,7 +16,7 @@ import servicos.Livro;
  *
  * @author José Welliton Nunes Júnior
  */
-public class LivroDAOArquivo implements LivroDAO{
+public class LivroDAOArquivo implements ILivroDAO{
     
     private static LivroDAOArquivo instancia = null;
     private static HashMap<String, Livro> hMapLivro;

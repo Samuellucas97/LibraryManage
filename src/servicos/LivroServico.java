@@ -5,12 +5,12 @@
  */
 package servicos;
 
-import dados.LivroDAO;
 import dados.LivroDAOArquivo;
 import dados.ServicoException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import dados.ILivroDAO;
 
 /**
  * Implementa a lógica de negócios relativa a Livro
@@ -19,7 +19,7 @@ import java.util.List;
  */
 public class LivroServico implements ILivroServico{
     private static LivroServico instance;
-    private static LivroDAO livroDAO;
+    private static ILivroDAO livroDAO;
     
     private LivroServico() throws ServicoException{        
         LivroServico.livroDAO = LivroDAOArquivo.getInstancia();

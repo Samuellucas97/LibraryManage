@@ -19,7 +19,7 @@ public class TestandoClasseDados {
         List<Livro> livros = new ArrayList<>();
         ArrayList<String> assunto = new ArrayList<>();
         Livro livro;
-        LivroDAO livroDAO;
+        ILivroDAO livroDAO;
         
         try {
             livroDAO = LivroDAOArquivo.getInstancia();

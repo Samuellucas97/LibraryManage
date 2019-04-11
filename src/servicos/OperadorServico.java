@@ -16,7 +16,7 @@ import dados.UsuarioDAOFactory;
  */
 public class OperadorServico extends FuncionarioServico{
   
-    private final OperadorDAOArquivo operadorDAOArquivo = (OperadorDAOArquivo) UsuarioDAOFactory.getUsuarioDAO("OperadorDAOArquivo");
+    private final OperadorDAOArquivo operadorDAOArquivo = (OperadorDAOArquivo) UsuarioDAOFactory.getIUsuarioDAO("OperadorDAOArquivo");
     private final LivroServico livroServico = new LivroServico();
 
     /**

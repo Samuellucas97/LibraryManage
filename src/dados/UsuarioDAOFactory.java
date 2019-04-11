@@ -9,10 +9,10 @@ import java.util.HashMap;
 
 
 public class UsuarioDAOFactory {
-    private static final HashMap<String,UsuarioDAO> hMapUsuarios = new HashMap();
+    private static final HashMap<String,IUsuarioDAO> hMapUsuarios = new HashMap();
     
-    public static UsuarioDAO getUsuarioDAO(String nome) throws ServicoException{
-       UsuarioDAO usuarioDAO = UsuarioDAOFactory.hMapUsuarios.get(nome);
+    public static IUsuarioDAO getIUsuarioDAO(String nome) throws ServicoException{
+       IUsuarioDAO usuarioDAO = UsuarioDAOFactory.hMapUsuarios.get(nome);
         
         if(usuarioDAO == null){
             if(nome.equals("ClienteDAOArquivo") ){

@@ -12,6 +12,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import servicos.Cliente;
+import servicos.Livro;
 import servicos.Usuario;
 
 /**
@@ -26,7 +27,7 @@ public class ClienteDAOArquivo extends UsuarioDAOArquivo{
     public ClienteDAOArquivo() throws ServicoException {
         this.hMapCliente = new HashMap<>();       
         this.lerArquivo(this.nomeDoArquivo);
-    }    
+    }
     
     @Override
     protected void lerArquivo(String nomeDoArquivo) throws ServicoException {
@@ -166,6 +167,18 @@ public class ClienteDAOArquivo extends UsuarioDAOArquivo{
         if(!verification) throw new ServicoException("Esse usuário não existe no registro e não pode ser excluído!");
         
         this.salvarArquivo(this.nomeDoArquivo);
+    }
+    
+    public Livro consultaLivro(String idLivro) throws ServicoException{
+        return LivroDAOArquivo.getInstancia().consultaLivro(idLivro);
+    }
+       
+    public List<Livro> consultaLivros(List<String> params, List<String> keys) throws ServicoException{
+        return LivroDAOArquivo.getInstancia().consultaLivros(params, keys);
+    }
+    
+    public List<Livro> consultaLivros(String param, String key) throws ServicoException{
+        return LivroDAOArquivo.getInstancia().consultaLivros(param, key);
     }
     
 }

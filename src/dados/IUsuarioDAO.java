@@ -13,7 +13,7 @@ import servicos.Usuario;
  * @author Samuel Lucas de Moura Ferino
  *         José Welliton Nunes Júnior
  */
-public interface UsuarioDAO {
+public interface IUsuarioDAO {
 
     public Usuario autenticacao(String login, String senha) throws ServicoException;
     public Usuario consultar( String login ) throws ServicoException;
